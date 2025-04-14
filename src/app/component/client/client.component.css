@@ -1,0 +1,84 @@
+/* Conteneur de l'icône de notification */
+.notification-container {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+  }
+  
+  /* Style du bouton de notification */
+  .notification-button {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    position: relative;
+  }
+  
+  /* Icône de notification */
+  .notification-button i {
+    color: #4e4e4e;
+    transition: color 0.3s ease;
+    font-size: 32px;
+  }
+  
+  /* Badge de notification (le petit cercle rouge avec le nombre) */
+  .notification-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: red;
+    color: white;
+    font-size: 12px;
+    border-radius: 50%;
+    padding: 4px 8px;
+  }
+  
+  /* Conteneur des notifications (panel) */
+  .notification-panel {
+    position: absolute;
+    top: 40px; /* Ajustement pour apparaître directement sous l'icône */
+    right: 0;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    width: 300px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    max-height: 300px;
+    overflow-y: auto;
+  }
+  
+  /* Liste de notifications */
+  .notification-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Élément de notification */
+  .notification-item {
+    background-color: #f4f4f4;
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+  }
+  
+  /* Ajout de survol (hover) pour les éléments de la liste */
+  .notification-item:hover {
+    background-color: #e6e6e6;
+  }
+  
+  /* Lorsque la liste est vide, afficher un message */
+  .notification-list:empty {
+    text-align: center;
+    color: #888;
+  }
+  
+  /* Si aucune notification, afficher ce message */
+  .notification-list:empty::before {
+    content: "Aucune nouvelle notification";
+  }
+  

@@ -1,0 +1,161 @@
+<body>
+  <div class="container-scroller">
+    <app-header></app-header>
+    <br><br><br>
+    <div class="container-fluid page-body-wrapper">
+      <app-sidebar></app-sidebar>
+      <div class="main-panel">
+        <div class="content-wrapper">
+          <div class="page-header">
+            <h3 class="page-title">
+              <span class="page-title-icon bg-gradient-primary text-white me-2">
+                <i class="mdi mdi-home"></i>
+              </span> Détails de la Commande
+            </h3>
+          </div>
+
+          <div class="row">
+            <div class="col-12 grid-margin">
+              <div class="card">
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <div class="col-lg-12 grid-margin stretch-card">
+                      <div class="card">
+                        <div class="card-body">
+                          <table class="table table-striped">
+                            <tbody>
+                              <tr>
+                                <td><strong>ID Commande</strong></td>
+                                <td>{{ order.id_commande }}</td>
+                              </tr>
+                              <tr>
+                                <td><strong>Date de Commande</strong></td>
+                                <td>{{ order.dateCommande }}</td>
+                              </tr>
+                              <tr>
+                                <td><strong>Statut</strong></td>
+                                <td>{{ order.statut_commande }}</td>
+                              </tr>
+                              <tr>
+                                <td><strong>Adresse de Livraison</strong></td>
+                                <td>{{ order.adresse_livraison }}</td>
+                              </tr>
+                              <tr>
+                                <td><strong>Total</strong></td>
+                                <td>{{ order.total }} TND</td>
+                              </tr>
+                              <tr>
+                                <td><strong>Article Commandé</strong></td>
+                                <td>{{ order.articel_commande }}</td>
+                              </tr>
+                              <tr>
+                                <td><strong>Remise</strong></td>
+                                <td>{{ order.remise }} D</td>
+                              </tr>
+                              <tr>
+                                <td><strong>Frais de Livraison</strong></td>
+                                <td>{{ order.fraisLivraison }} TND</td>
+                              </tr>
+                              <tr>
+                                <td><strong>Date Livraison Estimée</strong></td>
+                                <td>{{ order.date_livraison_estimee }}</td>
+                              </tr>
+                              <tr>
+                                <td><strong>Commentaires</strong></td>
+                                <td>{{ order.commentaires }}</td>
+                              </tr>
+                              <tr>
+                                <td><strong>Payée</strong></td>
+                                <td>{{ order.ispaied ? 'Oui' : 'Non' }}</td>
+                              </tr>
+                              <tr>
+                                <td><strong>Latitude</strong></td>
+                                <td>{{ order.latitude }}</td>
+                              </tr>
+                              <tr>
+                                <td><strong>Longitude</strong></td>
+                                <td>{{ order.longitude }}</td>
+                              </tr>
+
+                              <!-- Détails Produit -->
+                              <tr><td colspan="2"><strong>--- Produit Commandé ---</strong></td></tr>
+                              <tr>
+                                <td><strong>Nom du Produit</strong></td>
+                                <td>{{ order.productDTO.name }}</td>
+                              </tr>
+                              <tr>
+                                <td><strong>Description</strong></td>
+                                <td>{{ order.productDTO.description }}</td>
+                              </tr>
+                              <tr>
+                                <td><strong>Prix</strong></td>
+                                <td>{{ order.productDTO.price }} TND</td>
+                              </tr>
+                              <tr>
+                                <td><strong>Type</strong></td>
+                                <td>{{ order.productDTO.type }}</td>
+                              </tr>
+                              <tr>
+                                <td><strong>Disponible</strong></td>
+                                <td>{{ order.productDTO.disponiblity ? 'Oui' : 'Non' }}</td>
+                              </tr>
+                              <tr>
+                                <td><strong>Quantité</strong></td>
+                                <td>{{ order.productDTO.quantity }}</td>
+                              </tr>
+
+                              <!-- Détails Utilisateur -->
+                              <tr><td colspan="2"><strong>--- Informations Client ---</strong></td></tr>
+                              <tr>
+                                <td><strong>Nom d'utilisateur</strong></td>
+                                <td>{{ order.userDTO.username }}</td>
+                              </tr>
+                              <tr>
+                                <td><strong>Email</strong></td>
+                                <td>{{ order.userDTO.email }}</td>
+                              </tr>
+                              <tr>
+                                <td><strong>Nom</strong></td>
+                                <td>{{ order.userDTO.lastname }}</td>
+                              </tr>
+                              <tr>
+                                <td><strong>Prénom</strong></td>
+                                <td>{{ order.userDTO.firstname }}</td>
+                              </tr>
+                              <tr>
+                                <td><strong>Adresse</strong></td>
+                                <td>{{ order.userDTO.address }}</td>
+                              </tr>
+                              <tr>
+                                <td><strong>Téléphone</strong></td>
+                                <td>{{ order.userDTO.phone }}</td>
+                              </tr>
+                              <tr>
+                                <td><strong>Rôle</strong></td>
+                                <td>{{ order.userDTO.role }}</td>
+                              </tr>
+                              <tr>
+                                <td><strong>Photo</strong></td>
+                                <td>
+                                  <img [src]="'http://localhost:8762/User/files/' + order.userDTO.photo" 
+                                       alt="photo utilisateur" 
+                                       style="width: 100px; height: 100px;">
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div> <!-- fin card -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <app-footer></app-footer>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>

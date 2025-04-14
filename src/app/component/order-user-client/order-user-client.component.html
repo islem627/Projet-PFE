@@ -1,0 +1,18 @@
+<div class="container">
+    <h1 class="text-center">User - Order Tracking</h1>
+    <div id="orderUpdates">
+      <div *ngFor="let update of orderUpdates" class="update">
+        <div class="d-flex align-items-center">
+          <i [class]="update.icon" class="icon"></i>
+          <div>
+            <p class="status-label">{{ update.status }}</p>
+            <p>Order ID: {{ update.orderId }}</p>
+          </div>
+        </div>
+        <div class="progress progress-bar-container">
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" style="width: 50%"></div>
+              </div>       
+      </div>
+    </div>
+    </div>

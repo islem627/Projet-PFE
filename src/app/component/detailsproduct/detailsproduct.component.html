@@ -1,0 +1,90 @@
+<div class="container-scroller">
+    <!-- partial:partials/_navbar.html -->
+    <app-header></app-header>
+    <br><br><br>
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+      <!-- partial:partials/_sidebar.html -->
+      <app-sidebar></app-sidebar>
+      <!-- partial -->
+      <div class="main-panel">
+        <div class="content-wrapper">
+          <div class="page-header">
+            <h3 class="page-title">
+              <span class="page-title-icon bg-gradient-primary text-white me-2">
+                <i class="mdi mdi-home"></i>
+              </span> Détails du produit
+            </h3>
+            
+            <nav aria-label="breadcrumb">
+              <ul class="breadcrumb">
+                <li class="breadcrumb-item active" aria-current="page"></li>
+              </ul>
+            </nav>
+          </div>
+  
+          <div class="row">
+            <div class="col-12 grid-margin">
+              <div class="card">
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <div class="col-lg-12 grid-margin stretch-card">
+                      <div class="card">
+                        <div class="card-body">
+                          <table class="table table-striped">
+                            <tbody>
+                              <tr>
+                                <td><strong>ID</strong></td>
+                                <td>{{ product.id }}</td>
+                              </tr>
+                              <tr>
+                                <td><strong>Nom</strong></td>
+                                <td>{{ product.name }}</td>
+                              </tr>
+                              <tr>
+                                <td><strong>Description</strong></td>
+                                <td>{{ product.description }}</td>
+                              </tr>
+                              <tr>
+                                <td><strong>Prix</strong></td>
+                                <td>{{ product.price | currency }}</td>
+                              </tr>
+                              <tr>
+                                <td><strong>Date ajoutée</strong></td>
+                                <td>{{ product.dateAdded | date }}</td>
+                              </tr>
+                              <tr>
+                                <td><strong>Type</strong></td>
+                                <td>{{ product.type }}</td>
+                              </tr>
+                              <tr>
+                                <td><strong>Disponibilité</strong></td>
+                                <td>{{ product.disponiblity ? 'Disponible' : 'Indisponible' }}</td>
+                              </tr>
+                              <tr>
+                                <td><strong>Quantité</strong></td>
+                                <td>{{ product.quantity }}</td>
+                              </tr>
+                              <tr>
+                                <td><strong>Photo</strong></td>
+                                <td>
+                                  <img [src]="'http://localhost:8762/product/files/' + product.photo" alt="image" style="width: 100px; height: 100px;">
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+  
+          <app-footer></app-footer>
+        </div>
+      </div>
+    </div>
+  </div>
+  

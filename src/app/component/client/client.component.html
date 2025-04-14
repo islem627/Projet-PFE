@@ -1,0 +1,23 @@
+<div>
+    <h1>Real-Time Notifications</h1>
+  
+    <!-- Icône de notification avec compteur -->
+    <div class="notification-container" (click)="toggleNotifications()">
+      <button class="notification-button">
+        <i class="fa fa-bell"></i>
+        <span *ngIf="notificationCount > 0" class="notification-badge">
+          {{ notificationCount }}
+        </span>
+      </button>
+    </div>
+  
+    <!-- Liste des notifications (visible uniquement si showNotifications = true) -->
+    <div *ngIf="showNotifications" class="notification-panel">
+      <ul class="notification-list">
+        <li *ngFor="let msg of messages" class="notification-item">
+          <p>{{ msg }}</p>
+        </li>
+      </ul>
+    </div>
+  </div>
+  

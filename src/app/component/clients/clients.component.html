@@ -1,0 +1,78 @@
+<body>
+  <div class="container-scroller">
+    <app-header></app-header>
+    <br><br><br>
+    <div class="container-fluid page-body-wrapper">
+      <app-sidebar></app-sidebar>
+      <div class="main-panel">
+        <div class="content-wrapper">
+          <div class="page-header">
+            <h3 class="page-title">
+              <span class="page-title-icon bg-gradient-primary text-white me-2">
+                <i class="mdi mdi-home"></i>
+              </span> Liste des Clients
+            </h3>
+            <nav aria-label="breadcrumb">
+              <ul class="breadcrumb">
+                <li class="breadcrumb-item active" aria-current="page">
+                  <input type="text" [(ngModel)]="searchText" placeholder="Search...">
+                  <button (click)="search()">search username</button>
+               
+                </li>
+              </ul>
+            </nav>
+          </div>
+          <div class="row">
+            <div class="col-12 grid-margin">
+              <div class="card">
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th>ID</th>
+                            <th> Username </th>
+                            <th> Email </th>
+                            <th> Phone </th>
+                            <th> Adress </th>
+                            <th> Role </th>
+                            <th>Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let client of listClients |paginate:{itemsPerPage:3,currentPage:c};">
+                          <td>{{ client.id }}</td>
+                          <td>{{ client.username }}</td>
+                          <td>{{ client.email }}</td>
+                          <td>{{ client.phone }}</td>
+                          <td>{{ client.address }}</td>
+                          <td>{{ client.role }}</td>
+                          <td>
+                            <button type="button"
+                              class="btn-gradient-primary btn-rounded btn-fw"
+                              (click)="detailsClient(client.id)">
+                              Info
+                            </button>
+                            <button type="button"
+                              class="btn-gradient-success btn-rounded btn-fw"
+                              (click)="updateClient(client.id)">
+                              Modifier
+                            </button>
+                          
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <pagination-controls (pageChange)="c=$event"></pagination-controls>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <app-footer></app-footer>
+      </div>
+    </div>
+  </div>
+</body>

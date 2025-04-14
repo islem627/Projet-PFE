@@ -1,0 +1,202 @@
+<body>
+  <div class="container-scroller">
+   
+    <!-- partial:partials/_navbar.html -->
+  <app-header></app-header>
+  <br><br><br>
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+      <!-- partial:partials/_sidebar.html -->
+     <app-sidebar></app-sidebar>
+      <!-- partial -->
+      <div class="main-panel">
+        <div class="content-wrapper">
+          <div class="page-header">
+            <h3 class="page-title">
+              <span class="page-title-icon bg-gradient-primary text-white me-2">
+                <i class="mdi mdi-home"></i>
+              </span> Details Users
+            </h3>
+            
+            <nav aria-label="breadcrumb">
+              <ul class="breadcrumb">
+                <li class="breadcrumb-item active" aria-current="page">
+                
+                
+                </li>
+              </ul>
+            </nav>
+          </div>
+
+<div class="col-lg-6 grid-margin stretch-card">
+  <div class="card">
+    <div class="card-body">
+      <h4 class="card-title"> Update Product </h4>
+      <p class="card-description"> {{ product.name }} 
+      </p>
+      
+      <table class="table table-hover">
+        <thead>
+          <tr><th>Product</th></tr>
+        </thead>
+        <tbody>
+          <!-- ID (lecture seule) -->
+          <tr>
+            <th>ID</th>
+            <td>{{ product.id }}</td>
+            <td></td>
+          </tr>
+      
+          <!-- Name -->
+          <tr>
+            <th>Name</th>
+            <td
+              #tdName
+              (blur)="onBlur('name', tdName)"
+            >{{ product.name }}</td>
+            <td>
+              <label class="badge badge-warning"
+                     (click)="startEditing('name', tdName)"
+              >Update</label>
+            </td>
+          </tr>
+      
+          <!-- Description -->
+          <tr>
+            <th>Description</th>
+            <td>
+              <textarea [(ngModel)]="product.description"
+                        name="description"
+                        class="form-control"
+                        rows="3"></textarea>
+            </td>
+            <td>
+              <label class="badge badge-info"
+                     (click)="submitField('description')">
+                Update
+              </label>
+            </td>
+          </tr>
+
+      
+          <!-- Price -->
+          <tr>
+            <th>Price</th>
+            <td>
+              <ng-container *ngIf="!isEditing['price']; else editPrice">
+                {{ product.price | currency }}
+              </ng-container>
+              <ng-template #editPrice>
+                <input type="number" step="0.01" class="form-control"
+                       [(ngModel)]="editValues.price">
+              </ng-template>
+            </td>
+            <td>
+              <label class="badge badge-success" (click)="toggleEdit('price', product.price)">Update</label>
+            </td>
+          </tr>
+      
+          <!-- Date Added -->
+          <tr>
+            <th>Date Added</th>
+            <td>
+              <input type="date"
+                     [(ngModel)]="product.dateAdded"
+                     name="dateAdded"
+                     class="form-control">
+            </td>
+            <td>
+              <label class="badge badge-warning"
+                     (click)="submitField('dateAdded')">
+                Update
+              </label>
+            </td>
+          </tr>
+      
+          <!-- Type -->
+          <tr>
+            <th>Type</th>
+            <td
+              #tdType
+              (blur)="onBlur('type', tdType)"
+            >{{ product.type }}</td>
+            <td>
+              <label class="badge badge-warning"
+                     (click)="startEditing('type', tdType)"
+              >Update</label>
+            </td>
+          </tr>
+      
+          <!-- Disponiblity -->
+          <tr>
+            <th>Disponibility</th>
+            <td>
+              <ng-container *ngIf="!isEditing['disponibility']; else editDisponibility">
+                {{ product.disponiblity ? 'Disponible' : 'Indisponible' }}
+              </ng-container>
+              <ng-template #editDisponibility>
+                <select class="form-control"
+                        [(ngModel)]="editValues.disponibility">
+                  <option [ngValue]="true">Disponible</option>
+                  <option [ngValue]="false">Indisponible</option>
+                </select>
+              </ng-template>
+            </td>
+            <td>
+              <label class="badge badge-warning" (click)="toggleEdit('disponibility', product.disponiblity)">Update</label>
+            </td>
+          </tr>
+      
+          <!-- Quantity -->
+          <tr>
+            <th>Quantity</th>
+            <td>
+              <ng-container *ngIf="!isEditing['quantity']; else editQuantity">
+                {{ product.quantity }}
+              </ng-container>
+              <ng-template #editQuantity>
+                <input type="number" class="form-control"
+                       [(ngModel)]="editValues.quantity">
+              </ng-template>
+            </td>
+            <td>
+              <label class="badge badge-warning" (click)="toggleEdit('quantity', product.quantity)">Update</label>
+            </td>
+          </tr>
+          <!-- photo -->
+      
+          <tr>
+            <th>Photo</th>
+            <td>
+              <img [src]="'http://localhost:8763/product/files/' + product.photo"
+                   alt="avatar"
+                   style="width:100px; height:100px;">
+              <!-- input file caché -->
+              <input type="file"
+                     #fileInput
+                     style="display: none;"
+                     (change)="onPhotoSelected($event)" />
+            </td>
+            <td>
+              <label class="badge badge-warning"
+                     (click)="fileInput.click()">
+                Update
+              </label>
+            </td>
+          </tr>
+          
+      
+        </tbody>
+      </table>
+
+      <div class="mt-3">
+        <button class="btn btn-gradient-primary " (click)="submitAll()">Submit</button>
+        <button class="btn btn-outline-danger" (click)="cancelChanges()">Annuler</button>
+
+       
+      </div>
+      
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

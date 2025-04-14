@@ -1,0 +1,38 @@
+
+  .arrow {
+    cursor: pointer;
+    margin-left: 10px;
+    color: #007bff;
+    font-weight: bold;
+  }
+
+  .arrow:hover {
+    color: #0056b3;
+    text-decoration: underline;
+  }
+
+  .order-details-container {
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    max-width: 800px;
+    margin: auto;
+  }
+
+  .order-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .order-table th,
+  .order-table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+  }
+
+  .order-table th {
+    background-color: #f0f0f0;
+    width: 40%;
+  }

@@ -1,0 +1,25 @@
+.order-details-container {
+    max-width: 700px;
+    margin: auto;
+    padding: 20px;
+    background-color: #fefefe;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+  
+  .order-info p {
+    margin-bottom: 10px;
+    font-size: 16px;
+  }
+  
+  .arrow {
+    cursor: pointer;
+    margin-left: 10px;
+    color: blue;
+    font-weight: bold;
+  }
+  .arrow:hover {
+    color: darkblue;
+    text-decoration: underline;
+  }
+  

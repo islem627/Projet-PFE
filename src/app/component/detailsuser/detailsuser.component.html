@@ -1,0 +1,130 @@
+<body>
+  <div class="container-scroller">
+   
+    <!-- partial:partials/_navbar.html -->
+  <app-header></app-header>
+  <br><br><br>
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+      <!-- partial:partials/_sidebar.html -->
+     <app-sidebar></app-sidebar>
+      <!-- partial -->
+      <div class="main-panel">
+        <div class="content-wrapper">
+          <div class="page-header">
+            <h3 class="page-title">
+              <span class="page-title-icon bg-gradient-primary text-white me-2">
+                <i class="mdi mdi-home"></i>
+              </span> Details Users
+            </h3>
+            
+            <nav aria-label="breadcrumb">
+              <ul class="breadcrumb">
+                <li class="breadcrumb-item active" aria-current="page">
+                
+                
+                </li>
+              </ul>
+            </nav>
+          </div>
+
+          <div class="row">
+            <div class="col-12 grid-margin">
+              <div class="card">
+                <div class="card-body">
+              
+                  <div class="table-responsive">
+                   
+
+
+                      <div class="col-lg-12 grid-margin stretch-card">
+                          <div class="card">
+                            <div class="card-body">
+                              <p class="card-description"></p>
+                              <table class="table table-striped">
+                                <tbody>
+                                  <tr>
+                                    <td><strong>ID</strong></td>
+                                    <td>{{ user.id }}</td>
+                                  </tr>
+                                  <tr>
+                                    <td><strong>Nom d'utilisateur</strong></td>
+                                    <td>{{ user.username }}</td>
+                                  </tr>
+                                  <tr>
+                                    <td><strong>Email</strong></td>
+                                    <td>{{ user.email }}</td>
+                                  </tr>
+                                  <tr>
+                                    <td><strong>Téléphone</strong></td>
+                                    <td>{{ user.phone }}</td>
+                                  </tr>
+                                  <tr>
+                                    <td><strong>Adresse</strong></td>
+                                    <td>{{ user.address }}</td>
+                                  </tr>
+                                  <tr>
+                                    <td><strong>Prénom</strong></td>
+                                    <td>{{ user.firstname }}</td>
+                                  </tr>
+                                  <tr>
+                                    <td><strong>Nom</strong></td>
+                                    <td>{{ user.lastname }}</td>
+                                  </tr>
+                                  <tr>
+                                    <td><strong>Confirmé</strong></td>
+                                    <td>{{ user.confirme }}</td>
+                                  </tr>
+                                  <tr>
+                                      <td><strong>Mot de passe</strong></td>
+                                      <td 
+                                        (mouseenter)="showPassword = true" 
+                                        (mouseleave)="showPassword = false"
+                                        style="cursor: pointer;"
+                                      >
+                                        {{ showPassword ? user.password : '********' }}
+                                      </td>
+                                    </tr>
+                                    
+                                  <tr>
+                                    <td><strong>Rôle</strong></td>
+                                    <td>{{ user.role }}</td>
+                                  </tr>
+                                  <tr>
+                                    <td><strong>Photo</strong></td>
+                                    <td>
+                                      <img [src]="'http://localhost:8762/User/files/' + user.photo" alt="image" style="width: 100px; height: 100px;">
+                                    </td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        </div>
+                        
+
+
+
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          <app-footer></app-footer>

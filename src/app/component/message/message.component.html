@@ -1,0 +1,9 @@
+<div>
+    <input type="text" [(ngModel)]="message" placeholder="Enter your message" />
+    <button (click)="sendMessage()">Send Message</button>
+  </div>
+  
+  <div *ngIf="receivedMessage">
+    <p>Received Message: {{ receivedMessage }}</p>
+  </div>
+  

@@ -1,0 +1,189 @@
+/* Icône de notification */
+.mdi-bell-outline {
+  position: relative;
+  font-size: 2rem;
+  display: inline-block;
+}
+
+/* Badge de notification */
+.notification-badge {
+  position: absolute;
+  top:-7.75px;  /* Ajuste la position du badge en haut */
+  right: -3px; /* Ajuste la position du badge sur la droite */
+  background-color: red;
+  color: white;
+  padding: 0.3em 0.5em;
+  border-radius: 50%;
+  font-size: 0.5rem; /* Réduit la taille de la police dans le badge */
+  font-weight: bold;
+  height: 8px; /* Hauteur fixe du badge */
+  min-width: 6.5px; /* Largeur minimale pour le badge */
+  text-align: center;    /* Centrer le texte du badge */
+  line-height: 7px; /* Centrer verticalement le texte */
+}
+
+/* Conteneur des notifications */
+.dropdown-menu {
+  width: 300px;
+  max-height: 400px;
+  overflow-y: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  background-color: white;
+}
+
+/* En-tête des notifications */
+.dropdown-menu h6 {
+  font-weight: bold;
+  text-align: center;
+  color: #333;
+}
+
+/* Style des éléments de notification */
+.preview-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  transition: background 0.3s;
+  border-bottom: 1px solid #ddd;
+}
+
+.preview-item:hover {
+  background-color: #f8f9fa;
+}
+
+/* Icône dans les notifications */
+.preview-icon {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent; 
+
+}
+
+.preview-icon i {
+  font-size: 18px;
+  color: #333; 
+
+}
+
+/* Texte des notifications */
+.preview-item-content {
+    flex: 1;
+  margin-left: 10px;
+ 
+}
+
+.preview-item-content h6 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+}
+
+.preview-item-content span {
+  font-size: 12px;
+  color: #666;
+}
+
+/* Bouton de suppression */
+.btn-delete {
+  background: none;
+  border: none; /* Retirer la bordure */
+  color: gray; /* Icône de poubelle gris */
+  cursor: pointer;
+  font-size: 18px; /* Ajuster la taille de l'icône */
+  width: 30px; /* Taille du bouton */
+  height: 30px; /* Taille du bouton */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.3s, background 0.3s; /* Transition pour couleur et fond */
+}
+
+.btn-delete i {
+  font-size: 14px;
+}
+
+.btn-delete:hover {
+  color: #dc3545; /* Couleur rouge */
+  background-color: #f8d7da; /* Fond rouge clair */
+  border-radius: 50%; /* Rendre le fond rond */
+}
+
+.btn-delete:focus {
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Style du bouton "Supprimer toutes les notifications" */
+.clear-btn {
+  background-color: #dc3545;
+  color: white;
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  transition: background 0.3s;
+}
+
+.clear-btn:hover {
+  background-color: #c82333;
+}
+/*color notif */
+/* Classe pour "ready" */
+.notification-ready {
+  background-color: #dc3545; /* Couleur rouge */
+  color: white;
+}
+
+/* Classe pour "delivering" */
+.notification-delivering {
+  background-color: #ffc107; /* Couleur jaune */
+  color: black;
+}
+
+/* Classe pour "completed" */
+.notification-completed {
+  background-color: #28a745; /* Couleur verte */
+  color: white;
+}
+
+/* Autres styles généraux */
+.preview-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  transition: background 0.3s;
+  border-bottom: 1px solid #ddd;
+}
+
+.preview-item:hover {
+  background-color: #f8f9fa;
+}
+
+.preview-item-content h6 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+}
+
+.preview-item-content span {
+  font-size: 12px;
+  color: #666;
+}
+.notification-new {
+  background-color: rgb(236, 236, 236); /* Rouge pour une notification nouvelle */
+  color: white;
+}
+
+.notification-read {
+  background-color: #ffffff; /* Gris pour une notification lue */
+  color: black;
+}

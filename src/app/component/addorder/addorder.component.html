@@ -1,0 +1,128 @@
+<body>
+    <div class="container-scroller">
+      <app-header></app-header>
+      <br><br><br>
+      <div class="container-fluid page-body-wrapper">
+        <app-sidebar></app-sidebar>
+        <div class="main-panel">
+          <div class="content-wrapper">
+            <div class="page-header">
+              <h3 class="page-title">
+                <span class="page-title-icon bg-gradient-primary text-white me-2">
+                  <i class="mdi mdi-cart"></i>
+                </span> Ajouter Commande
+              </h3>
+            </div>
+  
+            <div class="col-12 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Formulaire Commande</h4>
+  
+                  <form [formGroup]="orderForm" (ngSubmit)="addOrder()">
+                    
+                    <!-- Date de commande -->
+                    <div class="form-group">
+                      <label for="dateCommande">Date de commande</label>
+                      <input type="date" class="form-control" id="dateCommande" formControlName="dateCommande">
+                    </div>
+  
+                    <!-- Statut -->
+                    <div class="form-group">
+                      <label for="statut_commande">Statut</label>
+                      <input type="text" class="form-control" id="statut_commande" formControlName="statut_commande" placeholder="Status">
+                    </div>
+  
+                    <!-- Adresse de livraison -->
+                    <div class="form-group">
+                      <label for="adresse_livraison">Adresse de livraison</label>
+                      <input type="text" class="form-control" id="adresse_livraison" formControlName="adresse_livraison" placeholder="Adress">
+                    </div>
+  
+                    <!-- Total -->
+                    <div class="form-group">
+                      <label for="total">Total</label>
+                      <input type="number" class="form-control" id="total" formControlName="total" placeholder="Montant total" step="0.01">
+                    </div>
+  
+                    <!-- Article Commandé -->
+                    <div class="form-group">
+                      <label for="articel_commande">Article commandé</label>
+                      <input type="text" class="form-control" id="articel_commande" formControlName="articel_commande" placeholder="Article">
+                    </div>
+  
+                    <!-- Remise -->
+                    <div class="form-group">
+                      <label for="remise">Remise</label>
+                      <input type="number" class="form-control" id="remise" formControlName="remise" placeholder="Remise" step="0.01">
+                    </div>
+  
+                    <!-- Frais de livraison -->
+                    <div class="form-group">
+                      <label for="fraisLivraison">Frais de livraison</label>
+                      <input type="number" class="form-control" id="fraisLivraison" formControlName="fraisLivraison" step="0.01" placeholder="Frais de livraison">
+                    </div>
+  
+                    <!-- Date de livraison estimée -->
+                    <div class="form-group">
+                      <label for="date_livraison_estimee">Date estimée de livraison</label>
+                      <input type="date" class="form-control" id="date_livraison_estimee" formControlName="date_livraison_estimee">
+                    </div>
+  
+                    <!-- Commentaires -->
+                    <div class="form-group">
+                      <label for="commentaires">Commentaires</label>
+                      <textarea class="form-control" id="commentaires" rows="3" formControlName="commentaires"></textarea>
+                    </div>
+  
+                    <!-- Commande payée -->
+                    <div class="form-group">
+                      <label for="ispaied">Commande payée</label>
+                      <select class="form-control" id="ispaied" formControlName="ispaied" >
+                        <option [value]="true">Oui</option>
+                        <option [value]="false">Non</option>
+                      </select>
+                    </div>
+  
+                    <!-- Latitude -->
+                    <div class="form-group">
+                      <label for="latitude">Latitude</label>
+                      <input type="number" class="form-control" id="latitude" formControlName="latitude" placeholder="Coordonnée GPS" step="0.01">
+                    </div>
+  
+                    <!-- Longitude -->
+                    <div class="form-group">
+                      <label for="longitude">Longitude</label>
+                      <input type="number" class="form-control" id="longitude" formControlName="longitude" placeholder="Coordonnée GPS" step="0.01">
+                    </div>
+  
+                    <!-- ID Utilisateur -->
+                    <div class="form-group">
+                      <label for="iduser">ID Utilisateur</label>
+                      <input type="text" class="form-control" id="iduser" formControlName="iduser" placeholder="ID du compte client">
+                    </div>
+                    <div class="form-group">
+                        <label for="idProduct">ID Produit</label>
+                        <input type="text" id="idProduct" class="form-control" formControlName="idProduct"  placeholder="ID du compte product">
+                      </div>
+                      
+  
+                    <!-- Boutons -->
+                    <div class="template-demo">
+                    <button type="submit" class="btn btn-gradient-primary btn-icon-text">
+                        <i class="mdi mdi-file-check btn-icon-prepend"></i> Submit
+                      </button>
+                      <button class="btn btn-light" type="button">Annuler</button>
+                    </div>
+  
+                  </form>
+                </div>
+              </div>
+            </div>
+  
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  

@@ -12,8 +12,10 @@
           <div class="page-header">
             <h3 class="page-title">
               <span class="page-title-icon bg-gradient-primary text-white me-2">
-                <i class="mdi mdi-home"></i>
-              </span> Détails du produit
+                <i class="mdi mdi-information-outline"></i>
+              </span>
+              Product Details
+              
             </h3>
             
             <nav aria-label="breadcrumb">
@@ -38,19 +40,19 @@
                                 <td>{{ product.id }}</td>
                               </tr>
                               <tr>
-                                <td><strong>Nom</strong></td>
+                                <td><strong>Name</strong></td>
                                 <td>{{ product.name }}</td>
                               </tr>
                               <tr>
-                                <td><strong>Description</strong></td>
+                                <td><strong>Description </strong></td>
                                 <td>{{ product.description }}</td>
                               </tr>
                               <tr>
-                                <td><strong>Prix</strong></td>
+                                <td><strong>Price</strong></td>
                                 <td>{{ product.price | currency }}</td>
                               </tr>
                               <tr>
-                                <td><strong>Date ajoutée</strong></td>
+                                <td><strong>Date Added</strong></td>
                                 <td>{{ product.dateAdded | date }}</td>
                               </tr>
                               <tr>
@@ -58,17 +60,17 @@
                                 <td>{{ product.type }}</td>
                               </tr>
                               <tr>
-                                <td><strong>Disponibilité</strong></td>
-                                <td>{{ product.disponiblity ? 'Disponible' : 'Indisponible' }}</td>
+                                <td><strong>Availability  </strong></td>
+                                <td>{{ product.disponiblity ? 'Availability' : 'Unavailable' }}</td>
                               </tr>
                               <tr>
-                                <td><strong>Quantité</strong></td>
+                                <td><strong>Quantity </strong></td>
                                 <td>{{ product.quantity }}</td>
                               </tr>
                               <tr>
                                 <td><strong>Photo</strong></td>
                                 <td>
-                                  <img [src]="'http://localhost:8762/product/files/' + product.photo" alt="image" style="width: 100px; height: 100px;">
+                                  <img [src]="'http://localhost:8763/product/files/' + product.photo" alt="image" style="width: 100px; height: 100px;">
                                 </td>
                               </tr>
                             </tbody>

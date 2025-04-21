@@ -1,0 +1,872 @@
+/* page-client.component.css */
+
+/* Conteneur principal */
+.content-wrapper {
+    background-color: #f4f6f9;
+    padding: 20px;
+  }
+  
+  /* Titre de la page */
+  .page-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .page-title-icon {
+    border-radius: 50%;
+    padding: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Carte principale */
+  .card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* Titre et description */
+  .card-title {
+    font-size: 1.5rem;
+    color: #2c3e50;
+    margin-bottom: 15px;
+  }
+  
+  .card-description {
+    font-size: 1rem;
+    color: #7f8c8d;
+    margin-bottom: 20px;
+  }
+  
+  /* Cartes des commandes */
+  .command-card {
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .command-card .card-body {
+    padding: 20px;
+  }
+  
+  .command-card .card-text {
+    font-size: 0.9rem;
+    color: #34495e;
+    line-height: 1.6;
+  }
+  
+  .command-card .card-text strong {
+    color: #2c3e50;
+  }
+  
+  
+  .btn-gradient-primary:hover {
+    background: linear-gradient(90deg, #dab4dd, #1f618d);
+  }
+  
+  /* Alerte d'erreur */
+  .alert-danger {
+    border-radius: 5px;
+    padding: 15px;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+  }
+  
+  /* Modale */
+  .modal-content {
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  .modal-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #e9ecef;
+  }
+  
+  .modal-title {
+    font-size: 1.4rem;
+    color: #2c3e50;
+  }
+  
+  .modal-body {
+    max-height: 60vh;
+    overflow-y: auto;
+    padding: 20px;
+  }
+  
+  .modal-footer {
+    border-top: 1px solid #e9ecef;
+  }
+  
+  /* Tableau des détails */
+  .table-details {
+    font-size: 0.9rem;
+    margin-bottom: 0;
+  }
+  
+  .table-details td {
+    vertical-align: middle;
+    padding: 10px;
+  }
+  
+  .table-details strong {
+    color: #2c3e50;
+  }
+  
+  .table-details .badge {
+    font-size: 0.8rem;
+    padding: 5px 10px;
+    border-radius: 12px;
+  }
+  
+  .badge-success {
+    background-color: #28a745;
+  }
+  
+  .badge-warning {
+    background-color: #ffc107;
+  }
+  
+  .badge-danger {
+    background-color: #dc3545;
+  }
+  
+  /* Photo utilisateur */
+  .user-photo {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .page-title {
+      font-size: 1.5rem;
+    }
+  
+    .card-title {
+      font-size: 1.3rem;
+    }
+  
+    .command-card .card-text {
+      font-size: 0.85rem;
+    }
+  
+    .modal-dialog {
+      margin: 10px;
+    }
+  
+    .table-details {
+      font-size: 0.85rem;
+    }
+  
+    .user-photo {
+      width: 80px;
+      height: 80px;
+    }
+  }
+  /* page-client.component.css */
+
+/* Conteneur principal */
+.content-wrapper {
+    background-color: #f4f6f9;
+    padding: 20px;
+  }
+  
+  /* Titre de la page */
+  .page-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .page-title-icon {
+    border-radius: 50%;
+    padding: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Carte principale */
+  .card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* Titre et description */
+  .card-title {
+    font-size: 1.5rem;
+    color: #2c3e50;
+    margin-bottom: 15px;
+  }
+  
+  .card-description {
+    font-size: 1rem;
+    color: #7f8c8d;
+    margin-bottom: 20px;
+  }
+  
+  /* Cartes des commandes */
+  .command-card {
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .command-card .card-body {
+    padding: 20px;
+  }
+  
+  .command-card .card-text {
+    font-size: 0.9rem;
+    color: #34495e;
+    line-height: 1.6;
+  }
+  
+  .command-card .card-text strong {
+    color: #2c3e50;
+  }
+  
+  /* Bouton Details */
+  .btn-gradient-primary {
+    background: linear-gradient(90deg, #3498db, #2980b9);
+    border: none;
+    border-radius: 20px;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    color: #fff;
+    transition: background 0.3s ease;
+  }
+  
+  .btn-gradient-primary:hover {
+    background: linear-gradient(90deg, #2980b9, #1f618d);
+  }
+  
+  /* Alerte d'erreur */
+  .alert-danger {
+    border-radius: 5px;
+    padding: 15px;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+  }
+  
+  /* Modale */
+  .modal {
+    z-index: 1050 !important;
+  }
+  
+  .modal-backdrop {
+    z-index: 1040 !important;
+  }
+  
+  .modal-content {
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  .modal-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #e9ecef;
+  }
+  
+  .modal-title {
+    font-size: 1.4rem;
+    color: #2c3e50;
+  }
+  
+  .modal-body {
+    max-height: 60vh;
+    overflow-y: auto;
+    padding: 20px;
+  }
+  
+  .modal-footer {
+    border-top: 1px solid #e9ecef;
+  }
+  
+  /* Tableau des détails */
+  .table-details {
+    font-size: 0.9rem;
+    margin-bottom: 0;
+  }
+  
+  .table-details td {
+    vertical-align: middle;
+    padding: 10px;
+  }
+  
+  .table-details strong {
+    color: #2c3e50;
+  }
+  
+  .table-details .badge {
+    font-size: 0.8rem;
+    padding: 5px 10px;
+    border-radius: 12px;
+  }
+  
+  .badge-success {
+    background-color: #28a745;
+  }
+  
+  .badge-warning {
+    background-color: #ffc107;
+  }
+  
+  .badge-danger {
+    background-color: #dc3545;
+  }
+  
+  /* Photo utilisateur */
+  .user-photo {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .page-title {
+      font-size: 1.5rem;
+    }
+  
+    .card-title {
+      font-size: 1.3rem;
+    }
+  
+    .command-card .card-text {
+      font-size: 0.85rem;
+    }
+  
+    .modal-dialog {
+      margin: 10px;
+    }
+  
+    .table-details {
+      font-size: 0.85rem;
+    }
+  
+    .user-photo {
+      width: 80px;
+      height: 80px;
+    }
+  }
+  .card.command-card {
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card.command-card .card-body {
+    padding: 20px;
+  }
+  
+  .btn-gradient-primary {
+    background: linear-gradient(to right, #667eea, #764ba2);
+    color: white;
+  }
+  
+  .btn-gradient-primary:hover {
+    background: linear-gradient(to right, #5a67d8, #6b46c1);
+    color: white;
+  }
+  
+  .table-details tr td {
+    vertical-align: middle;
+  }
+  
+  .table-details img.user-photo {
+    max-width: 100px;
+    border-radius: 50%;
+    border: 2px solid #ddd;
+    padding: 4px;
+  }
+  
+  .modal-title {
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .badge-success {
+    background-color: #28a745;
+  }
+  
+  .badge-warning {
+    background-color: #ffc107;
+    color: #212529;
+  }
+  
+  .badge-danger {
+    background-color: #dc3545;
+  }
+  /* page-client.component.css */
+
+/* Conteneur principal */
+.content-wrapper {
+  background-color: #f4f6f9;
+  padding: 20px;
+}
+
+/* Titre de la page */
+.page-title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.page-title-icon {
+  border-radius: 50%;
+  padding: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Carte principale */
+.card {
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Titre et description */
+.card-title {
+  font-size: 1.5rem;
+  color: #2c3e50;
+  margin-bottom: 15px;
+}
+
+.card-description {
+  font-size: 1rem;
+  color: #7f8c8d;
+  margin-bottom: 20px;
+}
+
+/* Cartes des commandes */
+.command-card {
+  background-color: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.command-card .card-body {
+  padding: 20px;
+}
+
+.command-card .card-text {
+  font-size: 0.9rem;
+  color: #34495e;
+  line-height: 1.6;
+}
+
+.command-card .card-text strong {
+  color: #2c3e50;
+}
+
+/* Bouton Details */
+.btn-gradient-primary {
+  background: linear-gradient(90deg, #3498db, #2980b9);
+  border: none;
+  border-radius: 20px;
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  color: #fff;
+  transition: background 0.3s ease;
+}
+
+.btn-gradient-primary:hover {
+  background: linear-gradient(90deg, #2980b9, #1f618d);
+}
+
+/* Alerte d'erreur */
+.alert-danger {
+  border-radius: 5px;
+  padding: 15px;
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+}
+
+/* Modale */
+.modal {
+  z-index: 1055 !important; /* Assurer que la modale est au-dessus de tout */
+}
+
+.modal-backdrop {
+  z-index: 1050 !important; /* Derrière la modale */
+  opacity: 0.5 !important; /* Réduire l'opacité pour éviter un fond trop sombre */
+}
+
+.modal-content {
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  z-index: 1060 !important; /* Au-dessus du backdrop */
+}
+
+.modal-header {
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.modal-title {
+  font-size: 1.4rem;
+  color: #2c3e50;
+}
+
+.modal-body {
+  max-height: 60vh;
+  overflow-y: auto;
+  padding: 20px;
+}
+
+.modal-footer {
+  border-top: 1px solid #e9ecef;
+}
+
+/* Tableau des détails */
+.table-details {
+  font-size: 0.9rem;
+  margin-bottom: 0;
+}
+
+.table-details td {
+  vertical-align: middle;
+  padding: 10px;
+}
+
+.table-details strong {
+  color: #2c3e50;
+}
+
+.table-details .badge {
+  font-size: 0.8rem;
+  padding: 5px 10px;
+  border-radius: 12px;
+}
+
+.badge-success {
+  background-color: #28a745;
+}
+
+.badge-warning {
+  background-color: #ffc107;
+}
+
+.badge-danger {
+  background-color: #dc3545;
+}
+
+/* Photo utilisateur */
+.user-photo {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid #e9ecef;
+}
+
+/* Message de chargement */
+.text-center {
+  padding: 20px;
+}
+
+.text-muted {
+  font-size: 1rem;
+  color: #6c757d;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .page-title {
+    font-size: 1.5rem;
+  }
+
+  .card-title {
+    font-size: 1.3rem;
+  }
+
+  .command-card .card-text {
+    font-size: 0.85rem;
+  }
+
+  .modal-dialog {
+    margin: 10px;
+  }
+
+  .table-details {
+    font-size: 0.85rem;
+  }
+
+  .user-photo {
+    width: 80px;
+    height: 80px;
+  }
+}
+/* page-client.component.css */
+
+/* Conteneur principal */
+.content-wrapper {
+    background-color: #f4f6f9;
+    padding: 20px;
+  }
+  
+  /* Titre de la page */
+  .page-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .page-title-icon {
+    border-radius: 50%;
+    padding: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Carte principale */
+  .card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* Titre et description */
+  .card-title {
+    font-size: 1.5rem;
+    color: #2c3e50;
+    margin-bottom: 15px;
+  }
+  
+  .card-description {
+    font-size: 1rem;
+    color: #7f8c8d;
+    margin-bottom: 20px;
+  }
+  
+  /* Cartes des commandes */
+  .command-card {
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .command-card .card-body {
+    padding: 20px;
+  }
+  
+  .command-card .card-text {
+    font-size: 0.9rem;
+    color: #34495e;
+    line-height: 1.6;
+  }
+  
+  .command-card .card-text strong {
+    color: #2c3e50;
+  }
+  
+  /* Bouton Details */
+  .btn-gradient-primary {
+    background: linear-gradient(90deg, #3498db, #2980b9);
+    border: none;
+    border-radius: 20px;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    color: #fff;
+    transition: background 0.3s ease;
+  }
+  
+  .btn-gradient-primary:hover {
+    background: linear-gradient(90deg, #2980b9, #1f618d);
+  }
+  
+  /* Alerte d'erreur */
+  .alert-danger {
+    border-radius: 5px;
+    padding: 15px;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+  }
+  
+  /* Modale */
+  .modal {
+    z-index: 1055 !important;
+  }
+  
+  .modal-backdrop {
+    z-index: 1050 !important;
+    opacity: 0.5 !important;
+  }
+  
+  .modal-content {
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    z-index: 1060 !important;
+    background-color: #fff;
+  }
+  
+  .modal-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #e9ecef;
+  }
+  
+  .modal-title {
+    font-size: 1.4rem;
+    color: #2c3e50;
+  }
+  
+  .modal-body {
+    max-height: 60vh;
+    overflow-y: auto;
+    padding: 20px;
+  }
+  
+  .modal-footer {
+    border-top: 1px solid #e9ecef;
+  }
+  
+  /* Tableau des détails */
+  .table-details {
+    font-size: 0.9rem;
+    margin-bottom: 0;
+  }
+  
+  .table-details td {
+    vertical-align: middle;
+    padding: 10px;
+  }
+  
+  .table-details strong {
+    color: #2c3e50;
+  }
+  
+  .table-details .badge {
+    font-size: 0.8rem;
+    padding: 5px 10px;
+    border-radius: 12px;
+  }
+  
+  .badge-success {
+    background-color: #28a745;
+  }
+  
+  .badge-warning {
+    background-color: #ffc107;
+  }
+  
+  .badge-danger {
+    background-color: #dc3545;
+  }
+  
+  /* Conteneur de la photo */
+  .user-photo-container {
+    text-align: center;
+    padding: 10px;
+  }
+  
+  /* Style de la photo utilisateur */
+  .user-photo {
+    width: 120px; /* Taille augmentée pour meilleure visibilité */
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%; /* Rendre la photo circulaire */
+    border: 2px solid #e9ecef;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+  
+  .user-photo:hover {
+    transform: scale(1.05); /* Effet de zoom au survol */
+  }
+  
+  /* Style pour l'image par défaut */
+  .default-photo {
+    opacity: 0.7; /* Légère transparence pour indiquer une image par défaut */
+    border: 2px dashed #6c757d; /* Bordure en pointillés pour l'image par défaut */
+  }
+  
+  /* Légende de la photo */
+  .photo-caption {
+    display: block;
+    margin-top: 8px;
+    font-size: 0.8rem;
+    color: #6c757d;
+  }
+  
+  /* Message de chargement */
+  .text-center {
+    padding: 20px;
+  }
+  
+  .text-muted {
+    font-size: 1rem;
+    color: #6c757d;
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .page-title {
+      font-size: 1.5rem;
+    }
+  
+    .card-title {
+      font-size: 1.3rem;
+    }
+  
+    .command-card .card-text {
+      font-size: 0.85rem;
+    }
+  
+    .modal-dialog {
+      margin: 10px;
+    }
+  
+    .table-details {
+      font-size: 0.85rem;
+    }
+  
+    .user-photo {
+      width: 80px;
+      height: 80px;
+    }
+  
+    .photo-caption {
+      font-size: 0.75rem;
+    }
+  }

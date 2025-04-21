@@ -14,8 +14,10 @@
           <div class="page-header">
             <h3 class="page-title">
               <span class="page-title-icon bg-gradient-primary text-white me-2">
-                <i class="mdi mdi-home"></i>
-              </span> Details Users
+                <i class="mdi mdi-pencil-box"></i>
+              </span>
+              Update Product
+              
             </h3>
             
             <nav aria-label="breadcrumb">
@@ -84,7 +86,7 @@
             <th>Price</th>
             <td>
               <ng-container *ngIf="!isEditing['price']; else editPrice">
-                {{ product.price | currency }}
+                {{ product.price  }}
               </ng-container>
               <ng-template #editPrice>
                 <input type="number" step="0.01" class="form-control"

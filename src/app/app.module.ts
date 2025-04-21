@@ -41,6 +41,13 @@ import { AddproductComponent } from './component/addproduct/addproduct.component
 import { AddorderComponent } from './component/addorder/addorder.component';
 import { UpdateproductComponent } from './component/updateproduct/updateproduct.component';
 import { UpdateuserComponent } from './component/updateuser/updateuser.component';
+import { PageClientComponent } from './component/pageclient/page-client.component';
+import { HeaderclientComponent } from './component/headerclient/headerclient.component';
+import { HeaderlivreurComponent } from './component/headerlivreur/headerlivreur.component';
+import { UpdateadminComponent } from './component/updateadmin/updateadmin.component';
+import { ProfileComponent } from './component/profile/profile.component';
+import { ResetPasswordComponent } from './component/reset-password/reset-password.component';
+import { ForgotPasswordComponent } from './component/forgot-password/forgot-password.component';
 firebase.initializeApp(environement.firebase);
 
 @NgModule({
@@ -75,22 +82,33 @@ firebase.initializeApp(environement.firebase);
     AddproductComponent,
     AddorderComponent,
     UpdateproductComponent,
-    UpdateuserComponent    
+    UpdateuserComponent,
+    PageClientComponent,
+    HeaderclientComponent,
+    HeaderlivreurComponent,
+    UpdateadminComponent,
+    ProfileComponent,
+    ResetPasswordComponent,
+    ForgotPasswordComponent
+    
   ],
+
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule, // Ajouter FormsModule ici
-    ToastrModule.forRoot(
+    ToastrModule.forRoot(),  // ToastrModule ajouté
+   /* 
       {
-      /* progressBar: true,
+       progressBar: true,
         closeButton: true,
         newestOnTop: true,
         tapToDismiss: true,
         positionClass: 'toast-top-right',
-        timeOut: 8000*/
+        timeOut: 8000
       }
-    ),
+    ,*/
+
     ReactiveFormsModule ,
     HttpClientModule ,
     BrowserAnimationsModule,

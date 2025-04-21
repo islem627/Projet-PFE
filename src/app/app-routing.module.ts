@@ -26,15 +26,22 @@ import { AddproductComponent } from './component/addproduct/addproduct.component
 import { AddorderComponent } from './component/addorder/addorder.component';
 import { UpdateproductComponent } from './component/updateproduct/updateproduct.component';
 import { UpdateuserComponent } from './component/updateuser/updateuser.component';
+import { PageClientComponent } from './component/pageclient/page-client.component';
+import { UpdateadminComponent } from './component/updateadmin/updateadmin.component';
+import { ForgotPasswordComponent } from './component/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './component/reset-password/reset-password.component';
+import { ProfileComponent } from './component/profile/profile.component';
+
 
 
 const routes: Routes = [
-  { path: "", component: HomeComponent },
+  { path: "home", component: HomeComponent },
   { path: "users", component: UsersComponent },
   { path: "destination", component: DestinationComponent },
   { path: "products", component: ProductsComponent },
-  { path: "login",component: LoginComponent}, 
-  { path: "chat/:id", component: ChatComponent },
+  { path: 'client', component: ClientComponent },
+  { path: "",component: LoginComponent}, 
+  {path: "chat/:id", component: ChatComponent},
   {path: "livreur", component: LivreurComponent},
   {path: "client", component: ClientComponent},
   {path: "order-user-client", component: OrderUserClientComponent},
@@ -58,7 +65,11 @@ const routes: Routes = [
   {path:"updateproduct/:id",component:UpdateproductComponent},
   {path: "updateorder/:id", component: UpdateorderComponent},
   {path:"updateuser/:id",component:UpdateuserComponent},
-
+  {path:"pageclient", component:PageClientComponent},
+  {path:"updateadmin/:id",component:UpdateadminComponent},
+  {path:"forgot-password",component:ForgotPasswordComponent},
+  {path: "reset-password/:token", component: ResetPasswordComponent}, 
+  {path:"updateprofile",component:ProfileComponent},
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)], // or RouterModule.forChild(routes) for feature modules

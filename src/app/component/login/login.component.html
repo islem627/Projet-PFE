@@ -73,7 +73,7 @@
        
           <div class="form-container login-container">
             <form [formGroup]="loginForm">
-                <h1>Login here</h1>
+                <h1>Login</h1>
                 <input type="text" placeholder="username" id="email" formControlName="username">
                 <input type="password" placeholder="Password" id="nom" formControlName="password">
                 <div class="content">
@@ -84,7 +84,7 @@
                       </div>
                     </div>
                     <div class="pass-link">
-                      <a href="#">Forgot password?</a>
+                     <a routerLink="/forgot-password">Forgot password?</a>
                   </div>
                     
                 </div>

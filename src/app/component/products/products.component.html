@@ -14,14 +14,16 @@
             <div class="page-header">
               <h3 class="page-title">
                 <span class="page-title-icon bg-gradient-primary text-white me-2">
-                  <i class="mdi mdi-home"></i>
-                </span> Products List
+                  <i class="mdi mdi-cart-outline"></i>
+                </span>
+                Products List
+                
               </h3>
               <nav aria-label="breadcrumb">
                 <ul class="breadcrumb">
                   <li class="breadcrumb-item active" aria-current="page">
                     <input type="text" [(ngModel)]="searchText" placeholder="Search...">
-                    <button (click)="search()">Chercher par name</button>
+                    <button (click)="search()">With Name</button>
                  
                   </li>
                 </ul>
@@ -42,7 +44,7 @@
                             <th> Name </th>
                             <th> Type </th>
                             <th> Description </th>
-                            <th> DateAdded </th>
+                            <th> Date Added </th>
                             <th> Quantity </th>
                             <th>Price</th>
                           </tr>
@@ -50,7 +52,9 @@
                         <tbody>
                           <tr *ngFor="let p of listusers |paginate:{itemsPerPage:3,currentPage:c};">
                             <td>{{p.id}}</td>
-                            <td> {{p.photo}} </td> 
+                            <td>                          
+                                 <img [src]="'http://localhost:8763/product/files/' + p.photo" class="me-2" alt="image">
+                            </td> 
                             <td>{{p.name}} </td>
                             <td> {{p.type}}</td>
                             <td> {{p.description}}   </td>
@@ -59,19 +63,20 @@
                             <td>{{p.price}}</td>
                             <td>
                               <button type="button"
-                                 class="btn-gradient-primary btn-rounded btn-fw" (click)="detailsproduct(p.id)">Info</button>
+                                 class="btn-gradient-primary btn-rounded btn-fw" (click)="detailsproduct(p.id)">Details</button>
                                  <button type="button"
                               class="btn-gradient-success btn-rounded btn-fw" (click)="updateproduct(p.id)">Update</button>
                               <button type="button"
                               class="btn-gradient-danger btn-rounded btn-fw" (click)="deleteproduct(p.id)">Delete</button>
-                              <button type="button"
-                              class="btn-gradient-danger btn-rounded btn-fw" (click)="addproduct()">Add product</button>
+                              
                             </td>
                           </tr>
                           
                         </tbody>
                       </table>
                       <pagination-controls (pageChange)="c=$event"></pagination-controls>
+                      <button type="button"
+                              class="btn-gradient-danger btn-rounded btn-fw" (click)="addproduct()">Add product</button>
                     </div>
                   </div>
                 </div>

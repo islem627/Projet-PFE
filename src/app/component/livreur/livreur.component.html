@@ -1,36 +1,185 @@
-<div class="container-scroller">
-  <!--<app-header></app-header>-->
-  <br><br><br>
-  
-  <!-- partial -->
-  <div class="container-fluid page-body-wrapper">
-    <app-sidebar></app-sidebar>
-    
-    <!-- Zone de texte pour saisir un message et boutons pour la mise à jour du statut -->
-    <div class="status-buttons mb-3 text-center">
-      <h3>Update Status</h3>
-      <button type="button" class="btn-gradient-primary btn-rounded btn-fw" (click)="updateOrderStatus('Prepared')">Prepared</button>
-      <button type="button" class="btn-gradient-danger btn-rounded btn-fw" (click)="updateOrderStatus('Ready')">Ready</button>
-      <button type="button" class="btn-gradient-success btn-rounded btn-fw" (click)="updateOrderStatus('Delivered')">Delivered</button>
-    </div>
-<br>
-<br>
-<br>
-    <!-- Zone de saisie pour un message personnalisé -->
-    <div class="message-input">
-      <textarea [(ngModel)]="notificationMessage" placeholder="Saisir un message..." rows="4" cols="50"></textarea>
-      <button type="button" class="btn-gradient-success btn-rounded btn-fw" (click)="sendMessage()">Envoyer Message</button>
-    </div>
+<body>
+  <div class="container-scroller">
+    <app-headerlivreur></app-headerlivreur>
+    <br><br><br>
 
-    <!-- Affichage des notifications -->
-    <div *ngIf="showNotification" class="notification-panel">
-      <ul class="notification-list">
-        <li class="notification-item">
-          <p>{{ notificationMessage }}</p>
-        </li>
-      </ul>
-    </div>
-    
-  </div>
-  <app-footer></app-footer>
-</div>
+    <div class="container-fluid page-body-wrapper">
+      <app-sidebar></app-sidebar>
+
+      <div class="main-panel">
+        <div class="content-wrapper">
+          <div class="page-header">
+            <h3 class="page-title">
+              <span class="page-title-icon bg-gradient-primary text-white me-2">
+                <i class="mdi mdi-truck"></i> <!-- Icon for Delivery Person -->
+              </span>
+              Delivery Person
+            </h3>
+          </div>
+
+          <div class="col-12 grid-margin stretch-card">
+            <div class="card">
+              <div class="card-body">
+                <h4 class="card-title"></h4>
+                <p class="card-description"></p>
+
+                <!-- Table des commandes actives -->
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th> Order Date</th>
+                      <th>Order Status</th>
+                      <th>Delivery Address</th>
+                      <th>Total</th>
+                      <th>Discount</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let o of listorders">
+                      <td>{{ o.id_commande }}</td>
+                      <td>{{ o.dateCommande }}</td>
+                      <td>{{ o.statut_commande }}</td>
+                      <td>{{ o.adresse_livraison }}</td>
+                      <td>{{ o.total }}</td>
+                      <td>{{ o.remise }}</td>
+                      <!--
+                      <td>
+                         Action Buttons with spacing 
+                        <button type="button" class="btn-circle btn-gradient-primary action-btn" (click)="updateOrderStatus('Prepared')" title="Prepared">
+                          <i class="mdi mdi-check-circle-outline"></i>
+                        </button>
+                      
+                        <button type="button" class="btn-circle btn-gradient-success action-btn" (click)="updateOrderStatus('Ready')" title="Ready">
+                          <i class="mdi mdi-timer-sand"></i>
+                        </button>
+                      
+                        <button type="button" class="btn-circle btn-gradient-danger action-btn" (click)="updateOrderStatus('Delivered')" title="Delivered">
+                          <i class="mdi mdi-truck-delivery-outline"></i>
+                        </button>
+                      
+                        <button type="button" class="btn-circle btn-gradient-warning action-btn" (click)="archiveOrder(o)" title="Archive">
+                          <i class="mdi mdi-archive-outline"></i>
+                        </button>
+                        
+                        <td>
+
+                          <button type="button" class="btn-circle btn-gradient-primary action-btn" 
+                          (click)="updateOrderStatus('Prepared', o.userDTO.id_commande, 1)"
+                          title="Prepared">
+                            <i class="mdi mdi-check-circle-outline"></i>
+                          </button>
+                          
+                          <button type="button" class="btn-circle btn-gradient-success action-btn" 
+                                  (click)="updateOrderStatus('Ready', o.userDTO.id_commande, 1)" 
+                                  title="Ready">
+                            <i class="mdi mdi-timer-sand"></i>
+                          </button>
+                          
+                          <button type="button" class="btn-circle btn-gradient-danger action-btn" 
+                                  (click)="updateOrderStatus('Delivered', o.userDTO.id_commande, 1)" 
+                                  title="Delivered">
+                            <i class="mdi mdi-truck-delivery-outline"></i>
+                          </button>
+                          <button type="button" class="btn-circle btn-gradient-warning action-btn" (click)="archiveOrder(o)" title="Archive">
+                            <i class="mdi mdi-archive-outline"></i>
+                          </button>
+
+                        </td>
+                      -->
+                        <!-- Dans la table des commandes -->
+                        <td>
+                          <button type="button" class="btn-circle btn-gradient-primary action-btn" (click)="updateOrderStatus(o, 'Prepared')" title="Prepared">
+                            <i class="mdi mdi-check-circle-outline"></i>
+                          </button>
+                          <button type="button" class="btn-circle btn-gradient-success action-btn" (click)="updateOrderStatus(o, 'Ready')" title="Ready">
+                            <i class="mdi mdi-timer-sand"></i>
+                          </button>
+                          <button type="button" class="btn-circle btn-gradient-danger action-btn" (click)="updateOrderStatus(o, 'Delivered')" title="Delivered">
+                            <i class="mdi mdi-truck-delivery-outline"></i>
+                          </button>
+                          <button type="button" class="btn-circle btn-gradient-warning action-btn" (click)="archiveOrder(o)" title="Archive">
+                            <i class="mdi mdi-archive-outline"></i>
+                          </button>
+                        </td>
+
+                      
+                    </tr>
+                  </tbody>
+                </table>
+
+                <!-- View Archived Orders Button -->
+                <button 
+                *ngIf="!showArchived" 
+                type="button" 
+                class="btn-icon-archive view-btn" 
+                (click)="showArchived = true"
+                title="View archived orders">
+                <i class="mdi mdi-eye"></i>
+              </button>
+
+                <!-- Display Archived Orders -->
+                <div *ngIf="showArchived" class="archived-orders mt-3">
+                  <h4>Archived Orders</h4>
+                  <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th>Order Date</th>
+                        <th>Order Status</th>
+                        <th>Delivery Address</th>
+                        <th>Total</th>
+                        <th>Discount</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let o of archivedOrders">
+                        <td>{{ o.id_commande }}</td>
+                        <td>{{ o.dateCommande }}</td>
+                        <td>{{ o.statut_commande }}</td>
+                        <td>{{ o.adresse_livraison }}</td>
+                        <td>{{ o.total }}</td>
+                        <td>{{ o.remise }}</td>
+                        <td>
+                          <button 
+                          type="button" 
+                          class="btn-icon-archive retrieve-btn" 
+                          (click)="unarchiveOrder(o)" 
+                          title="Retrieve">
+                          <i class="mdi mdi-restore"></i>
+                        </button>
+                        
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                  <!-- Close Archived Orders -->
+                  <button 
+  type="button" 
+  class="btn-icon-archive close-btn" 
+  (click)="showArchived = false"
+  title="Close archived orders">
+  <i class="mdi mdi-close"></i>
+</button>
+                </div>
+
+                <!-- Display Notifications -->
+                <!-- Display Notifications -->
+                <div *ngIf="showNotification" class="notification-panel">
+                  <div class="notification-bubble">
+                    <p>{{ notificationMessage }}</p>
+                  </div>
+                </div>
+                
+
+
+              </div> <!-- end card-body -->
+            </div> <!-- end card -->
+          </div> <!-- end col -->
+        </div> <!-- end content-wrapper -->
+      </div> <!-- end main-panel -->
+    </div> <!-- end page-body-wrapper -->
+  </div> <!-- end container-scroller -->
+</body>

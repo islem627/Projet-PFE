@@ -1,17 +1,30 @@
+<body>
+  <div class="container-scroller">
+    <app-header></app-header>
+    <br><br><br>
+    <div class="container-fluid page-body-wrapper">
+      <app-sidebar></app-sidebar>
+      <div class="main-panel">
+        <div class="content-wrapper">
+          <div class="page-header">
+            <h3 class="page-title">
+              
+            </h3>
+
 
 <div class="chat_window">
+
   <div class="top_menu">
     <div class="buttons">
       <div class="button close"></div>
       <div class="button minimize"></div>
       <div class="button maximize"></div>
+    
     </div>
-   
     <div class="title">
       <img src="../../../assets/icon.jpg" width="25px" height="25px">
-     Message
-    </div> 
-   
+      Chat
+    </div>
   </div>
   <ul class="messages">
     <li class="message right" *ngFor="let item of messageList"
@@ -34,4 +47,3 @@
     </div>
   </div>
 </div>
-

@@ -7,7 +7,6 @@ import { ChatComponent } from './component/chat/chat.component';
 import { LivreurComponent } from './component/livreur/livreur.component';
 import { ClientComponent } from './component/client/client.component';
 import { OrderUserClientComponent } from './component/order-user-client/order-user-client.component';
-import { RealTimeNotificationsComponent } from './component/real-time-notifications/real-time-notifications.component';
 import { NotificationComponent } from './component/notification/notification.component';
 import { MessageComponent } from './component/message/message.component';
 import { AdminComponent } from './component/admin/admin.component';
@@ -26,19 +25,29 @@ import { AddproductComponent } from './component/addproduct/addproduct.component
 import { AddorderComponent } from './component/addorder/addorder.component';
 import { UpdateproductComponent } from './component/updateproduct/updateproduct.component';
 import { UpdateuserComponent } from './component/updateuser/updateuser.component';
+import { PageClientComponent } from './component/pageclient/page-client.component';
+import { UpdateadminComponent } from './component/updateadmin/updateadmin.component';
+import { ProfileComponent } from './component/profile/profile.component';
+import { LivreursComponent } from './component/livreurs/livreurs.component';
+import { DetailslivreurComponent } from './component/detailslivreur/detailslivreur.component';
+import { UpdatelivreurComponent } from './component/updatelivreur/updatelivreur.component';
+import { AssignByGovernorateComponent } from './component/assign-by-governorate/assign-by-governorate.component';
+import { ForgotPasswordComponent } from './component/forgot-password/forgot-password.component';
+
+
 
 
 const routes: Routes = [
-  { path: "", component: HomeComponent },
+  { path: "home", component: HomeComponent },
   { path: "users", component: UsersComponent },
   { path: "destination", component: DestinationComponent },
   { path: "products", component: ProductsComponent },
-  { path: "login",component: LoginComponent}, 
-  { path: "chat/:id", component: ChatComponent },
+  { path: 'client', component: ClientComponent },
+  { path: "",component: LoginComponent}, 
+  { path: 'chat/:userId', component: ChatComponent },
   {path: "livreur", component: LivreurComponent},
   {path: "client", component: ClientComponent},
   {path: "order-user-client", component: OrderUserClientComponent},
-  {path: "real-time-notifications", component: RealTimeNotificationsComponent},
   {path:"notification",component:NotificationComponent},
   {path:"message", component:MessageComponent},
   {path:"admin", component:AdminComponent},
@@ -58,11 +67,20 @@ const routes: Routes = [
   {path:"updateproduct/:id",component:UpdateproductComponent},
   {path: "updateorder/:id", component: UpdateorderComponent},
   {path:"updateuser/:id",component:UpdateuserComponent},
-
+  {path:"pageclient", component:PageClientComponent},
+  {path:"updateadmin/:id",component:UpdateadminComponent},
+  {path:"updateprofile",component:ProfileComponent},
+  {path:"livreurs",component:LivreursComponent},
+  {path:"detailslivreur/:id",component:DetailslivreurComponent},
+  {path: "updatelivreur/id",component:UpdatelivreurComponent},
+  { path: 'planning', component:AssignByGovernorateComponent },
+  {path:"forgot-password",component:ForgotPasswordComponent}
 ];
 @NgModule({
-  imports: [RouterModule.forRoot(routes)], // or RouterModule.forChild(routes) for feature modules
-  exports: [RouterModule]
+ // imports: [RouterModule.forRoot(routes)], // or RouterModule.forChild(routes) for feature modules
+ imports : [RouterModule.forRoot(routes, { useHash: false })], // ou tout simplement sans options
+
+ exports: [RouterModule]
 
 })
 export class AppRoutingModule { }

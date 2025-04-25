@@ -1,0 +1,10 @@
+interface Commande {
+  id_commande: string;
+  dateCommande: string;
+  statut_commande: string;
+  adresse_livraison: string;
+  total: number;
+  remise: number;
+  iduser?: number; // Ajouter iduser si disponible
+  // Ajoutez d'autres propriétés selon la structure de vos données
+}

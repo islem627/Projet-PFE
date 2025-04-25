@@ -36,9 +36,10 @@ export class AdminComponent implements OnInit {
     this.router.navigateByUrl("/detailsadmin/"+id)
   }
 
-  updateAdmin(id: string) {
-    alert("Mettre à jour l'admin: " + id);
+ updateAdmin(id: string) {
+   this.router.navigateByUrl("/updateadmin/"+id)
   }
+   
 
   deleteAdmin(id: string) {Swal.fire({
     title: "Are you sure?",

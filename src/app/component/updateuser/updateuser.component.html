@@ -9,28 +9,32 @@
           <div class="content-wrapper">
             <div class="page-header">
               <h3 class="page-title">
-                <span class="page-title-icon bg-gradient-primary text-white me-2">
-                  <i class="mdi mdi-home"></i>
-                </span> Détails Utilisateur
+               <span class="page-title-icon bg-gradient-primary text-white me-2">
+  <i class="mdi mdi-account-edit"></i>
+</span>
+Update User
+
               </h3>
+              <!--
               <nav aria-label="breadcrumb">
                 <ul class="breadcrumb">
                   <li class="breadcrumb-item active" aria-current="page">
                     Détails de l'utilisateur
                   </li>
                 </ul>
+      
               </nav>
+              -->
             </div>
   
             <div class="col-lg-6 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">Update l'utilisateur</h4>
                   <p class="card-description">{{ user.username }} {{ user.lastname }}</p>
   
                   <table class="table table-hover">
                     <thead>
-                      <tr><th>Utilisateur</th></tr>
+                      <tr><th>Client</th></tr>
                     </thead>
                     <tbody>
                       <!-- ID (lecture seule) -->
@@ -107,7 +111,9 @@
                       <tr>
                         <th>Photo</th>
                         <td>
-                          <img [src]="'http://localhost:8762/user/files/' + user.photo" alt="avatar" style="width:100px; height:100px;">
+
+
+                          <img [src]="'http://localhost:8762/User/files/' + user.photo" alt="avatar" style="width:100px; height:100px;"  class="me-2" alt="image">
                           <input type="file" #fileInput style="display: none;" (change)="onPhotoSelected($event)" />
                         </td>
                         <td>

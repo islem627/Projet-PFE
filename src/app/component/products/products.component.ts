@@ -12,7 +12,9 @@ export class ProductsComponent implements OnInit{
   constructor(private service : AllmyservicesService , private router: Router){}
   listusers:any
   c: number = 1
+  roleUserConnected:String=""
   ngOnInit(): void {
+    this.roleUserConnected = localStorage.getItem('role');
     this.Mybackfunction()
   }
 

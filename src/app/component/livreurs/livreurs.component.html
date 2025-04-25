@@ -1,0 +1,140 @@
+<body>
+    <div class="container-scroller">
+      <app-header></app-header>
+      <br><br><br>
+      <div class="container-fluid page-body-wrapper">
+        <app-sidebar></app-sidebar>
+        <div class="main-panel">
+          <div class="content-wrapper">
+            <div class="page-header">
+              <h3 class="page-title">
+                <span class="page-title-icon bg-gradient-primary text-white me-2">
+                  <i class="mdi-format-list-bulleted"></i>
+                </span> Delivery Personnel List
+              </h3>
+              <nav aria-label="breadcrumb">
+                <ul class="breadcrumb">
+                  <li class="breadcrumb-item active" aria-current="page">
+                    <div style="
+                      display: flex;
+                      align-items: center;
+                      background-color: #caafd26e; /* Violet pastel foncé */
+                      border-radius: 12px;
+                      padding: 6px 10px;
+                      box-shadow: 0 2px 6px rgba(218, 161, 230, 0.742);
+                      width: fit-content;
+                      gap: 8px;
+                    ">
+                      <input type="text"
+                             [(ngModel)]="searchText"
+                             placeholder="Search Delivery Person by Username..."
+                             style="
+                               border: none;
+                               background: linear-gradient(135deg, #b388ff, #e1bee7);
+                               border-radius: 8px;
+                               outline: none;
+                               padding: 8px 10px;
+                               color: white;
+                               font-size: 14px;
+                               width: 180px;
+                             "/>
+                  
+                      <button (click)="search()"
+                              style="
+                               background: linear-gradient(135deg, #b388ff, #e1bee7);
+                               border: none;
+                                border-radius: 50%;
+                                width: 36px;
+                                height: 36px;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                cursor: pointer;
+                                transition: background-color 0.3s ease;
+                              "
+                              onmouseover="this.style.backgroundColor='#6a1b9a'"
+                              onmouseout="this.style.backgroundColor='#8e24aa'">
+                        <i class="mdi mdi-magnify" style="color: white; font-size: 20px;"></i>
+                      </button>
+                    </div>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+            <div class="row">
+              <div class="col-12 grid-margin">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="table-responsive">
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th>ID</th>
+                              <th> Username </th>
+                              <th>Photo</th>
+                              <th> Email </th>
+                              <th> Phone </th>
+                              <th> Adress </th>
+                              <th>Governorate</th>
+                              <th> Role </th>
+                              <th>Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let Livreur of listLivreur |paginate:{itemsPerPage:3,currentPage:c};">
+                            <td>{{ Livreur.id }}</td>
+                            <td>
+                              <img [src]="'http://localhost:8762/User/files/' + Livreur.photo" class="me-2" alt="image">
+  
+                            </td>
+                            <td>{{ Livreur.username }}</td>
+                            <td>{{ Livreur.email }}</td>
+                            <td>{{ Livreur.phone }}</td>
+                            <td>{{ Livreur.address }}</td>
+                            <td>{{Livreur.gouvernorat}}</td>
+                            <td>{{ Livreur.role }}</td>
+                            <td>
+                              
+                              <!-- Détails Livreur -->
+<button type="button" 
+class="btn-circle btn-gradient-primary btn-rounded  action-btn" 
+(click)="detailsLivreur(Livreur.id)">
+<i class="mdi mdi-account-search-outline text-white" style="cursor: pointer;"></i>
+</button>
+
+<!-- Modifier Livreur -->
+<button type="button" 
+class="btn-circle btn-gradient-success btn-rounded  action-btn" 
+(click)="updateLivreur(Livreur.id)">
+<i class="mdi mdi-account-edit-outline" style="cursor: pointer;"></i>
+</button>
+
+<!-- Supprimer Livreur -->
+<button type="button"
+class="btn-circle btn-gradient-danger btn-rounded action-btn" 
+(click)="deleteLivreur(Livreur.id)">
+<i class="mdi mdi-account-remove-outline text-white" style="cursor: pointer;"></i>
+</button>
+
+                              
+                              
+                              
+                            
+                          </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <pagination-controls (pageChange)="c=$event"></pagination-controls>
+  
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <app-footer></app-footer>
+        </div>
+      </div>
+    </div>
+  </body>
+  

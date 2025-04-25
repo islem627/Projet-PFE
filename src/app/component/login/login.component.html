@@ -1,146 +1,160 @@
 
-    
+   <body>
+     
     <div class="ii">
-        <a href="home.html" class="previous">&laquo; Back</a>
 
-    </div>
-        <section class="banner">
-            <h2>Express Delivery</h2>
-            
-        </section>
-        <div class="container" [class.right-panel-active]="rightPanelActive" id="container">
-          <!-- Register Form -->
+  </div>
+      <section class="banner">
+          
+      </section>
+      <div class="container" [class.right-panel-active]="rightPanelActive" id="container">
+        <!-- Register Form -->
 
-          <div class="form-container register-container">
+        <div class="form-container register-container">
+      
+      
+         
         
-        
+         <form [formGroup]="registerForm" (ngSubmit)="register()">
+          
+          <input formControlName="firstname" placeholder="First Name" />
+            <div *ngIf="registerForm.get('firstname')?.touched && registerForm.get('firstname')?.invalid">
+            </div>
+          
+            <input formControlName="lastname" placeholder="Last Name" />
+            <div *ngIf="registerForm.get('lastname')?.touched && registerForm.get('lastname')?.invalid">
+            </div>
+          
+            <input formControlName="email" placeholder="Email" />
+            <div *ngIf="registerForm.get('email')?.touched && registerForm.get('email')?.invalid">
+            </div>
+          
+            <input formControlName="password" placeholder="Password" type="password" />
+            <div *ngIf="registerForm.get('password')?.touched && registerForm.get('password')?.invalid">
+            </div>
+          
+            <input formControlName="address" placeholder="Address" />
+            <div *ngIf="registerForm.get('address')?.touched && registerForm.get('address')?.invalid">
+            </div>
+          
+            <input formControlName="phone" placeholder="Phone" />
+            <div *ngIf="registerForm.get('phone')?.touched && registerForm.get('phone')?.invalid">
+            </div>
+          
+            <input formControlName="username" placeholder="Username" />
+            <div *ngIf="registerForm.get('username')?.touched && registerForm.get('username')?.invalid">
+            </div>
 
-           <form [formGroup]="registerForm" (ngSubmit)="register()">
-              <input formControlName="firstname" placeholder="First Name" />
-              <div *ngIf="registerForm.get('firstname')?.touched && registerForm.get('firstname')?.invalid">
-                <small style="color: red;">Le prénom est requis.</small>
-              </div>
+          
             
-              <input formControlName="lastname" placeholder="Last Name" />
-              <div *ngIf="registerForm.get('lastname')?.touched && registerForm.get('lastname')?.invalid">
-                <small style="color: red;">Le nom est requis.</small>
-              </div>
             
-              <input formControlName="email" placeholder="Email" />
-              <div *ngIf="registerForm.get('email')?.touched && registerForm.get('email')?.invalid">
-                <small *ngIf="registerForm.get('firstname')?.errors?.['required']" style="color: red;">Le champ 'firstname' est requis.</small>
-                <small *ngIf="registerForm.get('firstname')?.errors?.['minlength']" style="color: red;">Le champ 'firstname' doit contenir au moins 4 caractères.</small>
-                <small *ngIf="registerForm.get('firstname')?.errors?.['pattern']" style="color: red;">Le champ 'firstname' doit contenir uniquement des lettres (pas de chiffres ni de caractères spéciaux).</small>
-              </div>
-            
-              <input formControlName="password" placeholder="Password" type="password" />
-              <div *ngIf="registerForm.get('password')?.touched && registerForm.get('password')?.invalid">
-                <small style="color: red;">Le mot de passe est requis.</small>
-              </div>
-            
-              <input formControlName="address" placeholder="Address" />
-              <div *ngIf="registerForm.get('address')?.touched && registerForm.get('address')?.invalid">
-                <small style="color: red;">L'adresse est requise.</small>
-              </div>
-            
-              <input formControlName="phone" placeholder="Phone" />
-              <div *ngIf="registerForm.get('phone')?.touched && registerForm.get('phone')?.invalid">
-                <small *ngIf="registerForm.get('phone')?.errors?.['required']" style="color: red;">Le numéro est requis.</small>
-                <small *ngIf="registerForm.get('phone')?.errors?.['pattern']" style="color: red;">Le numéro doit contenir uniquement des chiffres.</small>
-              </div>
-            
-              <input formControlName="username" placeholder="Username" />
-              <div *ngIf="registerForm.get('username')?.touched && registerForm.get('username')?.invalid">
-                <small style="color: red;">Le nom d'utilisateur est requis.</small>
-              </div>
-            
-              <input type="file" (change)="onFileSelected($event)" accept="image/*" />
-            
-              <label for="role">Rôle :</label>
-              <select formControlName="role" id="role">
-                <option value="">Sélectionner un rôle</option>
+              <select formControlName="gouvernorat" id="gouvernorat" class="custom-select">
+                <option value="">Sélectionner votre governorates</option>
+                <option *ngFor="let gov of gouvernorat" [value]="gov">{{ gov }}</option>
+                
+            <div *ngIf="registerForm.get('gouvernorat')?.touched && registerForm.get('gouvernorat')?.invalid">
+            </div>
+
+              </select>
+               <select formControlName="role" id="role" class="custom-select">
+                <option value="" disabled selected>Sélectionner un rôle    </option>
                 <option value="admin">Admin</option>
                 <option value="client">Client</option>
                 <option value="livreur">Livreur</option>
               </select>
-              <div *ngIf="registerForm.get('role')?.touched && registerForm.get('role')?.invalid">
-                <small style="color: red;">Le rôle est requis.</small>
-              </div>
-              <button type="submit">S'inscrire</button>
-            </form>
-            
+              <div class="a">
+            <div *ngIf="registerForm.get('role')?.touched && registerForm.get('role')?.invalid">
+            </div>
+          
+            <input type="file" (change)="onFileSelected($event)" accept="image/*" />
+            <button  class="bs" type="submit">Submit</button>
           </div>
-       
-          <div class="form-container login-container">
-            <form [formGroup]="loginForm">
-                <h1>Login here</h1>
-                <input type="text" placeholder="username" id="email" formControlName="username">
-                <input type="password" placeholder="Password" id="nom" formControlName="password">
-                <div class="content">
-                    <div class="checkbox">
-                        <input type="checkbox" name="checkbox" id="checkbox">
-                        <div class="reme">
-                        <label form="Remember me">Remember me</label>
-                      </div>
-                    </div>
-                    <div class="pass-link">
-                      <a href="#">Forgot password?</a>
+          
+           
+          </form>
+          
+        </div>
+
+     
+        <div class="form-container login-container">
+          <form [formGroup]="loginForm">
+              <h1 class="log">Login</h1>
+              
+              <input type="text" placeholder="username" id="email" formControlName="username">
+              <input type="password" placeholder="Password" id="nom" formControlName="password">
+                  <div class="pass-link">
+                    <br>
+                    <a href="javascript:void(0)" (click)="showResetPassword()">Forgot password?</a>
                   </div>
-                    
-                </div>
-              <div class="bb">
-                  <button (click)="login()">Login</button>
+                  
+              
+            <div class="bb">
+                <button (click)="login()">Login</button>
+            </div>
+              <span>or login with</span>
+              
+              <div class="social-container">
+                  <a href="#" class="social"><i class="lni lni-facebook-fill"></i></a>
+                  <a href="#" class="social"><i class="lni lni-google"></i></a>
+                  <a href="#" class="social"><i class="lni lni-linkedin-original"></i></a>
               </div>
-                <span>or login with</span>
-                
-                <div class="social-container">
-                    <a href="#" class="social"><i class="lni lni-facebook-fill"></i></a>
-                    <a href="#" class="social"><i class="lni lni-google"></i></a>
-                    <a href="#" class="social"><i class="lni lni-linkedin-original"></i></a>
-                </div>
-            </form>
-   
-          </div>
+          </form>
+ 
+        </div>
+    
+       <!-- Overlay -->
       
-         <!-- Overlay -->
-        
-         <div class="overlay-container">
-    <div class="overlay">
-      <div class="overlay-panel overlay-left">
-        <h1>Hello, Friend!</h1>
-        <p>Already have an account? Login here!</p>
-        <button class="ghost" (click)="activateLogin()">Login</button>
-      </div>
-      <div class="overlay-panel overlay-right">
-        <h1>Smart & Easy Delivery Tracking!</h1>
-        <p>Don't have an account yet ? Register here!</p>
-        <button class="ghost" (click)="activateRegister()">Register</button>
-      </div>
+       <div class="overlay-container">
+  <div class="overlay">
+    <div class="overlay-panel overlay-left">
+      <h1>Hello, Friend!</h1>
+      <p>Already have an account? Login here!</p>
+      <button class="login" (click)="activateLogin()">Login</button>
+    
+  </div>
+    <div class="overlay-panel overlay-right">
+      <h1>Smart & Easy Delivery Tracking!</h1>
+      <p>Don't have an account yet ? Register here!</p>
+      <button class="ghost" (click)="activateRegister()">Register</button>
     </div>
   </div>
 </div>
-<div class="video-container">
-  <video autoplay muted loop>
-      <source src="assets/2.mp4" type="video/mp4">
-      Votre navigateur ne supporte pas les vidéos.
-  </video>
-  
 </div>
-      
 
-    <script>
-       const registerButton = document.getElementById("register");
+<!-- Bulle pour réinitialisation du mot de passe -->
+<div *ngIf="showResetBubble" class="reset-bubble-overlay" (click)="closeResetPassword($event)">
+  <div class="reset-bubble">
+    <button class="close-button" (click)="closeResetPassword()">×</button>
+    <h2>Reset Password</h2>
+    <p>Please enter your email address to receive a new password.</p>
+    <div class="input-group">
+      <i class="fas fa-envelope icon"></i>
+      <input type="email" [(ngModel)]="email" placeholder="Email address" />
+    </div>
+    <button class="submit-button" (click)="resetPassword()">
+      <i class="fas fa-paper-plane"></i> Send
+    </button>
+    <div *ngIf="message" class="success">{{ message }}</div>
+    <div *ngIf="error" class="error">{{ error }}</div>
+  </div>
+</div>
+   </body>
+
+
+  <script>
+     const registerButton = document.getElementById("register");
 const loginButton = document.getElementById("login");
 const container = document.getElementById("container");
 
 // Add the "right-panel-active" class when the register button is clicked
 registerButton.addEventListener("click", () => {
-    container.classList.add("right-panel-active");
+  container.classList.add("right-panel-active");
 });
 
 // Remove the "right-panel-active" class when the login button is clicked
 loginButton.addEventListener("click", () => {
-    container.classList.remove("right-panel-active");
+  container.classList.remove("right-panel-active");
 });
-    </script>
-    
+  </script>
+  
+

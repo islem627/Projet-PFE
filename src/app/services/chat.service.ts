@@ -42,15 +42,11 @@ export class ChatService {
     return this.messageSubject.asObservable();
   }
 }*/
-
-///
-//
-
 import { Injectable } from '@angular/core';
 import { Stomp } from '@stomp/stompjs';
-import SockJS from 'sockjs-client';
 import { BehaviorSubject, first } from 'rxjs';
 import { ChatMessage } from '../models/chat-message';
+import SockJS from 'sockjs-client';
 
 @Injectable({
   providedIn: 'root'
@@ -94,7 +90,7 @@ export class ChatService {
     });
   }
 
-  sendMessage(roomId: string, chatMessage: ChatMessage) {
+ /* sendMessage(roomId: string, chatMessage: ChatMessage) {
     this.isConnected.subscribe((connected) => {
       if (connected) {
         this.stompClient.send(`/app/chat/${roomId}`, {}, JSON.stringify(chatMessage));
@@ -102,7 +98,18 @@ export class ChatService {
         console.error('STOMP connection is not established. Unable to send the message.');
       }
     });
-  }
+  }*/
+
+
+    sendMessage(roomId: string, chatMessage: ChatMessage) {
+      this.isConnected.pipe(first((connected) => connected)).subscribe(() => {
+        console.log('Sending STOMP message:', JSON.stringify(chatMessage));
+        this.stompClient.send(`/app/chat/${roomId}`, {}, JSON.stringify(chatMessage));
+        console.log(`Message sent to room ${roomId}:`, chatMessage);
+      });
+    }
+
+
 
   getMessageSubject() {
     return this.messageSubject.asObservable();

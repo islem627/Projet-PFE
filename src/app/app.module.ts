@@ -9,7 +9,6 @@ import { FooterComponent } from './component/footer/footer.component';
 import { OrdersComponent } from './component/orders/orders.component';
 import { ProductsComponent } from './component/products/products.component';
 import { UsersComponent } from './component/users/users.component';
-import { DestinationComponent } from './component/destination/destination.component';
 import { LoginComponent } from './component/login/login.component'; 
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -20,7 +19,6 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LivreurComponent } from './component/livreur/livreur.component';
 import { ClientComponent } from './component/client/client.component';
 import { OrderUserClientComponent } from './component/order-user-client/order-user-client.component';
-import { RealTimeNotificationsComponent } from './component/real-time-notifications/real-time-notifications.component';
 import { environement } from 'src/environements/environement'; 
 import * as firebase from 'firebase/app';
 import { PushNotificationComponent } from './component/push-notification/push-notification.component';
@@ -41,6 +39,22 @@ import { AddproductComponent } from './component/addproduct/addproduct.component
 import { AddorderComponent } from './component/addorder/addorder.component';
 import { UpdateproductComponent } from './component/updateproduct/updateproduct.component';
 import { UpdateuserComponent } from './component/updateuser/updateuser.component';
+import { PageClientComponent } from './component/pageclient/page-client.component';
+import { HeaderclientComponent } from './component/headerclient/headerclient.component';
+import { HeaderlivreurComponent } from './component/headerlivreur/headerlivreur.component';
+import { UpdateadminComponent } from './component/updateadmin/updateadmin.component';
+import { ProfileComponent } from './component/profile/profile.component';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { LivreursComponent } from './component/livreurs/livreurs.component';
+import { DetailslivreurComponent } from './component/detailslivreur/detailslivreur.component';
+import { UpdatelivreurComponent } from './component/updatelivreur/updatelivreur.component';
+import { AssignByGovernorateComponent } from './component/assign-by-governorate/assign-by-governorate.component';
+import { FindByIdPipe } from './pipes/find-by-id.pipe';
+import { DestinationComponent } from './component/destination/destination.component';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { ForgotPasswordComponent } from './component/forgot-password/forgot-password.component';
+
 firebase.initializeApp(environement.firebase);
 
 @NgModule({
@@ -59,7 +73,6 @@ firebase.initializeApp(environement.firebase);
     LivreurComponent,
     ClientComponent,
     OrderUserClientComponent,
-    RealTimeNotificationsComponent,
     PushNotificationComponent,
     NotificationComponent,
     MessageComponent,
@@ -75,28 +88,50 @@ firebase.initializeApp(environement.firebase);
     AddproductComponent,
     AddorderComponent,
     UpdateproductComponent,
-    UpdateuserComponent    
+    UpdateuserComponent,
+    PageClientComponent,
+    HeaderclientComponent,
+    HeaderlivreurComponent,
+    UpdateadminComponent,
+    ProfileComponent,
+    LivreursComponent,
+    DetailslivreurComponent,
+    UpdatelivreurComponent,
+    AssignByGovernorateComponent,
+    FindByIdPipe,
+    ForgotPasswordComponent
+    
+    
+    
   ],
+
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule, // Ajouter FormsModule ici
-    ToastrModule.forRoot(
+    ToastrModule.forRoot(),  // ToastrModule ajouté
+   /* 
       {
-      /* progressBar: true,
+       progressBar: true,
         closeButton: true,
         newestOnTop: true,
         tapToDismiss: true,
         positionClass: 'toast-top-right',
-        timeOut: 8000*/
+        timeOut: 8000
       }
-    ),
+    ,*/
+
     ReactiveFormsModule ,
     HttpClientModule ,
     BrowserAnimationsModule,
     NgxPaginationModule,
+    MatSelectModule,
+    ReactiveFormsModule,
+    MatFormFieldModule
+
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+ // providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
+ providers: [],
+ bootstrap: [AppComponent]
 })
 export class AppModule { }

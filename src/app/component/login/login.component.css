@@ -17,13 +17,6 @@ html{
     overflow-x:hidden;
 }
 
-.ii a {
-    position: absolute;
-    text-decoration: none;
-    display: inline-block;
-    top:5px;
-    right: 1210px;
-  }
   
   a:hover {
     color:  #ac7dad;
@@ -34,37 +27,22 @@ html{
     color: rgb(255, 255, 255);
   }
   
+  body {
+   
+     background-image: url('/assets/L5.jpg');
+     background-size: cover; /* L'image occupera tout l'écran */
+     background-position: center; /* Centrer l'image */
+     background-repeat: no-repeat; /* Évite que l'image se répète */
+     height: 100vh; /* L'écran entier prend la hauteur du viewport */
+     margin: 0;
+     background-color: #f6f5f7;
+     justify-content: center;
+     align-items: center;
+     flex-direction: column;
+     font-family: "Poppins", sans-serif;
+     overflow: hidden;
+ }
 
-body {
-   /* background-image: url('./assets/images/template.jpg');
-    background-size: cover; 
-    display: flex;
-    background-color: #f6f5f7;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    font-family: "Poppins", sans-serif;
-    overflow: hidden;
-    height: 100vh;*/
-    background-image: url('/assets/1.mp4'); /* Chemin absolu */
-    background-size: cover; /* L'image occupera tout l'écran */
-    background-position: center; /* Centrer l'image */
-    background-repeat: no-repeat; /* Évite que l'image se répète */
-    height: 100vh; /* L'écran entier prend la hauteur du viewport */
-    margin: 0;
-    background-color: #f6f5f7;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    font-family: "Poppins", sans-serif;
-    overflow: hidden;
-}
-.banner h2{
-    text-align:center;
-    font-size: 4rem;
-    font-weight: 800;
-    color:#ffffff;
-}
 h1 {
 
     font-weight: 700;
@@ -123,41 +101,27 @@ a:hover{
 .content input{
     accent-color: #333;
     width: 12px;
-    height: 12px;
+    height: 10px;
 }
-.content .checkbox{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.content label {
-    font-size: 10px; /* Font size for better readability */
-    user-select: none; /* Prevent text selection */
-    padding-left: 90px;
-    padding-right: 20px; /* Space between checkbox and label */
-    padding-top:3.5px;
-}
+
 .pass-link a{
 
-    font-size: 10px; /* Font size for better readability */
+    font-size:15px; /* Font size for better readability */
     user-select: none; /* Prevent text selection */
-    padding-top:3.5px;
+    padding-top:50px;
     padding-left: 50px;
     
 }
-/*
-.content .checkbox{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
 
-.content label{
-    font-size: 10px;
-    user-select: none;
-    padding-left: 3px;
-    padding-right: 4px;
-}*/
+h1.log{
+
+padding-top: 130px;
+justify-content: center;
+margin-left: 380px;
+font-weight: 700;
+    letter-spacing: -1.5px;
+    color: #ac7dad;
+}
 
 button{
     position: relative;
@@ -167,12 +131,31 @@ button{
     color: #fff;
     font-size: 15px;
     font-weight: 700;
-    margin: 10px;
+    margin: 65px;
     padding: 12px 80px;
     letter-spacing: 1px;
     text-transform: capitalize;
     transition: 0.3s ease-in-out;
+    
 }
+.bs{
+
+    position: relative;
+    border-radius: 20px;
+    border: 1px solid #ac7dad;
+    background-color: #107bba;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 700;
+    margin: 65px;
+    padding: 12px 80px;
+    letter-spacing: 1px;
+    text-transform: capitalize;
+    transition: 0.3s ease-in-out;
+
+
+}
+
 
 button:hover{
     letter-spacing: 3px;
@@ -191,6 +174,8 @@ button.ghost{
     border: 2px solid #fff;
     color: #fff;
 }
+
+
 
 button.ghost i{
     position: absolute;
@@ -219,7 +204,7 @@ button.ghost:hover i.login{
 }
 
 form{
-    background-color: #fff;
+    background-color: #ffffff;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -227,15 +212,19 @@ form{
     padding: 0 50px;
     height: 100%;
     text-align: center;
+    margin-top: 37px;
+
+
 }
 
 input{
     background-color: #eee;
     border-radius: 10px;
     border: none;
-    padding: 12px 15px;
-    margin: 8px 0;
+    padding: 15px 15px;
+    margin: 7px 0;
     width: 100%;
+    height: 47px;
 }
 
 .container{
@@ -244,9 +233,13 @@ input{
     box-shadow: 0 14px 28px rgba(0, 0, 0, 25), 0 10px 10px rgba(0, 0, 0, 0.22);
     position: relative;
     overflow: hidden;
-    width: 900px;
-    max-width: 100%;
-    min-height: 620px;
+    width: 1050px;
+  /*  max-width: 100%;*/
+    min-height:750px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+
+
 }
 
 .form-container{
@@ -325,8 +318,8 @@ input{
     width: 200%;
     transform: translateX(0);
     transition: transform 0.6s ease-in-out;*/
-        background-image: url('/assets/1.mp4'); /* Chemin absolu */
-        background-repeat: no-repeat;
+    background-image: url('/assets/L5.jpg'); /* Chemin absolu */
+    background-repeat: no-repeat;
         background-size: cover; 
         background-position: center; 
         color: #fff;
@@ -426,27 +419,165 @@ input{
     margin-top: 20px;
 }
 
-.video-container {
-    width: 100%;
-    height: 100vh;
-    overflow: hidden;
-}
 
-.video-container video {
-    top: 50%;
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%, -50%);
+
+
+/* Style général pour le conteneur */
+.form-group {
+    margin-bottom: 1.5rem;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  /* Style pour le label */
+  label {
+    display: block;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 0.5rem;
+  }
+  
+  /* Style pour le select */
+  .custom-select {
+    color: #333;
+    background-color: #eee;
+    border:none;
+    border-radius: 10px;
+    padding: 12px 15px;
+    margin: 8px 0;
+    width: 100%;
+    outline: none;
+    transition: all 0.3s ease;
+    height: 43px;
+
+  }
+  
+  /* Effet au focus */
+  .custom-select:focus {
+    border-color: #c099c2; /* Couleur de surbrillance (bleu, personnalisable) */
+    box-shadow: 0 0 5px rgba(155, 122, 158, 0.3);
+  }
+  
+  /* Style pour les options */
+  .custom-select option {
+    padding: 10px;
+    background-color: #fff;
+    color: #333;
+  }
+  
+  /* Style au survol */
+  .custom-select:hover {
+    border-color: #aaa;
+  }
+
+
+
+
+  /* Bulle pour réinitialisation du mot de passe */
+.reset-bubble-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Ajuste la vidéo pour couvrir tout l'écran */
-
- filter: none; /* Assure-toi qu'il n'y a pas de flou */
-}
-
-.reme :hover{ 
-    color: #ac7dad;
-}
-video {
-    image-rendering: optimizeQuality;
-}
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease-in-out;
+  }.reset-bubble {
+    background-color: #fff;
+    border-radius: 15px;
+    padding: 2rem;
+    width: 400px;
+    max-width: 90%;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    position: relative;
+    font-family: "Poppins", sans-serif;
+    text-align: center;
+    animation: slideIn 0.3s ease-in-out;
+  }.reset-bubble h2 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 1rem;
+  }.reset-bubble p {
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 1.5rem;
+  }.reset-bubble .input-group {
+    position: relative;
+    margin-bottom: 1.5rem;
+  }.reset-bubble .input-group .icon {
+    position: absolute;
+    top: 50%;
+    left: 1rem;
+    transform: translateY(-50%);
+    color: #d3b2d4;
+    font-size: 1.2rem;
+  }.reset-bubble input {
+    width: 100%;
+    padding: 12px 15px 12px 40px;
+    border: none;
+    border-radius: 10px;
+    background-color: #eee;
+    font-size: 1.2rem;
+    font-family: "Poppins", sans-serif;
+    outline: none;
+    transition: all 0.3s ease;
+  }.reset-bubble input:focus {
+    border: 2px solid #ac7dad;
+    box-shadow: 0 0 5px rgba(172, 125, 173, 0.3);
+  }.reset-bubble .submit-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: calc(100% - 2rem); /* Réduit pour éviter débordement */
+    margin: 0 auto; /* Centre le bouton */
+    padding: 10px; /* Réduit le padding */
+    border: none;
+    border-radius: 10px;
+    background-color: #d3b2d4;
+    color: #fff;
+    font-size: 1.1rem; /* Réduit légèrement la taille du texte */
+    font-weight: 600;
+    font-family: "Poppins", sans-serif;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-sizing: border-box; /* Inclut padding/border dans la largeur */
+  }.reset-bubble .submit-button i {
+    margin-right: 0.4rem;
+    font-size: 1rem; /* Réduit la taille de l'icône */
+  }.reset-bubble .submit-button:hover {
+    background-color: #DDA0DD;
+    transform: translateY(-2px);
+  }.reset-bubble .success {
+    color: #28a745;
+    font-size: 1.2rem;
+    margin-top: 1rem;
+  }.reset-bubble .error {
+    color: #dc3545;
+    font-size: 1.2rem;
+    margin-top: 1rem;
+  }.reset-bubble .close-button {
+    position: absolute;
+    top: -65px;
+    right: -115px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #666;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }.reset-bubble .close-button:hover {
+    color: #d3b2d4;
+  }@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }@keyframes slideIn {
+    from { transform: translateY(-20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+  
+  

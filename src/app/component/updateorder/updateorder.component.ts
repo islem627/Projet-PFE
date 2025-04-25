@@ -15,15 +15,12 @@ export class UpdateorderComponent implements OnInit {
   isEditing: { [key: string]: boolean } = {};
   editValues: any = {};
 
-  
-    @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
-
+  @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
 
   constructor(
     private route: ActivatedRoute,
     private service: AllmyservicesService,
-        private renderer: Renderer2
-    
+    private renderer: Renderer2
   ) {}
 
   ngOnInit(): void {
@@ -33,40 +30,28 @@ export class UpdateorderComponent implements OnInit {
     }
   }
 
+  // Récupérer les détails de la commande
   getOrderDetails(id: string) {
     this.service.Detailsdeorder(id).subscribe({
       next: res => {
         this.order = res;
-        this.originalOrder = { ...res }; // Initialiser `originalProduct` ici
+        this.originalOrder = { ...res }; // Sauvegarder l'état original
         this.editValues = { ...res }; // Initialiser les valeurs éditables
-        console.log('Détails du produit:', this.order);
+        console.log('Détails de la commande:', this.order);
       },
-      error: err => console.error('Erreur lors du chargement du produit', err)
+      error: err => console.error('Erreur lors du chargement de la commande', err)
     });
   }
+
+  // Annuler les modifications et revenir aux valeurs originales
   cancelChanges() {
-    // Réinitialiser tous les champs aux valeurs d'origine (avant modification)
-    this.order = { ...this.originalOrder }; // Utiliser `originalProduct` pour restaurer l'état initial
-    this.isEditing = {}; // Réinitialiser l'état des champs en mode lecture
+    this.order = { ...this.originalOrder };
+    this.isEditing = {};
   }
 
-  onPhotoSelected(event: Event) {
-    const input = event.target as HTMLInputElement;
-    if (!input.files?.length || !this.orderId) return;
 
-    const file = input.files[0];
-    const formData = new FormData();
-    formData.append('photo', file);
 
-    this.service.updateProduct(this.orderId, formData).subscribe({
-      next: () => {
-        console.log('Photo du produit mise à jour');
-        this.getOrderDetails(this.orderId!);
-      },
-      error: err => console.error('Erreur lors de la mise à jour de la photo', err)
-    });
-  }
-//
+  // Activer le mode édition pour un champ spécifique
   toggleEdit(field: string, currentValue: any) {
     this.isEditing[field] = !this.isEditing[field];
     if (this.isEditing[field]) {
@@ -75,61 +60,68 @@ export class UpdateorderComponent implements OnInit {
       this.submitField(field);
     }
   }
+  
 
-
+  // Soumettre la mise à jour pour un champ spécifique
   submitField(field: string): void {
     if (!this.orderId) return;
-
-    const payload: any = {};
-    payload[field] = this.order[field];
-
+  
+    const payload = { [field]: this.order[field] };
+  
     this.service.updateorder(this.orderId, payload).subscribe({
-      next: () => {
-        console.log(`Champ "${field}" mis à jour avec succès`);
-        this.getOrderDetails(this.orderId!);
-        this.isEditing[field] = false;
+      next: (updatedOrder) => {
+        console.log('Commande mise à jour:', updatedOrder);
+        this.order = updatedOrder; // Update the order object with the new values
+        this.isEditing[field] = false; // Mark the field as not editing
+        this.getOrderDetails(this.orderId!);  // Fetch the updated order details
       },
       error: (err) => {
         console.error(`Erreur lors de la mise à jour du champ "${field}"`, err);
+        alert('Erreur lors de la mise à jour');
       }
     });
   }
+  
+  
 
+  // Soumettre toutes les modifications
   submitAll() {
     if (!this.orderId) return;
-
-    this.service.updateProduct(this.orderId, this.order).subscribe({
-      next: () => console.log('Commande mise à jour avec succès mis à jour avec succès'),
+    this.service.updateorder(this.orderId, this.order).subscribe({
+      next: () => console.log('Commande mis à jour avec succès'),
       error: err => console.error('Erreur lors de la mise à jour', err)
     });
+
+  }
+  startEditing(field: string, td: HTMLElement) {
+    this.editingField = field;
+    this.renderer.setAttribute(td, 'contenteditable', 'true');
+    td.focus();
   }
 
+
+  // Gérer la sortie du mode édition
   onBlur(field: string, td: HTMLElement) {
     this.renderer.removeAttribute(td, 'contenteditable');
     this.editingField = null;
-
+  
     const newValue = td.innerText.trim();
     if (this.order[field] == newValue) return;
-
-    this.order[field] = (field === 'price' || field === 'quantity')
+  
+    this.order[field] = (field === 'total' || field === 'remise')
       ? parseFloat(newValue)
       : newValue;
-
+  
     const payload: any = {};
     payload[field] = this.order[field];
-
+  
     if (!this.orderId) return;
-
-    this.service.updateProduct(this.orderId, payload).subscribe({
-      next: () => console.log(`${field} mis à jour avec succès`),
+  
+    this.service.updateorder(this.orderId, payload).subscribe({
+      next: () => console.log(`${field} mis à jour avec succès`, this.order),
       error: err => console.error(`Erreur lors de la mise à jour de ${field}`, err)
     });
-  
   }
   
-
-
-
-
-
+  
 }

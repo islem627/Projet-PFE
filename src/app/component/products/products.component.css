@@ -1,0 +1,40 @@
+/* Style des boutons de statut */
+.status-buttons {
+    margin-bottom: 20px;
+  }
+  
+  .status-buttons button {
+    margin: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+  }
+  
+  
+
+  button {
+    padding: 10px 15px;
+    margin-top: 10px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+ 
+  
+
+ 
+  
+  .notification-item {
+    background-color: #f4f4f4;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 5px 0;
+  }
+
+
+.action-btn {
+  margin-right: 8px; /* espace entre les boutons */
+}
+
+

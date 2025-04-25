@@ -1,0 +1,137 @@
+<p>detailslivreur works!</p>
+<body>
+    <div class="container-scroller">
+     
+      <!-- partial:partials/_navbar.html -->
+    <app-header></app-header>
+    <br><br><br>
+      <!-- partial -->
+      <div class="container-fluid page-body-wrapper">
+        <!-- partial:partials/_sidebar.html -->
+       <app-sidebar></app-sidebar>
+        <!-- partial -->
+        <div class="main-panel">
+          <div class="content-wrapper">
+            <div class="page-header">
+              <h3 class="page-title">
+                <span class="page-title-icon bg-gradient-primary text-white me-2">
+                  <i class="mdi mdi-account-box-outline"></i>
+                </span>
+                Livreur Details
+                
+              </h3>
+              
+              <nav aria-label="breadcrumb">
+                <ul class="breadcrumb">
+                  <li class="breadcrumb-item active" aria-current="page">
+                  
+                  
+                  </li>
+                </ul>
+              </nav>
+            </div>
+  
+            <div class="row">
+              <div class="col-12 grid-margin">
+                <div class="card">
+                  <div class="card-body">
+                
+                    <div class="table-responsive">
+                     
+  
+  
+                        <div class="col-lg-12 grid-margin stretch-card">
+                            <div class="card">
+                              <div class="card-body">
+                                <p class="card-description"></p>
+                                <table class="table table-striped">
+                                  <tbody>
+                                    <tr>
+                                      <td><strong>ID</strong></td>
+                                      <td>{{ Livreur.id }}</td>
+                                    </tr>
+                                    <tr>
+                                      <td><strong>Username</strong></td>
+                                      <td>{{ Livreur.username }}</td>
+                                    </tr>
+                                    <tr>
+                                      <td><strong>Email</strong></td>
+                                      <td>{{ Livreur.email }}</td>
+                                    </tr>
+                                    <tr>
+                                      <td><strong>phone</strong></td>
+                                      <td>{{ Livreur.phone }}</td>
+                                    </tr>
+                                    <tr>
+                                      <td><strong>Adress</strong></td>
+                                      <td>{{ Livreur.address }}</td>
+                                    </tr>
+                                    <tr>
+                                      <td><strong>Firstname</strong></td>
+                                      <td>{{ Livreur.firstname }}</td>
+                                    </tr>
+                                    <tr>
+                                      <td><strong>Lastname</strong></td>
+                                      <td>{{ Livreur.lastname }}</td>
+                                    </tr>
+                                    <tr>
+                                      <td><strong>Confirm</strong></td>
+                                      <td>{{ Livreur.confirme }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>  password</strong></td>
+                                        <td 
+                                          (mouseenter)="showPassword = true" 
+                                          (mouseleave)="showPassword = false"
+                                          style="cursor: pointer;"
+                                        >
+                                          {{ showPassword ? Livreur.password : '********' }}
+                                        </td>
+                                      </tr>
+                                      
+                                    <tr>
+                                      <td><strong>Role</strong></td>
+                                      <td>{{ Livreur.role }}</td>
+                                    </tr>
+                                    <tr>
+                                      <td><strong>Photo</strong></td>
+                                      <td>
+                                        <img [src]="'http://localhost:8762/User/files/' + Livreur.photo" alt="image" style="width: 100px; height: 100px;">
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </div>
+                            </div>
+                          </div>
+                          
+  
+  
+  
+  
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+  
+            
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+            <app-footer></app-footer>
+  
+
+
+

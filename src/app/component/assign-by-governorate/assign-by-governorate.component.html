@@ -1,0 +1,124 @@
+<div class="container-scroller">
+    <app-header></app-header>
+    <br><br><br>
+    <div class="container-fluid page-body-wrapper">
+      <app-sidebar></app-sidebar>
+      <div class="main-panel">
+        <div class="content-wrapper">
+          <div class="page-header">
+            <h3 class="page-title">
+                <h3 class="page-title">
+                  <span class="page-title-icon bg-gradient-primary text-white me-2">
+                    <i class="mdi mdi-calendar-clock"></i>
+                  </span>
+                  <span class="fw-bold">Planing</span>
+                  <span class="ms-2 text-muted" style="font-weight: normal; font-size: 16px;">
+                    {{ today | date: 'fullDate' }}
+                  </span>
+                  </h3>
+                  
+                  
+              
+            </h3>
+          </div>
+  <!-- Loading spinner -->
+  <div *ngIf="isLoading" class="text-center my-4">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+
+  <!-- Governorate filter -->
+  <div class="mb-4">
+    <label for="governorateFilter" class="form-label">Select Governorate</label>
+    <select id="governorateFilter" class="form-select" [(ngModel)]="selectedGovernorate" (change)="filterByGovernorate()">
+      <option value="">All Governorates</option>
+      <option *ngFor="let governorate of governorates" [value]="governorate">{{ governorate }}</option>
+    </select>
+  </div>
+
+  <div class="row">
+    <h2>Orders</h2>
+    <!-- Orders Table -->
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h4>Orders</h4>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>Order ID</th>
+                    <th>ID Client</th>
+                    <th>Customer</th>
+                    <th>Phone</th>
+                    <th>Governorate</th>
+                    <th>Assigned To</th>
+                    <th>Assign</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let order of filteredOrders">
+                    <td>{{ order.id_commande }}</td>
+                    <td>{{ order.iduser }}</td>
+                    <td>{{ order.userDTO?.username }}</td>
+                    <td>{{ order.userDTO?.phone }}</td>
+                    <td>{{ order.gouvernoratCmd }}</td>
+                    <td>{{ order.livreurId || 'Not Assigned' }}</td>
+                    <td>
+                      <select class="form-select form-select-sm"
+                              (change)="assignOrder(order.id_commande, $event)">
+                        <option value="">Select Delivery Person</option>
+                        <option *ngFor="let person of filteredDeliveryPersons" 
+                                [value]="person.id">
+                          {{ person.username }} ({{ person.gouvernorat }})
+                        </option>
+                      </select>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          
+      </div>
+    </div>
+
+    <!-- Delivery Persons Table -->
+   
+  </div>
+<br><br>
+
+  <div class="row">
+<h2>Delivery Persons</h2>
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h4>Delivery Persons</h4>
+        </div>
+        <div class="card-body">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Governorate</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let deliveryPerson of filteredDeliveryPersons">
+                <td>{{ deliveryPerson.id }}</td>
+                <td>{{ deliveryPerson.username }}</td>
+                <td>{{ deliveryPerson.phone }}</td>
+                <td>{{ deliveryPerson.gouvernorat }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

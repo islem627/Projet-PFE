@@ -11,17 +11,44 @@
   
   /* Panneau de notification */
   .notification-panel {
-    position: absolute;
-    top: 100px; /* Ajuste selon le besoin */
-    left: 20px;
-    background-color: white;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 10px;
-    width: 250px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
     z-index: 1000;
+    animation: fadeOut 5s forwards; /* L'animation de disparition */
   }
+  
+  .notification-bubble {
+    background: linear-gradient(to right, #a15cc6, #f48fb1); /* violet clair */
+    color: white;
+    padding: 12px 20px;
+    border-radius: 25px;
+    font-weight: 500;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    opacity: 1;
+    transform: translateY(0);
+    transition: all 0.5s ease;
+  }
+  
+  /* Animation douce de disparition */
+  @keyframes fadeOut {
+    0% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    80% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(20px);
+      visibility: hidden;
+    }
+  }
+  
+  
+  
   
   .notification-list {
     list-style: none;
@@ -45,9 +72,17 @@
     background-color: #e6e6e6;
   }
   .message-input {
-    margin-top: 20px;
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
+  
+  .message-input textarea {
+    width: 100%;
+    max-width: 600px;
+    margin-bottom: 10px;
+  }
+  
   
   textarea {
     width: 80%;
@@ -86,3 +121,121 @@
     padding: 0;
   }
     
+/*
+  @keyframes fadeInOut {
+    0% {
+      opacity: 0;
+      transform: translateY(-15px);
+    }
+    10% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    90% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(-15px);
+    }
+  }*/
+
+
+/* Custom Button Styles with hover effects */
+.btn-gradient-primary, .btn-gradient-danger, .btn-gradient-success, .btn-gradient-warning, .btn-gradient-info {
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-gradient-primary:hover,
+.btn-gradient-danger:hover,
+.btn-gradient-success:hover,
+.btn-gradient-warning:hover,
+.btn-gradient-info:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Table Styling */
+table.table {
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+table.table-striped tbody tr:nth-child(odd) {
+  background-color: #f9f9f9;
+}
+
+
+
+table td {
+  vertical-align: middle;
+}
+
+/* Archived Orders Panel */
+.archived-orders {
+  background-color: #f4f4f4;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.notification-panel {
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Custom notification styles */
+.notification-item {
+  list-style-type: none;
+  font-size: 14px;
+  color: #333;
+}
+/* Ajoute un petit espace entre les boutons */
+.action-btn {
+  margin-right: 8px; /* espace entre les boutons */
+}
+/* Style générique pour les boutons */
+.btn-icon-archive {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  border: none;
+  font-size: 20px;
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 12px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Dégradé violet → rose clair pour le bouton "Retrieve" */
+.retrieve-btn {
+  background: linear-gradient(135deg, #8e24aa, #f06292);
+}
+
+/* Effet hover pour l'interaction */
+.btn-icon-archive:hover {
+  transform: scale(1.08);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+
+/* Violet clair -> Rose pour "View" */
+.view-btn {
+  background: linear-gradient(135deg, #b388ff, #e1bee7);
+}
+
+/* Violet foncé -> Rouge rosé pour "Close" */
+.close-btn {
+  background: linear-gradient(135deg, #ab47bc, #ef5350);
+}
+
+.btn-icon-archive:hover {
+  transform: scale(1.08);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+

@@ -20,11 +20,13 @@ export class ChatComponent implements OnInit {
 
   }
 
-  ngOnInit(): void {
+ /* ngOnInit(): void {
     this.userId = this.route.snapshot.params["userId"];
     this.chatService.joinRoom("ABC");
     this.lisenerMessage();
   }
+
+
 
   sendMessage() {
     const chatMessage = {
@@ -33,7 +35,36 @@ export class ChatComponent implements OnInit {
     }as ChatMessage
     this.chatService.sendMessage("ABC", chatMessage);
     this.messageInput = '';
+  }*/
+
+
+
+    ngOnInit(): void {
+      this.route.paramMap.subscribe(params => {
+        this.userId = params.get('userId') || '';
+        console.log('UserId from route:', this.userId);
+        this.chatService.joinRoom('ABC');
+        this.lisenerMessage();
+      });
+    }
+
+sendMessage() {
+  if (!this.messageInput.trim()) {
+    console.warn('Cannot send empty message');
+    return;
   }
+  if (!this.userId) {
+    console.error('UserId is not set');
+    return;
+  }
+  const chatMessage = {
+    message: this.messageInput,
+    user: this.userId
+  } as ChatMessage;
+  console.log('Sending message:', chatMessage); // Log the message before sending
+  this.chatService.sendMessage('ABC', chatMessage);
+  this.messageInput = '';
+}
 
   lisenerMessage() {
     this.chatService.getMessageSubject().subscribe((messages: any) => {

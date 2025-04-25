@@ -14,8 +14,10 @@
             <div class="page-header">
               <h3 class="page-title">
                 <span class="page-title-icon bg-gradient-primary text-white me-2">
-                  <i class="mdi mdi-home"></i>
-                </span> Details Users
+                  <i class="mdi mdi-account-box-outline"></i>
+                </span>
+                Client Details
+                
               </h3>
               
               <nav aria-label="breadcrumb">
@@ -48,7 +50,7 @@
                                       <td>{{ client.id }}</td>
                                     </tr>
                                     <tr>
-                                      <td><strong>Nom d'utilisateur</strong></td>
+                                      <td><strong>Username</strong></td>
                                       <td>{{ client.username }}</td>
                                     </tr>
                                     <tr>
@@ -56,27 +58,27 @@
                                       <td>{{ client.email }}</td>
                                     </tr>
                                     <tr>
-                                      <td><strong>Téléphone</strong></td>
+                                      <td><strong>phone</strong></td>
                                       <td>{{ client.phone }}</td>
                                     </tr>
                                     <tr>
-                                      <td><strong>Adresse</strong></td>
+                                      <td><strong>Adress</strong></td>
                                       <td>{{ client.address }}</td>
                                     </tr>
                                     <tr>
-                                      <td><strong>Prénom</strong></td>
+                                      <td><strong>Firstname</strong></td>
                                       <td>{{ client.firstname }}</td>
                                     </tr>
                                     <tr>
-                                      <td><strong>Nom</strong></td>
+                                      <td><strong>Lastname</strong></td>
                                       <td>{{ client.lastname }}</td>
                                     </tr>
                                     <tr>
-                                      <td><strong>Confirmé</strong></td>
+                                      <td><strong>Confirm</strong></td>
                                       <td>{{ client.confirme }}</td>
                                     </tr>
                                     <tr>
-                                        <td><strong>Mot de passe</strong></td>
+                                        <td><strong>  password</strong></td>
                                         <td 
                                           (mouseenter)="showPassword = true" 
                                           (mouseleave)="showPassword = false"
@@ -87,7 +89,7 @@
                                       </tr>
                                       
                                     <tr>
-                                      <td><strong>Rôle</strong></td>
+                                      <td><strong>Role</strong></td>
                                       <td>{{ client.role }}</td>
                                     </tr>
                                     <tr>

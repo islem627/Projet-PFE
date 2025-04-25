@@ -34,7 +34,7 @@ detailsuser(id:string)
   this.router.navigateByUrl("/detailsuser/"+id)
 }
   ajouteruser()
-  {this.router.navigate(['/adduserc']);}
+  {this.router.navigate(['/adduser']);}
 updateuser(id:string)
 {
   this.router.navigateByUrl("/updateuser/"+id)

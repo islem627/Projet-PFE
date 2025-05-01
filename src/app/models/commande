@@ -1,10 +1,18 @@
-interface Commande {
-  id_commande: string;
-  dateCommande: string;
+export interface Commande {
+  id_commande: number; // Aligné avec CommandeEntity.id_commande (Long)
+  dateCommande: string; // LocalDate au format ISO string
   statut_commande: string;
   adresse_livraison: string;
   total: number;
   remise: number;
-  iduser?: number; // Ajouter iduser si disponible
-  // Ajoutez d'autres propriétés selon la structure de vos données
+  iduser: number; // Aligné avec CommandeEntity.iduser (Long)
+  livreurId?: number; // Optionnel, aligné avec CommandeEntity.livreurId
+  articel_commande?: string;
+  fraisLivraison?: number;
+  date_livraison_estimee?: string;
+  commentaires?: string;
+  ispaied?: boolean;
+  latitude?: number;
+  longitude?: number;
+  idproduit?: number;
 }

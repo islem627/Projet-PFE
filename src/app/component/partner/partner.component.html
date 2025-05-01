@@ -1,0 +1,125 @@
+<body>
+    <div class="container-scroller">
+     
+      <!-- partial:partials/_navbar.html -->
+    <app-header></app-header>
+    <br><br><br>
+      <!-- partial -->
+      <div class="container-fluid page-body-wrapper">
+        <!-- partial:partials/_sidebar.html -->
+       <app-sidebar></app-sidebar>
+        <!-- partial -->
+        <div class="main-panel">
+          <div class="content-wrapper">
+            <div class="page-header">
+              <h3 class="page-title">
+                <span class="page-title-icon bg-gradient-primary text-white me-2">
+                  <i class="mdi mdi-cart-outline"></i>
+                </span>
+                Interface
+                
+              </h3>
+             
+            </div>
+        
+         
+        
+            <div class="form-container bg-white p-8 rounded-xl shadow-lg w-full max-w-2xl">
+              <h2 class="text-2xl font-bold text-center text-purple-800 mb-6">Créer une Commande</h2>
+              <form [formGroup]="commandeForm" (ngSubmit)="onSubmit()" class="space-y-4">
+                <div>
+                  <label for="dateCommande" class="block text-sm font-medium text-purple-700">Date de Commande</label>
+                  <input type="date" id="dateCommande" formControlName="dateCommande" required
+                         class="mt-1 block w-full p-2 border border-purple-200 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-400">
+                  <div *ngIf="commandeForm.get('dateCommande')?.invalid && commandeForm.get('dateCommande')?.touched"
+                       class="text-red-500 text-sm">Date de commande requise</div>
+                </div>
+                <div>
+                  <label for="adresse_livraison" class="block text-sm font-medium text-purple-700">Adresse de Livraison</label>
+                  <input type="text" id="adresse_livraison" formControlName="adresse_livraison" required
+                         class="mt-1 block w-full p-2 border border-purple-200 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-400"
+                         placeholder="123 Rue Exemple, Tunis">
+                  <div *ngIf="commandeForm.get('adresse_livraison')?.invalid && commandeForm.get('adresse_livraison')?.touched"
+                       class="text-red-500 text-sm">Adresse de livraison requise</div>
+                </div>
+                <div>
+                  <label for="total" class="block text-sm font-medium text-purple-700">Total (€)</label>
+                  <input type="number" id="total" formControlName="total" step="0.01" required
+                         class="mt-1 block w-full p-2 border border-purple-200 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-400"
+                         placeholder="100.50">
+                  <div *ngIf="commandeForm.get('total')?.invalid && commandeForm.get('total')?.touched"
+                       class="text-red-500 text-sm">Total requis et doit être positif</div>
+                </div>
+                <div>
+                  <label for="articel_commande" class="block text-sm font-medium text-purple-700">Article Commandé</label>
+                  <input type="text" id="articel_commande" formControlName="articel_commande"
+                         class="mt-1 block w-full p-2 border border-purple-200 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-400"
+                         placeholder="Article XYZ">
+                </div>
+                <div>
+                  <label for="longueur_cm" class="block text-sm font-medium text-purple-700">Longueur (cm)</label>
+                  <input type="number" id="longueur_cm" formControlName="longueur_cm" step="0.1"
+                         class="mt-1 block w-full p-2 border border-purple-200 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-400"
+                         placeholder="40.0">
+                </div>
+                <div>
+                  <label for="largeur_cm" class="block text-sm font-medium text-purple-700">Largeur (cm)</label>
+                  <input type="number" id="largeur_cm" formControlName="largeur_cm" step="0.1"
+                         class="mt-1 block w-full p-2 border border-purple-200 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-400"
+                         placeholder="30.0">
+                </div>
+                <div>
+                  <label for="hauteur_cm" class="block text-sm font-medium text-purple-700">Hauteur (cm)</label>
+                  <input type="number" id="hauteur_cm" formControlName="hauteur_cm" step="0.1"
+                         class="mt-1 block w-full p-2 border border-purple-200 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-400"
+                         placeholder="20.0">
+                </div>
+                <div>
+                  <label for="poids_grammes" class="block text-sm font-medium text-purple-700">Poids (g)</label>
+                  <input type="number" id="poids_grammes" formControlName="poids_grammes" step="0.1"
+                         class="mt-1 block w-full p-2 border border-purple-200 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-400"
+                         placeholder="1500.5">
+                </div>
+                <div>
+                  <label for="gouvernoratCmd" class="block text-sm font-medium text-purple-700">Gouvernorat</label>
+                  <input type="text" id="gouvernoratCmd" formControlName="gouvernoratCmd"
+                         class="mt-1 block w-full p-2 border border-purple-200 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-400"
+                         placeholder="Tunis">
+                </div>
+                <div>
+                  <label for="enseigne" class="block text-sm font-medium text-purple-700">Enseigne</label>
+                  <input type="text" id="enseigne" formControlName="enseigne"
+                         class="mt-1 block w-full p-2 border border-purple-200 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-400"
+                         placeholder="MyStore">
+                </div>
+                <div>
+                  <label for="destination_enseigne" class="block text-sm font-medium text-purple-700">Destination Enseigne</label>
+                  <input type="text" id="destination_enseigne" formControlName="destination_enseigne"
+                         class="mt-1 block w-full p-2 border border-purple-200 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-400"
+                         placeholder="Warehouse1">
+                </div>
+                <div>
+                  <label for="iduser" class="block text-sm font-medium text-purple-700">ID Utilisateur</label>
+                  <input type="number" id="iduser" formControlName="iduser" required
+                         class="mt-1 block w-full p-2 border border-purple-200 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-400"
+                         placeholder="61">
+                  <div *ngIf="commandeForm.get('iduser')?.invalid && commandeForm.get('iduser')?.touched"
+                       class="text-red-500 text-sm">ID utilisateur requis</div>
+                </div>
+                <div>
+                  <label for="idproduit" class="block text-sm font-medium text-purple-700">ID Produit</label>
+                  <input type="number" id="idproduit" formControlName="idproduit" required
+                         class="mt-1 block w-full p-2 border border-purple-200 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-400"
+                         placeholder="7">
+                  <div *ngIf="commandeForm.get('idproduit')?.invalid && commandeForm.get('idproduit')?.touched"
+                       class="text-red-500 text-sm">ID produit requis</div>
+                </div>
+                <div>
+                  <button type="submit" [disabled]="commandeForm.invalid"
+                          class="w-full p-3 bg-purple-500 text-white font-semibold rounded-md hover:bg-purple-600 transition duration-300">
+                    Ajouter la Commande
+                  </button>
+                </div>
+              </form>
+            </div>
+            

@@ -171,6 +171,7 @@ import { HttpClient } from '@angular/common/http';
 import { AuthResponse } from '../../models/auth-response';
 import { AuthService } from '../../services/auth.service'; // Ajouter cette importation
 import { Toast, ToastrService } from 'ngx-toastr';
+import { NotifserviceService } from 'src/app/services/notifservice.service';
 
 @Component({
   selector: 'app-login',
@@ -211,7 +212,8 @@ implements OnInit {
     private router: Router,
     private http: HttpClient,
     private authService: AuthService, 
-    private toastr : ToastrService  ) {
+    private toastr : ToastrService,
+    private notifService : NotifserviceService  ) {
       
     this.registerForm = this.fb.group({
       firstname: ['', [
@@ -339,8 +341,10 @@ implements OnInit {
         localStorage.setItem('refreshToken', res.refreshToken);
         localStorage.setItem('role', res.role);
         localStorage.setItem('username', res.username);
+        this.notifService.connect(username); // Connexion WebSocket après login
         localStorage.setItem('email', res.email);
         localStorage.setItem('iduser', res.id.toString()); // Ajouter iduser
+        this.notifService.connect(username);
 
         // Mettre à jour AuthService.currentUser
         this.authService.currentUser = {
@@ -351,13 +355,15 @@ implements OnInit {
 
         const role = res.role;
 
-        if (role === 'ROLE_admin') {
+        if (role === 'ROLE_Admin') {
           this.router.navigate(['/home']);
-        } else if (role === 'ROLE_client') {
+        } else if (role === 'ROLE_Client') {
           this.router.navigate(['/pageclient']);
         } else if (role === 'ROLE_livreur') {
           this.router.navigate(['/livreur']);
-        } else {
+        }  else if (role === 'ROLE_partner') {
+          this.router.navigate(['/partner']);
+         } else {
           this.router.navigate(['/home']);
         }
       },

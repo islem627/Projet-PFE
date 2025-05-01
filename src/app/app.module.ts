@@ -54,6 +54,12 @@ import { DestinationComponent } from './component/destination/destination.compon
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ForgotPasswordComponent } from './component/forgot-password/forgot-password.component';
+import { PageDeleviryComponent } from './component/page-deleviry/page-deleviry.component';
+import { NotifclientComponent } from './component/notifclient/notifclient.component';
+import { ChattComponent } from './component/chatt/chatt.component';
+import { DeliveryComponent } from './component/delivery/delivery.component';
+import { ClientNotificationsComponent } from './component/client-notifications/client-notifications.component';
+import { PartnerComponent } from './component/partner/partner.component';
 
 firebase.initializeApp(environement.firebase);
 
@@ -99,7 +105,13 @@ firebase.initializeApp(environement.firebase);
     UpdatelivreurComponent,
     AssignByGovernorateComponent,
     FindByIdPipe,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    PageDeleviryComponent,
+    NotifclientComponent,
+    ChattComponent,
+    DeliveryComponent,
+    ClientNotificationsComponent,
+    PartnerComponent,
     
     
     
@@ -128,7 +140,6 @@ firebase.initializeApp(environement.firebase);
     MatSelectModule,
     ReactiveFormsModule,
     MatFormFieldModule
-
   ],
  // providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
  providers: [],

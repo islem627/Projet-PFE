@@ -1,0 +1,56 @@
+<!-- src/app/components/delivery/delivery.component.html -->
+<div class="container">
+    <h2>Gestion des livraisons</h2>
+  
+    <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+  
+    <table class="table table-striped" *ngIf="commandes.length > 0">
+      <thead>
+        <tr>
+          <th>ID Commande</th>
+          <th>Date</th>
+          <th>Statut</th>
+          <th>Adresse</th>
+          <th>Total</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let commande of commandes">
+          <td>{{ commande.id_commande }}</td>
+          <td>{{ commande.dateCommande }}</td>
+          <td>{{ commande.statut_commande }}</td>
+          <td>{{ commande.adresse_livraison || 'N/A' }}</td>
+          <td>{{ commande.total }} €</td>
+          <td>
+            <select [(ngModel)]="newStatus[commande.id_commande]">
+              <option value="">Sélectionner un statut</option>
+              <option value="EN_COURS">En cours</option>
+              <option value="LIVREE">Livrée</option>
+              <option value="ANNULEE">Annulée</option>
+            </select>
+            <button
+              class="btn btn-primary btn-sm"
+              (click)="updateStatus(commande.id_commande)"
+            >
+              Mettre à jour
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div *ngIf="commandes.length === 0">Aucune commande trouvée.</div>
+  
+    <h3>Notifications</h3>
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let notification of notifications">
+        Commande #{{ notification.orderId }} est maintenant {{ notification.status }}
+        <br />
+        Article: {{ notification.articelCommande || 'N/A' }}
+        <br />
+        Adresse: {{ notification.adresseLivraison || 'N/A' }}
+        <br />
+        Date: {{ notification.dateCommande || 'N/A' }}
+      </li>
+    </ul>
+  </div>

@@ -33,6 +33,12 @@ import { DetailslivreurComponent } from './component/detailslivreur/detailslivre
 import { UpdatelivreurComponent } from './component/updatelivreur/updatelivreur.component';
 import { AssignByGovernorateComponent } from './component/assign-by-governorate/assign-by-governorate.component';
 import { ForgotPasswordComponent } from './component/forgot-password/forgot-password.component';
+import { Path } from 'leaflet';
+import { NotifclientComponent } from './component/notifclient/notifclient.component';
+import { PageDeleviryComponent } from './component/page-deleviry/page-deleviry.component';
+import { DeliveryComponent } from './component/delivery/delivery.component';
+import { ClientNotificationsComponent } from './component/client-notifications/client-notifications.component';
+import { PartnerComponent } from './component/partner/partner.component';
 
 
 
@@ -74,7 +80,18 @@ const routes: Routes = [
   {path:"detailslivreur/:id",component:DetailslivreurComponent},
   {path: "updatelivreur/id",component:UpdatelivreurComponent},
   { path: 'planning', component:AssignByGovernorateComponent },
-  {path:"forgot-password",component:ForgotPasswordComponent}
+  {path:"forgot-password",component:ForgotPasswordComponent},
+  {path:"notifclient",component:NotifclientComponent},
+  {path:"delivery", component:PageDeleviryComponent},
+  { path: 'delivery', component: DeliveryComponent },
+  { path: 'notifications', component: ClientNotificationsComponent },
+  //{ path: '', redirectTo: '/notifications', pathMatch: 'full' },:
+  {path:'partner',component:PartnerComponent}
+
+
+
+
+
 ];
 @NgModule({
  // imports: [RouterModule.forRoot(routes)], // or RouterModule.forChild(routes) for feature modules

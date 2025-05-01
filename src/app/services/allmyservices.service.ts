@@ -61,9 +61,55 @@ export interface ProductDTO {
 })
 export class AllmyservicesService {
   private apiUrl = `${environment.baseUrlorder}/Commande`;
-
+  private apiUrl2 = 'http://localhost:8080/api/orders';
   constructor(private http:HttpClient) {}
- 
+  private getHeaders(): HttpHeaders {
+    const token = localStorage.getItem('token');
+    return new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+  }
+    /*AllcmdByIdLivreur2(idlivreur: String): Observable<Commande[]> {
+    return this.http.get<Commande[]>(`${this.apiUrl2}/livreur/${idlivreur}`, { headers: this.getHeaders() });
+  }
+
+  AllcmdByIdClient2(iduser: String): Observable<Commande[]> {
+    return this.http.get<Commande[]>(`${this.apiUrl2}/user/${iduser}`, { headers: this.getHeaders() });
+  }*/
+
+
+    AllcmdByIdLivreur2(idlivreur: string): Observable<Commande[]> {
+      return this.http.get<Commande[]>(`${this.apiUrl}/livreur/${idlivreur}`, { headers: this.getHeaders() }).pipe(
+        tap(data => console.log('Commandes livreur:', data)),
+        catchError(err => {
+          console.error('Erreur lors de la récupération des commandes:', err);
+          return throwError(() => new Error('Erreur lors de la récupération des commandes'));
+        })
+      );
+    }
+  
+    AllcmdByIdClient2(iduser: string): Observable<Commande[]> {
+      return this.http.get<Commande[]>(`${this.apiUrl2}/user/${iduser}`, { headers: this.getHeaders() }).pipe(
+        tap(data => console.log('Commandes client:', data)),
+        catchError(err => {
+          console.error('Erreur lors de la récupération des commandes:', err);
+          return throwError(() => new Error('Erreur lors de la récupération des commandes'));
+        })
+      );
+    }
+  
+    updateorder2(id: number, commande: Partial<Commande>): Observable<any> {
+      return this.http.put(`${this.apiUrl2}/update/${id}`, commande, { headers: this.getHeaders() }).pipe(
+        tap(data => console.log('Commande mise à jour:', data)),
+        catchError(err => {
+          console.error('Erreur lors de la mise à jour de la commande:', err);
+          return throwError(() => new Error('Erreur lors de la mise à jour de la commande'));
+        })
+      );
+    }
+
+
  
  //*********************service orders************************************ */
 
@@ -96,17 +142,29 @@ export class AllmyservicesService {
    updateorder(id: string, data: any) {
     return this.http.put(`${environment.baseUrlorder}/Commande/updatecmd/${id}`, data);
   }*/
+ 
+   
 
-  updateorder(id: string, data: any): Observable<any> {
+    updateorder(id: string, data: any): Observable<any> {
+      const token = localStorage.getItem('token');
       const headers = new HttpHeaders({
-        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+        'Authorization': token ? `Bearer ${token}` : '',
         'Content-Type': 'application/json'
       });
+      console.log('Sending PUT request with token:', token); // Debug
       return this.http.put(`${environment.baseUrlorder}/api/orders/update/${id}`, data, { headers });
+    }
+
+    AjouterCMD(data: Commande): Observable<any> {
+      return this.http.post(`${environment.baseUrlorder}/commande/createE`, data);
     }
 
 
 
+    
+
+
+   
 
     getGovernorates(): Observable<string[]> {
       return this.http.get<string[]>(`${environment.baseUrlorder}/api/governorates`);
@@ -150,6 +208,7 @@ AllcmdByIdLivreur(idlivreur: string): Observable<any[]> {
  AllcmdByIdProduct(id:String){
    return this.http.get(`${environment.baseUrlorder}/Commande/allByproductID/${id}`)
  }
+
 /*
  assignOrder(orderId: number, deliveryPersonId: number): Observable<any> {
   const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('token')}`);
@@ -223,7 +282,6 @@ AllcmdByIdUser(iduser: string): Observable<any[]> {
 
   DetailsUser(id:String)
   {return this.http.get(`${environment.baseUrlUser}/User/getuser/${id}`)}
-
 
   UpdateUser(id:string , data:any)
   {return this.http.put(`${environment.baseUrlUser}/User/update/${id}`,data)}

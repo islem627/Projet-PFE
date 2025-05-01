@@ -21,6 +21,7 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "typeRoots": ["node_modules/@types"],
+    "types": ["node"],
     "useDefineForClassFields": false,
     "lib": [
       "ES2022",

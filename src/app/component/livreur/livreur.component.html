@@ -90,18 +90,25 @@
                       -->
                         <!-- Dans la table des commandes -->
                         <td>
-                          <button type="button" class="btn-circle btn-gradient-primary action-btn" (click)="updateOrderStatus(o, 'Prepared')" title="Prepared">
-                            <i class="mdi mdi-check-circle-outline"></i>
-                          </button>
-                          <button type="button" class="btn-circle btn-gradient-success action-btn" (click)="updateOrderStatus(o, 'Ready')" title="Ready">
-                            <i class="mdi mdi-timer-sand"></i>
-                          </button>
-                          <button type="button" class="btn-circle btn-gradient-danger action-btn" (click)="updateOrderStatus(o, 'Delivered')" title="Delivered">
-                            <i class="mdi mdi-truck-delivery-outline"></i>
-                          </button>
-                          <button type="button" class="btn-circle btn-gradient-warning action-btn" (click)="archiveOrder(o)" title="Archive">
-                            <i class="mdi mdi-archive-outline"></i>
-                          </button>
+                          <td>
+                            <button type="button" class="btn-circle btn-gradient-primary action-btn" 
+                                    (click)="updateOrderStatus(o.id_commande, 'Prepared')" title="Prepared">
+                              <i class="mdi mdi-check-circle-outline"></i>
+                            </button>
+                            <button type="button" class="btn-circle btn-gradient-success action-btn" 
+                                    (click)="updateOrderStatus(o.id_commande, 'Ready')" title="Ready">
+                              <i class="mdi mdi-timer-sand"></i>
+                            </button>
+                            <button type="button" class="btn-circle btn-gradient-danger action-btn" 
+                                    (click)="updateOrderStatus(o.id_commande, 'Delivered')" title="Delivered">
+                              <i class="mdi mdi-truck-delivery-outline"></i>
+                            </button>
+                            <button type="button" class="btn-circle btn-gradient-warning action-btn" 
+                                    (click)="archiveOrder(o)" title="Archive">
+                              <i class="mdi mdi-archive-outline"></i>
+                            </button>
+                       
+                         
                         </td>
 
                       

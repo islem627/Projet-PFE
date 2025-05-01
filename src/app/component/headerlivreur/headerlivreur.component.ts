@@ -195,11 +195,12 @@ loading: boolean = false;  // Indicateur de chargement
 */
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { AllmyservicesService, Commande, UserDTO } from 'src/app/services/allmyservices.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { ChatService } from 'src/app/services/chat.service';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
 import Swal from 'sweetalert2';
 
@@ -214,7 +215,7 @@ interface Notification {
   templateUrl: './headerlivreur.component.html',
   styleUrls: ['./headerlivreur.component.css']
 })
-export class HeaderlivreurComponent implements OnInit {
+export class HeaderlivreurComponent implements OnInit, OnDestroy {
   messages: Notification[] = [];
   notificationCount = 0;
   showNotifications = false;
@@ -232,6 +233,8 @@ export class HeaderlivreurComponent implements OnInit {
   private subscription: Subscription | null = null;
   clientId:number;
   clients: UserDTO[] = [];
+  unreadCount: number = 0;
+  private unreadCountSubscription: Subscription | null = null;
 
 
   constructor(
@@ -239,7 +242,8 @@ export class HeaderlivreurComponent implements OnInit {
     private tokenStorage: TokenStorageService,
     private router: Router,
     private http: HttpClient,
-    private service: AllmyservicesService
+    private service: AllmyservicesService,
+    private chatService: ChatService
   ) {}
 
   ngOnInit(): void {
@@ -247,7 +251,24 @@ export class HeaderlivreurComponent implements OnInit {
     if (this.currentUser) {
       this.fetchCommandesByLivreur(this.currentUser.iduser.toString());
     }
+    // Subscribe to unread count updates
+    this.unreadCountSubscription = this.chatService.getUnreadCountSubject().subscribe({
+      next: (count: number) => {
+        this.unreadCount = count;
+        console.log('Unread count updated:', this.unreadCount);
+      },
+      error: (error) => {
+        console.error('Error receiving unread count:', error);
+      }
+    });
+  }
+  //
 
+  
+  ngOnDestroy(): void {
+    if (this.unreadCountSubscription) {
+      this.unreadCountSubscription.unsubscribe();
+    }
   }
 
   private initUser(): void {

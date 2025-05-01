@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+/*import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AllmyservicesService, Commande } from 'src/app/services/allmyservices.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { trigger, style, animate, transition } from '@angular/animations';
@@ -150,6 +150,151 @@ export class LivreurComponent implements OnInit, OnDestroy {
         this.showNotification = true;
         this.notificationMessage = 'Commande restaurée avec succès !';
         Swal.fire('Restaurée !', 'Votre commande a été restaurée depuis l\'archive.', 'success');
+      }
+    });
+  }
+}
+*/
+
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { AllmyservicesService, Commande } from 'src/app/services/allmyservices.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { trigger, style, animate, transition } from '@angular/animations';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
+import { WebSocketService } from 'src/app/services/web-socket-servicee.service';
+
+@Component({
+  selector: 'app-livreur',
+  templateUrl: './livreur.component.html',
+  styleUrls: ['./livreur.component.css'],
+  animations: [
+    trigger('fadeIn', [
+      transition(':enter', [
+        style({ opacity: 0, transform: 'translateY(20px)' }),
+        animate('300ms ease-out', style({ opacity: 1, transform: 'translateY(0)' }))
+      ])
+    ])
+  ]
+})
+export class LivreurComponent implements OnInit, OnDestroy {
+  commandes: Commande[] = [];
+  listorders: Commande[] = [];
+  archivedOrders: Commande[] = [];
+  showArchived = false;
+  notificationMessage = '';
+  showNotification = false;
+  token: string = '';
+  currentUser: { iduser: number; username: string } | null = null;
+  private subscription: Subscription | null = null;
+  private apiUrl = '/api/orders';
+
+  constructor(
+    private authService: AuthService,
+    private service: AllmyservicesService,
+    private http: HttpClient,
+    private webSocketService: WebSocketService,
+    private router: Router
+  ) {}
+
+  ngOnInit(): void {
+    this.initUser();
+    this.token = localStorage.getItem('token') || '';
+
+    if (this.currentUser) {
+      this.fetchCommandesByLivreur(this.currentUser.iduser.toString());
+      this.webSocketService.connect(this.currentUser.iduser.toString(), this.token);
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.subscription?.unsubscribe();
+    this.webSocketService.disconnect();
+  }
+
+  private initUser(): void {
+    const storedUsername = localStorage.getItem('username');
+    const storedIduser = localStorage.getItem('iduser');
+
+    if (this.authService.currentUser) {
+      this.currentUser = this.authService.currentUser;
+    } else if (storedUsername && storedIduser) {
+      this.currentUser = {
+        iduser: parseInt(storedIduser, 10),
+        username: storedUsername
+      };
+      this.authService.currentUser = this.currentUser;
+    } else {
+      this.router.navigate(['/']);
+    }
+  }
+
+  private fetchCommandesByLivreur(idlivreur: string): void {
+    this.service.AllcmdByIdLivreur(idlivreur).subscribe({
+      next: (commandes) => {
+        this.commandes = commandes || [];
+        this.listorders = [...this.commandes];
+        console.log(`✅ Commandes récupérées pour le livreur ${idlivreur}:`, commandes);
+      },
+      error: (err) => {
+        console.error('❌ Erreur lors de la récupération des commandes:', err);
+      }
+    });
+  }
+
+  updateOrderStatus(orderId: string, statut: string): void {
+    const formData = new FormData();
+    formData.append('statut_commande', statut);
+
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.token}`
+    });
+
+    this.http.put(`${this.apiUrl}/update/${orderId}`, formData, { headers })
+      .subscribe({
+        next: (response) => {
+          console.log('✅ Statut de commande mis à jour:', response);
+        },
+        error: (error) => {
+          console.error('❌ Erreur de mise à jour de statut:', error);
+        }
+      });
+  }
+
+  archiveOrder(order: Commande): void {
+    Swal.fire({
+      title: 'Êtes-vous sûr ?',
+      text: `Voulez-vous archiver la commande ${order.id_commande} ?`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Oui, archiver',
+      cancelButtonText: 'Annuler'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.archivedOrders.push({ ...order });
+        this.listorders = this.listorders.filter(o => o.id_commande !== order.id_commande);
+        this.showNotification = true;
+        this.notificationMessage = 'Commande archivée avec succès!';
+      }
+    });
+  }
+
+  unarchiveOrder(order: Commande): void {
+    Swal.fire({
+      title: 'Êtes-vous sûr ?',
+      text: `Voulez-vous restaurer la commande ${order.id_commande} ?`,
+      icon: 'info',
+      showCancelButton: true,
+      confirmButtonText: 'Oui, restaurer',
+      cancelButtonText: 'Annuler'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.listorders.push({ ...order });
+        this.archivedOrders = this.archivedOrders.filter(o => o.id_commande !== order.id_commande);
+        this.showNotification = true;
+        this.notificationMessage = 'Commande restaurée avec succès!';
       }
     });
   }

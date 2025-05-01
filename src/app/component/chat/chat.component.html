@@ -1,49 +1,65 @@
-<body>
-  <div class="container-scroller">
-    <app-header></app-header>
-    <br><br><br>
-    <div class="container-fluid page-body-wrapper">
-      <app-sidebar></app-sidebar>
-      <div class="main-panel">
-        <div class="content-wrapper">
-          <div class="page-header">
-            <h3 class="page-title">
-              
-            </h3>
+<div class="container-scroller">
+  <app-header></app-header>
+  <br><br><br>
+  <div class="container-fluid page-body-wrapper">
+    <app-sidebar></app-sidebar>
+    <div class="main-panel">
+      <div class="content-wrapper">
+        <div class="page-header">
+          <h3 class="page-title"></h3>
+        </div>
 
+        <div class="chat_window">
+          <div class="top_menu">
+            <div class="buttons">
+              <div class="button close"></div>
+              <div class="button minimize"></div>
+              <div class="button maximize"></div>
+            </div>
+            <div class="title">Chat</div>
+          </div>
 
-<div class="chat_window">
+          <div *ngIf="connectionError" class="error-message">
+            {{ connectionError }}
+          </div>
 
-  <div class="top_menu">
-    <div class="buttons">
-      <div class="button close"></div>
-      <div class="button minimize"></div>
-      <div class="button maximize"></div>
-    
-    </div>
-    <div class="title">
-      <img src="../../../assets/icon.jpg" width="25px" height="25px">
-      Chat
-    </div>
-  </div>
-  <ul class="messages">
-    <li class="message right" *ngFor="let item of messageList"
-    [ngClass]="{'left': item.message_side === 'receiver', 'right': item.message_side === 'sender'}"
-    >
-      <div class="avatar"></div>
-      <div class="text_wrapper">
-        <div class="text">{{item.message}}</div>
+          <ul class="messages">
+            <li class="message" *ngFor="let item of messageList"
+                [ngClass]="{'left': item.message_side === 'receiver', 'right': item.message_side === 'sender'}">
+              <div class="timestamp" *ngIf="item.timestamp">
+                {{ item.timestamp | date:'medium' }}
+              </div>
+              <div class="seen-status" *ngIf="item.message_side === 'sender' && item.seen">
+                Vu à {{ item.seenTimestamp | date:'shortTime' }}
+              </div>
+              <div class="avatar"></div>
+              <div class="text_wrapper">
+                <div class="text">{{ item.message }}</div>
+              </div>
+            </li>
+            <li class="typing-indicator" *ngIf="typingUser">
+              <div class="text_wrapper">
+                <div class="typing-dots">
+                  <span class="dot"></span>
+                  <span class="dot"></span>
+                  <span class="dot"></span>
+                </div>
+              </div>
+            </li>
+          </ul>
+
+          <div class="bottom_wrapper clearfix">
+            <div class="message_input_wrapper">
+              <input class="message_input" placeholder="Message..." [(ngModel)]="messageInput"
+                     (keyup.enter)="sendMessage()" (input)="onTyping(); debugInput()"/>
+            </div>
+            <div class="send_message" (click)="sendMessage()">
+              <div class="icon"></div>
+              <div class="text">Envoyer</div>
+            </div>
+          </div>
+        </div>
       </div>
-    </li>
-  </ul>
-  <div class="bottom_wrapper clearfix">
-    <div class="message_input_wrapper">
-      <input class="message_input" placeholder="Message..." [(ngModel)]="messageInput" 
-      (keyup.enter)="sendMessage()"/>
-    </div>
-    <div class="send_message" (click)="sendMessage()">
-      <div class="icon"></div>
-      <div class="text">Send</div>
     </div>
   </div>
 </div>

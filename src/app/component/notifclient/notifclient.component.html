@@ -1,0 +1,10 @@
+<div *ngIf="notifications.length === 0">
+    <p>Aucune notification pour le moment.</p>
+  </div>
+  
+  <ul class="list-group mt-3" *ngIf="notifications.length > 0">
+    <li class="list-group-item" *ngFor="let notif of notifications">
+      {{ notif }}
+    </li>
+  </ul>
+  

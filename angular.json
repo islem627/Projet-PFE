@@ -13,9 +13,12 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "allowedCommonJsDependencies": [
-              "sockjs-client"
-              ],
+           "allowedCommonJsDependencies": [
+            "sockjs-client",
+            "sweetalert2",
+            "pusher-js",
+           "leaflet"
+            ],
             "outputPath": "dist/delivery-managementfront",
             "baseHref": "/",
             "index": "src/index.html",
@@ -50,9 +53,8 @@
              "node_modules/@popperjs/core/dist/umd/popper.min.js",
              "node_modules/bootstrap/dist/js/bootstrap.min.js"
 
-            ],
-            "allowedCommonJsDependencies":
-             ["leaflet"]
+            ]
+            
 
           },
           "configurations": {
@@ -85,6 +87,10 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "DeliveryManagementfront:build",
+               "proxyConfig": "proxy.conf.json"
+          },
           "configurations": {
             "production": {
               "browserTarget": "DeliveryManagementfront:build:production"

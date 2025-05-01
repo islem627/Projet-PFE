@@ -32,6 +32,8 @@
     "boxicons": "^2.1.4",
     "firebase": "^10.14.1",
     "font-awesome": "^4.7.0",
+    "http-proxy": "^1.18.1",
+    "http-proxy-middleware": "^3.0.5",
     "jquery": "^3.7.1",
     "leaflet": "^1.9.4",
     "ngx-pagination": "^6.0.3",
@@ -61,5 +63,9 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "typescript": "~5.1.3"
+  },
+  "resolutions": {
+    "http-proxy-middleware": "^3.0.0",
+    "http-proxy": "^1.18.1"
   }
 }

@@ -8,6 +8,7 @@ export const environment = {
   baseUrlUser:"http://localhost:8762",
   baseUrlproduct:"http://localhost:8763",
   baseUrlorder:"http://localhost:8764",
+  baseUrlorderr: 'http://localhost:8080', // Updated from 8764 to 8080
 
 
 };

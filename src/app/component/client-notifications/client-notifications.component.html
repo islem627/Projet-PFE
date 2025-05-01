@@ -1,0 +1,45 @@
+<!-- src/app/components/client-notifications/client-notifications.component.html -->
+<div class="container">
+    <h2>Notifications de commande</h2>
+  
+    <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+  
+    <h3>Vos commandes</h3>
+    <table class="table table-striped" *ngIf="commandes.length > 0">
+      <thead>
+        <tr>
+          <th>ID Commande</th>
+          <th>Date</th>
+          <th>Statut</th>
+          <th>Adresse</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let commande of commandes">
+          <td>{{ commande.id_commande }}</td>
+          <td>{{ commande.dateCommande }}</td>
+          <td>{{ commande.statut_commande }}</td>
+          <td>{{ commande.adresse_livraison || 'N/A' }}</td>
+          <td>{{ commande.total }} €</td>
+        </tr>
+      </tbody>
+    </table>
+    <div *ngIf="commandes.length === 0">Aucune commande trouvée.</div>
+  
+    <h3>Notifications en temps réel</h3>
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let notification of notifications">
+        Commande #{{ notification.orderId }} est maintenant {{ notification.status }}
+        <br />
+        Article : {{ notification.articelCommande || 'N/A' }}
+        <br />
+        Adresse : {{ notification.adresseLivraison || 'N/A' }}
+        <br />
+        Date : {{ notification.dateCommande || 'N/A' }}
+      </li>
+      <li class="list-group-item" *ngIf="notifications.length === 0">
+        Aucune notification reçue.
+      </li>
+    </ul>
+  </div>

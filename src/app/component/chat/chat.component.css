@@ -1,10 +1,4 @@
-
-
-
-
-
 /*
-
 * {
   box-sizing: border-box;
 }
@@ -231,7 +225,12 @@ body {
 
 .message_template {
   display: none;
-}*/
+}
+
+*/
+
+
+
 * {
   box-sizing: border-box;
 }
@@ -315,7 +314,7 @@ body {
 }
 
 .messages .message.left .avatar {
-  background-color: #d1a2c9;
+  background-color: #e6e6e6;
   float: left;
 }
 
@@ -331,7 +330,7 @@ body {
 }
 
 .messages .message.left .text {
-  color: #e0d0de;
+  color: #510d48;
 }
 
 .messages .message.right .avatar {
@@ -459,4 +458,95 @@ body {
 
 .message_template {
   display: none;
+}
+
+
+
+
+
+/* src/app/components/chat/chat.component.css */
+.error-message {
+  color: red;
+  font-size: 14px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.timestamp {
+  text-align: center;
+  font-size: 12px;
+  color: #888;
+  margin-bottom: 5px;
+}
+
+/* Styles pour le statut "Vu" */
+.seen-status {
+  font-size: 12px;
+  color: #888;
+  text-align: right;
+  margin-top: 4px;
+  margin-right: 10px;
+  display: block;
+}
+/* Styles pour l'indicateur de saisie */
+.typing-indicator {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+
+.typing-dots {
+  display: flex;
+  align-items: center;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  background-color: #888;
+  border-radius: 50%;
+  margin: 0 4px;
+  animation: typing 1.4s infinite ease-in-out;
+}
+
+.dot:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes typing {
+  0%, 80%, 100% {
+    transform: scale(0.6);
+    opacity: 0.4;
+  }
+  40% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+.right .text_wrapper {
+  background-color: #0084ff; /* Couleur pour les messages envoyés */
+  color: white;
+  border-radius: 10px;
+  padding: 8px 12px;
+  max-width: 70%;
+}
+
+.left .text_wrapper {
+  background-color: #f1f0f0; /* Couleur pour les messages reçus */
+  color: black;
+  border-radius: 10px;
+  padding: 8px 12px;
+  max-width: 70%;
+}
+
+.text_wrapper {
+  margin-bottom: 5px; /* Espacement pour le statut "Vu" */
 }

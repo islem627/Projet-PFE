@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+/*import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Client, StompSubscription } from '@stomp/stompjs';
 import SockJS from 'sockjs-client';
@@ -89,5 +89,152 @@ export class WebSocketServiceeService {
       this.stompClient = null;
     }
     console.log('Déconnexion WebSocket');
+  }
+}
+  */
+
+
+
+/* mariem 
+import { Injectable } from '@angular/core';
+import { Client, IMessage } from '@stomp/stompjs';
+import SockJS from 'sockjs-client';
+import { BehaviorSubject, Observable } from 'rxjs';
+
+export interface OrderUpdate {
+  orderId: string;
+  status: string;
+  articelCommande?: string;
+  adresseLivraison?: string;
+  dateCommande?: string;
+}
+
+@Injectable({
+  providedIn: 'root'
+})
+export class WebSocketServiceeService {
+  private stompClient: Client | null = null;
+  private notificationsSubject = new BehaviorSubject<OrderUpdate[]>([]);
+  notifications$: Observable<OrderUpdate[]> = this.notificationsSubject.asObservable();
+
+  connect(userId: string, token: string): void {
+    if (!userId || !token) {
+      console.error('userId ou token manquant');
+      return;
+    }
+
+    this.stompClient = new Client({
+      webSocketFactory: () => new SockJS('http://localhost:8080/ws'),
+      connectHeaders: {
+        Authorization: `Bearer ${token}`
+      },
+      reconnectDelay: 5000,
+      debug: (msg: string) => console.log('STOMP DEBUG:', msg),
+      onConnect: () => {
+        console.log('Connecté à WebSocket pour userId:', userId);
+        console.log('Abonnement au topic: /topic/notifications/' + userId);
+        this.stompClient!.subscribe(`/topic/notifications/${userId}`, (message: IMessage) => {
+          console.log('Message brut reçu:', message.body);
+          const notification: OrderUpdate = JSON.parse(message.body);
+          console.log('Notification parsée:', notification);
+          const currentNotifications = this.notificationsSubject.value;
+          this.notificationsSubject.next([...currentNotifications, notification]);
+        });
+      },
+      onStompError: (frame) => {
+        console.error('Erreur STOMP:', frame.headers['message'], frame.body);
+      },
+      onWebSocketClose: () => {
+        console.warn('Connexion WebSocket fermée');
+      }
+    });
+
+    this.stompClient.activate();
+  }
+
+  disconnect(): void {
+    if (this.stompClient && this.stompClient.active) {
+      this.stompClient.deactivate();
+      console.log('WebSocket déconnecté');
+    }
+  }
+}*/
+
+
+import { Injectable } from '@angular/core';
+import { Client, IMessage } from '@stomp/stompjs';
+import SockJS from 'sockjs-client';
+import { BehaviorSubject, Observable } from 'rxjs';
+
+export interface OrderUpdate {
+  orderId: string;
+  status: string;
+  articelCommande?: string;
+  adresseLivraison?: string;
+  dateCommande?: string;
+}
+
+@Injectable({ providedIn: 'root' })
+export class WebSocketService {
+  private stompClient: Client | null = null;
+  private notificationsSubject = new BehaviorSubject<OrderUpdate[]>([]);
+  notifications$: Observable<OrderUpdate[]> = this.notificationsSubject.asObservable();
+
+  connect(userId: string, token: string): void {
+    console.log('Tentative de connexion WebSocket avec userId:', userId, 'et token:', token);
+    if (!userId || !token) {
+      console.error('❌ userId ou token manquant');
+      return;
+    }
+
+    this.stompClient = new Client({
+      webSocketFactory: () => new SockJS('/ws'),
+      connectHeaders: {
+        Authorization: `Bearer ${token}`
+      },
+      reconnectDelay: 5000,
+      heartbeatIncoming: 4000,
+      heartbeatOutgoing: 4000,
+      debug: (msg: string) => console.log('STOMP DEBUG:', msg),
+      onConnect: () => {
+        console.log(`✅ Connecté WebSocket pour userId: ${userId}`);
+        this.subscribeToNotifications(userId);
+      },
+      onStompError: (frame) => {
+        console.error('❌ Erreur STOMP:', frame.headers['message'], frame.body);
+      },
+      onWebSocketClose: () => {
+        console.warn('⚠️ Connexion WebSocket fermée, tentative de reconnexion...');
+      },
+      onWebSocketError: (error) => {
+        console.error('❌ Erreur WebSocket:', error);
+      }
+    });
+
+    this.stompClient.activate();
+  }
+
+  private subscribeToNotifications(userId: string): void {
+    if (this.stompClient && this.stompClient.connected) {
+      this.stompClient.subscribe(`/topic/notifications/${userId}`, (message: IMessage) => {
+        try {
+          console.log('📨 Message brut reçu:', message.body);
+          const notification: OrderUpdate = JSON.parse(message.body);
+          const currentNotifications = this.notificationsSubject.value;
+          this.notificationsSubject.next([...currentNotifications, notification]);
+        } catch (error) {
+          console.error('❌ Erreur lors du parsing du message:', error);
+        }
+      });
+    } else {
+      console.warn('⚠️ Impossible de s’abonner, stompClient non connecté');
+    }
+  }
+
+  disconnect(): void {
+    if (this.stompClient && this.stompClient.active) {
+      this.stompClient.deactivate();
+      console.log('🔌 WebSocket déconnecté');
+    }
   }
 }

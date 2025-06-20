@@ -1,0 +1,1273 @@
+/*archiveeeeee*/
+
+
+/* page-client.component.css */
+
+
+/* Conteneur principal */
+
+.content-wrapper {
+    background-color: #6a005f;
+    padding: 20px;
+}
+
+/* Titre de la page */
+
+.page-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.page-title-icon {
+    border-radius: 50%;
+    padding: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* Carte principale */
+
+.card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+
+/* Titre et description */
+
+.card-title {
+    font-size: 1.5rem;
+    color: #2c3e50;
+    margin-bottom: 15px;
+}
+
+.card-description {
+    font-size: 1rem;
+    color: #7f8c8d;
+    margin-bottom: 20px;
+}
+
+
+/* Cartes des commandes */
+
+.command-card {
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.command-card .card-body {
+    padding: 20px;
+}
+
+.command-card .card-text {
+    font-size: 0.9rem;
+    color: #34495e;
+    line-height: 1.6;
+}
+
+.command-card .card-text strong {
+    color: #2c3e50;
+}
+
+.btn-gradient-primary:hover {
+    background: linear-gradient(90deg, #dab4dd, #841f8d);
+}
+
+
+/* Alerte d'erreur */
+
+.alert-danger {
+    border-radius: 5px;
+    padding: 15px;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+}
+
+
+/* Modale */
+
+.modal-content {
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.modal-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.modal-title {
+    font-size: 1.4rem;
+    color: #2c3e50;
+}
+
+.modal-body {
+    max-height: 60vh;
+    overflow-y: auto;
+    padding: 20px;
+}
+
+.modal-footer {
+    border-top: 1px solid #e9ecef;
+}
+
+
+/* Tableau des détails */
+
+.table-details {
+    font-size: 0.9rem;
+    margin-bottom: 0;
+}
+
+.table-details td {
+    vertical-align: middle;
+    padding: 10px;
+}
+
+.table-details strong {
+    color: #2c3e50;
+}
+
+.table-details .badge {
+    font-size: 0.8rem;
+    padding: 5px 10px;
+    border-radius: 12px;
+}
+
+.badge-success {
+    background-color: #28a745;
+}
+
+.badge-warning {
+    background-color: #ffc107;
+}
+
+.badge-danger {
+    background-color: #dc3545;
+}
+
+
+/* Photo utilisateur */
+
+.user-photo {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+}
+
+
+/* Responsive */
+
+@media (max-width: 768px) {
+    .page-title {
+        font-size: 1.5rem;
+    }
+    .card-title {
+        font-size: 1.3rem;
+    }
+    .command-card .card-text {
+        font-size: 0.85rem;
+    }
+    .modal-dialog {
+        margin: 10px;
+    }
+    .table-details {
+        font-size: 0.85rem;
+    }
+    .user-photo {
+        width: 80px;
+        height: 80px;
+    }
+}
+
+
+/* page-client.component.css */
+
+
+/* Conteneur principal */
+
+.content-wrapper {
+    background-color: #f4f6f9;
+    padding: 20px;
+}
+
+
+/* Titre de la page */
+
+.page-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.page-title-icon {
+    border-radius: 50%;
+    padding: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* Carte principale */
+
+.card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+
+/* Titre et description */
+
+.card-title {
+    font-size: 1.5rem;
+    color: #2c3e50;
+    margin-bottom: 15px;
+}
+
+.card-description {
+    font-size: 1rem;
+    color: #7f8c8d;
+    margin-bottom: 20px;
+}
+
+
+/* Cartes des commandes */
+
+.command-card {
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.command-card .card-body {
+    padding: 20px;
+}
+
+.command-card .card-text {
+    font-size: 0.9rem;
+    color: #34495e;
+    line-height: 1.6;
+}
+
+.command-card .card-text strong {
+    color: #2c3e50;
+}
+
+
+/* Bouton Details */
+
+.btn-gradient-primary {
+    background: linear-gradient(90deg, #3498db, #2980b9);
+    border: none;
+    border-radius: 20px;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    color: #fff;
+    transition: background 0.3s ease;
+}
+
+.btn-gradient-primary:hover {
+    background: linear-gradient(90deg, #2980b9, #1f618d);
+}
+
+
+/* Alerte d'erreur */
+
+.alert-danger {
+    border-radius: 5px;
+    padding: 15px;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+}
+
+
+/* Modale */
+
+.modal {
+    z-index: 1050 !important;
+}
+
+.modal-backdrop {
+    z-index: 1040 !important;
+}
+
+.modal-content {
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.modal-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.modal-title {
+    font-size: 1.4rem;
+    color: #2c3e50;
+}
+
+.modal-body {
+    max-height: 60vh;
+    overflow-y: auto;
+    padding: 20px;
+}
+
+.modal-footer {
+    border-top: 1px solid #e9ecef;
+}
+
+
+/* Tableau des détails */
+
+.table-details {
+    font-size: 0.9rem;
+    margin-bottom: 0;
+}
+
+.table-details td {
+    vertical-align: middle;
+    padding: 10px;
+}
+
+.table-details strong {
+    color: #2c3e50;
+}
+
+.table-details .badge {
+    font-size: 0.8rem;
+    padding: 5px 10px;
+    border-radius: 12px;
+}
+
+.badge-success {
+    background-color: #28a745;
+}
+
+.badge-warning {
+    background-color: #ffc107;
+}
+
+.badge-danger {
+    background-color: #dc3545;
+}
+
+
+/* Photo utilisateur */
+
+.user-photo {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+}
+
+
+/* Responsive */
+
+@media (max-width: 768px) {
+    .page-title {
+        font-size: 1.5rem;
+    }
+    .card-title {
+        font-size: 1.3rem;
+    }
+    .command-card .card-text {
+        font-size: 0.85rem;
+    }
+    .modal-dialog {
+        margin: 10px;
+    }
+    .table-details {
+        font-size: 0.85rem;
+    }
+    .user-photo {
+        width: 80px;
+        height: 80px;
+    }
+}
+
+.card.command-card {
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.card.command-card .card-body {
+    padding: 20px;
+}
+
+.btn-gradient-primary {
+    background: linear-gradient(to right, #667eea, #764ba2);
+    color: white;
+}
+
+.btn-gradient-primary:hover {
+    background: linear-gradient(to right, #5a67d8, #6b46c1);
+    color: white;
+}
+
+.table-details tr td {
+    vertical-align: middle;
+}
+
+.table-details img.user-photo {
+    max-width: 100px;
+    border-radius: 50%;
+    border: 2px solid #ddd;
+    padding: 4px;
+}
+
+.modal-title {
+    font-weight: bold;
+    color: #333;
+}
+
+.badge-success {
+    background-color: #28a745;
+}
+
+.badge-warning {
+    background-color: #ffc107;
+    color: #212529;
+}
+
+.badge-danger {
+    background-color: #dc3545;
+}
+
+
+/* page-client.component.css */
+
+
+/* Conteneur principal */
+
+.content-wrapper {
+    background-color: #f4f6f9;
+    padding: 20px;
+}
+
+
+/* Titre de la page */
+
+.page-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.page-title-icon {
+    border-radius: 50%;
+    padding: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* Carte principale */
+
+.card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+
+/* Titre et description */
+
+.card-title {
+    font-size: 1.5rem;
+    color: #2c3e50;
+    margin-bottom: 15px;
+}
+
+.card-description {
+    font-size: 1rem;
+    color: #7f8c8d;
+    margin-bottom: 20px;
+}
+
+
+/* Cartes des commandes */
+
+.command-card {
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.command-card .card-body {
+    padding: 20px;
+}
+
+.command-card .card-text {
+    font-size: 0.9rem;
+    color: #34495e;
+    line-height: 1.6;
+}
+
+.command-card .card-text strong {
+    color: #2c3e50;
+}
+
+
+/* Bouton Details */
+
+.btn-gradient-primary {
+    background: linear-gradient(90deg, #3498db, #2980b9);
+    border: none;
+    border-radius: 20px;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    color: #fff;
+    transition: background 0.3s ease;
+}
+
+.btn-gradient-primary:hover {
+    background: linear-gradient(90deg, #2980b9, #1f618d);
+}
+
+
+/* Alerte d'erreur */
+
+.alert-danger {
+    border-radius: 5px;
+    padding: 15px;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+}
+
+
+/* Modale */
+
+.modal {
+    z-index: 1055 !important;
+    /* Assurer que la modale est au-dessus de tout */
+}
+
+.modal-backdrop {
+    z-index: 1050 !important;
+    /* Derrière la modale */
+    opacity: 0.5 !important;
+    /* Réduire l'opacité pour éviter un fond trop sombre */
+}
+
+.modal-content {
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    z-index: 1060 !important;
+    /* Au-dessus du backdrop */
+}
+
+.modal-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.modal-title {
+    font-size: 1.4rem;
+    color: #2c3e50;
+}
+
+.modal-body {
+    max-height: 60vh;
+    overflow-y: auto;
+    padding: 20px;
+}
+
+.modal-footer {
+    border-top: 1px solid #e9ecef;
+}
+
+
+/* Tableau des détails */
+
+.table-details {
+    font-size: 0.9rem;
+    margin-bottom: 0;
+}
+
+.table-details td {
+    vertical-align: middle;
+    padding: 10px;
+}
+
+.table-details strong {
+    color: #2c3e50;
+}
+
+.table-details .badge {
+    font-size: 0.8rem;
+    padding: 5px 10px;
+    border-radius: 12px;
+}
+
+.badge-success {
+    background-color: #28a745;
+}
+
+.badge-warning {
+    background-color: #ffc107;
+}
+
+.badge-danger {
+    background-color: #dc3545;
+}
+
+
+/* Photo utilisateur */
+
+.user-photo {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+}
+
+
+/* Message de chargement */
+
+.text-center {
+    padding: 20px;
+}
+
+.text-muted {
+    font-size: 1rem;
+    color: #6c757d;
+}
+
+
+/* Responsive */
+
+@media (max-width: 768px) {
+    .page-title {
+        font-size: 1.5rem;
+    }
+    .card-title {
+        font-size: 1.3rem;
+    }
+    .command-card .card-text {
+        font-size: 0.85rem;
+    }
+    .modal-dialog {
+        margin: 10px;
+    }
+    .table-details {
+        font-size: 0.85rem;
+    }
+    .user-photo {
+        width: 80px;
+        height: 80px;
+    }
+}
+
+
+/* page-client.component.css */
+
+
+/* Conteneur principal */
+
+.content-wrapper {
+    background-color: #f4f6f9;
+    padding: 20px;
+}
+
+
+/* Titre de la page */
+
+.page-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.page-title-icon {
+    border-radius: 50%;
+    padding: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* Carte principale */
+
+.card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+
+/* Titre et description */
+
+.card-title {
+    font-size: 1.5rem;
+    color: #2c3e50;
+    margin-bottom: 15px;
+}
+
+.card-description {
+    font-size: 1rem;
+    color: #7f8c8d;
+    margin-bottom: 20px;
+}
+
+
+/* Cartes des commandes */
+
+.command-card {
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.command-card .card-body {
+    padding: 20px;
+}
+
+.command-card .card-text {
+    font-size: 0.9rem;
+    color: #34495e;
+    line-height: 1.6;
+}
+
+.command-card .card-text strong {
+    color: #2c3e50;
+}
+
+
+/* Bouton Details */
+
+.btn-gradient-primary {
+    background: linear-gradient(90deg, #3498db, #2980b9);
+    border: none;
+    border-radius: 20px;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    color: #fff;
+    transition: background 0.3s ease;
+}
+
+.btn-gradient-primary:hover {
+    background: linear-gradient(90deg, #2980b9, #1f618d);
+}
+
+
+/* Alerte d'erreur */
+
+.alert-danger {
+    border-radius: 5px;
+    padding: 15px;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+}
+
+.btn-outline-none {
+    border: none;
+}
+
+
+/* Modale */
+
+.modal {
+    z-index: 1055 !important;
+}
+
+.modal-backdrop {
+    z-index: 1050 !important;
+    opacity: 0.5 !important;
+}
+
+.modal-content {
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    z-index: 1060 !important;
+    background-color: #fff;
+}
+
+.modal-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.modal-title {
+    font-size: 1.4rem;
+    color: #2c3e50;
+}
+
+.modal-body {
+    max-height: 60vh;
+    overflow-y: auto;
+    padding: 20px;
+}
+
+.modal-footer {
+    border-top: 1px solid #e9ecef;
+}
+
+
+/* Tableau des détails */
+
+.table-details {
+    font-size: 0.9rem;
+    margin-bottom: 0;
+}
+
+.table-details td {
+    vertical-align: middle;
+    padding: 10px;
+}
+
+.table-details strong {
+    color: #2c3e50;
+}
+
+.table-details .badge {
+    font-size: 0.8rem;
+    padding: 5px 10px;
+    border-radius: 12px;
+}
+
+.badge-success {
+    background-color: #28a745;
+}
+
+.badge-warning {
+    background-color: #ffc107;
+}
+
+.badge-danger {
+    background-color: #dc3545;
+}
+
+
+/* Conteneur de la photo */
+
+.user-photo-container {
+    text-align: center;
+    padding: 10px;
+}
+
+
+/* Style de la photo utilisateur */
+
+.user-photo {
+    width: 120px;
+    /* Taille augmentée pour meilleure visibilité */
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%;
+    /* Rendre la photo circulaire */
+    border: 2px solid #e9ecef;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.user-photo:hover {
+    transform: scale(1.05);
+    /* Effet de zoom au survol */
+}
+
+
+/* Style pour l'image par défaut */
+
+.default-photo {
+    opacity: 0.7;
+    /* Légère transparence pour indiquer une image par défaut */
+    border: 2px dashed #6c757d;
+    /* Bordure en pointillés pour l'image par défaut */
+}
+
+
+/* Légende de la photo */
+
+.photo-caption {
+    display: block;
+    margin-top: 8px;
+    font-size: 0.8rem;
+    color: #6c757d;
+}
+
+
+/* Message de chargement */
+
+.text-center {
+    padding: 20px;
+}
+
+.text-muted {
+    font-size: 1rem;
+    color: #6c757d;
+}
+
+
+/* Responsive */
+
+@media (max-width: 768px) {
+    .page-title {
+        font-size: 1.5rem;
+    }
+    .card-title {
+        font-size: 1.3rem;
+    }
+    .command-card .card-text {
+        font-size: 0.85rem;
+    }
+    .modal-dialog {
+        margin: 10px;
+    }
+    .table-details {
+        font-size: 0.85rem;
+    }
+    .user-photo {
+        width: 80px;
+        height: 80px;
+    }
+    .photo-caption {
+        font-size: 0.75rem;
+    }
+}
+
+
+/*Boutons d'archivage et récupération */
+
+.archived-table-container {
+    max-width: 500px;
+    /* même largeur que tes cartes si elles font env. 800px */
+    margin: 0 auto;
+    /* pour centrer */
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-left: 50px;
+}
+
+.btn-gradient {
+    background: linear-gradient(135deg, #8e2de2, #4a00e0);
+    /* Dégradé violet */
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    font-weight: 600;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    box-shadow: 0px 4px 15px rgba(138, 43, 226, 0.4);
+}
+
+.btn-gradient:hover {
+    background: linear-gradient(135deg, #4a00e0, #8e2de2);
+    /* Inverse les couleurs au hover */
+    transform: translateY(-2px);
+    box-shadow: 0px 6px 20px rgba(138, 43, 226, 0.6);
+}
+
+.btn-gradient i {
+    margin-right: 6px;
+}
+
+.icon-btn {
+    position: fixed;
+    /* pour qu'il reste fixe au scroll */
+    top: 500px;
+    /* ajuste ici pour le mettre plus haut */
+    left: 300px;
+    /* ajuste ici pour l'aligner avec ta liste */
+    background-color: rgb(250, 250, 250);
+    border: none;
+    border-radius: 15%;
+    padding: 8px;
+    font-size: 24px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: color 0.3s ease;
+    width: 50px;
+    height: 50px;
+}
+
+.icon-btn:hover {
+    background: linear-gradient(135deg, #e271ca, #8e44ad);
+    color: white;
+    transition: all 0.3s ease-in-out;
+}
+
+.retrieve-btn {
+    background: linear-gradient(135deg, #8e44ad, #d2b4de);
+    /* violet doux -> violet clair */
+    border-radius: 50%;
+    padding: 10px 12px;
+    font-size: 14px;
+    color: white;
+    border: none;
+    transition: all 0.4s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.retrieve-btn:hover {
+    background: linear-gradient(135deg, #a569bd, #bb8fce);
+    transform: scale(1.1);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+}
+
+
+/* Bouton d'archivage */
+
+.btn-outline-warning {
+    background-color: #fa9d85;
+    /* Violet foncé */
+    color: white;
+    background-color: #fa9d85;
+    border-color: #f0a675;
+    /* Maintenir la même couleur pour la bordure */
+}
+
+
+/* Effet au survol du bouton d'archivage */
+
+.btn-outline-warning:hover {
+    background: linear-gradient(135deg, #c96147, #f36565);
+    /* Dégradé violet au survol */
+    color: white;
+    border: none;
+}
+
+
+/* Icône d'archivage (la rendre violette) */
+
+.btn-outline-warning .fas.fa-box-archive {
+    color: white;
+    /* Icône blanche par défaut */
+}
+
+.btn-outline-warning:hover .fas.fa-box-archive {
+    color: #fff;
+    /* Icône en blanc pendant le survol */
+}
+
+.page-title-icon.mdi-archive-outline {
+    color: #dfba97;
+    font-size: 30px;
+}
+
+.page-title-icon.mdi-archive-outline:hover {
+    color: #c7a4bf;
+}
+
+
+/* Supprimer le focus jaune sur tous les boutons */
+
+.btn-outline-warning:focus {
+    outline: none;
+    /* Retirer l'effet de focus */
+    box-shadow: none;
+    /* Retirer l'ombre autour du bouton */
+}
+
+
+/* Désactiver l'effet jaune lors du clic */
+
+.btn-outline-warning:active {
+    background-color: #ecda33;
+    /* Choisir une couleur violet clair */
+    border-color: #f0c348;
+    /* Pas de bordure jaune */
+    box-shadow: none;
+    /* Retirer toute ombre */
+}
+
+
+/* Empêcher l'effet de focus de s'afficher même si le bouton est sélectionné */
+
+.btn-outline-warning:focus-visible {
+    outline: none;
+    /* Aucun contour visible même quand il est sélectionné via le clavier */
+    box-shadow: none;
+    /* Pas d'ombre */
+}
+
+
+/* Lorsque le bouton est dans l'état "active", empêcher la couleur jaune */
+
+.btn-outline-warning:active,
+.btn-outline-warning:focus {
+    background-color: #8e44ad;
+    /* Dégradé violet personnalisé pour les deux états */
+    color: white;
+    /* Couleur du texte */
+    border-color: #8e44ad;
+    /* Garde la couleur violet clair au lieu de jaune */
+}
+
+
+/* Icône de fermeture positionnée à droite avec couleurs dynamiques */
+
+.close-archived-icon {
+    position: absolute;
+    top: 600px;
+    right: 10px;
+    font-size: 24px;
+    color: var(--primary);
+    /* Utilise la couleur principale définie dans :root */
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 9999;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.close-archived-icon:hover {
+    color: var(--danger);
+    /* Couleur de survol rouge (danger) */
+    transform: scale(1.1);
+}
+
+.close-archived-icon i {
+    font-size: 24px;
+    transition: transform 0.3s ease;
+}
+
+.close-archived-icon:hover i {
+    transform: rotate(15deg);
+}
+
+.btn-gradient-retrieve {
+    background: linear-gradient(135deg, #7f00ff, #e100ff);
+    /* Un autre dégradé violet pour différencier un peu */
+    border: none;
+    color: white;
+    padding: 6px 12px;
+    font-weight: 500;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    font-size: 14px;
+    box-shadow: 0px 3px 10px rgba(127, 0, 255, 0.4);
+    display: flex;
+    align-items: center;
+    margin-right: -500px;
+}
+
+.btn-gradient-retrieve:hover {
+    background: linear-gradient(135deg, #e100ff, #7f00ff);
+    transform: translateY(-2px);
+    box-shadow: 0px 5px 15px rgba(127, 0, 255, 0.6);
+}
+
+.btn-gradient-retrieve i {
+    margin-right: 5px;
+    font-size: 18px;
+}
+
+
+/* Ajout dans le fichier CSS du composant */
+
+.archive-button {
+    background-color: transparent;
+    border: none;
+    color: violet;
+    font-size: 24px;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.archive-button:hover {
+    color: darkviolet;
+}
+
+.commande {
+    position: relative;
+    margin: 20px 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.commande-details {
+    margin-top: 20px;
+    /* Ajoute d'autres styles si nécessaire */
+}
+
+
+/*sss*/
+
+.swal2-custom-popup {
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    padding: 1rem;
+}
+
+.swal2-actions {
+    display: flex !important;
+    visibility: visible !important;
+    margin-top: 1rem;
+}
+
+.swal2-actions-visible {
+    opacity: 1 !important;
+}
+
+.swal2-custom-button {
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    border: none;
+    color: white;
+}
+
+.swal2-custom-button.swal2-confirm {
+    background: linear-gradient(45deg, #2196f3, #3f51b5);
+}
+
+.swal2-custom-button.swal2-confirm:hover {
+    background: linear-gradient(45deg, #1976d2, #303f9f);
+}
+
+.swal2-custom-button.swal2-cancel {
+    background-color: #d33;
+}
+
+.swal2-custom-button.swal2-cancel:hover {
+    background-color: #b32d2d;
+}

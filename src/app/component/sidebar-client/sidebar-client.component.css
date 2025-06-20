@@ -1,0 +1,123 @@
+/* Styles pour la sidebar et l'icône des livreurs */
+.sidebar .nav .nav-item .nav-link.count-indicator {
+  display: flex;
+  align-items: center;
+  color: #ffffff; /* Texte blanc pour contraste */
+  transition: all 0.3s ease;
+}
+
+.sidebar .nav .nav-item .nav-link.count-indicator:hover {
+  background-color: #5a32a3; /* Violet foncé au survol */
+  color: #ffffff;
+}
+
+.sidebar .nav .nav-item .nav-link.count-indicator i.mdi-truck-delivery {
+  font-size: 1.5rem;
+  color: #f3e8ff; /* Violet clair pour l'icône */
+}
+
+/* Style pour le badge de notification (remplace bg-primary) */
+.count-symbol {
+  background-color: #6f42c1; /* Violet moyen pour le badge */
+  color: #ffffff;
+  border-radius: 50%;
+  padding: 0.2rem 0.5rem;
+  font-size: 0.8rem;
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  min-width: 1.2rem;
+  text-align: center;
+}
+
+/* Styles pour la bulle (dropdown) */
+.dropdown-menu {
+  background-color: #f3e8ff; /* Fond violet clair */
+  border: 1px solid #6f42c1; /* Bordure violette */
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  min-width: 250px;
+  max-width: 300px;
+  max-height: 400px; /* Hauteur maximale avec défilement */
+  overflow-y: auto; /* Défilement vertical */
+}
+
+/* Styles pour chaque élément de la liste */
+.dropdown-item {
+  background-color: #ffffff; /* Fond blanc pour chaque livreur */
+  border-radius: 10px;
+  padding: 12px;
+  margin: 5px;
+  border: 1px solid #e0d7f7; /* Bordure violette pastel */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: background-color 0.2s ease;
+  color: #5a32a3; /* Texte violet foncé */
+}
+
+.dropdown-item:hover {
+  background-color: #f9f9fc; /* Violet très clair au survol */
+  color: #5a32a3;
+}
+
+/* Style pour l'image du livreur */
+.dropdown-item img.rounded-circle {
+  width: 56px; /* Taille augmentée */
+  height: 56px;
+  border-radius: 50%;
+  border: 2px solid #c3b5f4; /* Bordure violette pastel */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  object-fit: cover;
+}
+
+/* Style pour le nom du livreur */
+.dropdown-item p.fw-bold {
+  font-size: 0.9rem;
+  color: #333; /* Noir doux */
+  margin-bottom: 4px;
+}
+
+/* Style pour le téléphone */
+.dropdown-item p.text-muted {
+  font-size: 0.8rem;
+  color: #666; /* Gris */
+  margin-bottom: 6px;
+}
+
+/* Style pour le bouton Contacter */
+.btn-outline-primary {
+  background-color: #c084fc; /* Violet pastel */
+  border-color: #c084fc;
+  color: #ffffff;
+  font-size: 0.75rem;
+  border-radius: 20px;
+  padding: 3px 10px;
+  transition: all 0.3s ease;
+}
+
+.btn-outline-primary:hover {
+  background-color: #a855f7; /* Violet plus foncé au survol */
+  border-color: #a855f7;
+  color: #ffffff;
+}
+
+/* Style pour la ligne de séparation */
+.dropdown-item hr {
+  border-top: 1px solid #6f42c1; /* Ligne violette */
+  margin: 0.5rem 0;
+}
+
+/* Style pour le texte de chargement ou absence de livreurs */
+.dropdown-item p {
+  color: #5a32a3; /* Violet foncé */
+  font-style: italic;
+}
+
+/* Style pour l'en-tête du dropdown (si utilisé) */
+.dropdown-header {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #6b21a8; /* Violet foncé pour accent */
+  border-bottom: 1px solid #ece8f9;
+  padding-bottom: 6px;
+  margin-bottom: 10px;
+}

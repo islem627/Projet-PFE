@@ -15,13 +15,17 @@ export class DetaisorderComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private service: AllmyservicesService , private router : Router) {}
 
-  ngOnInit(): void {
-    // Récupérer l'ID de la commande à partir de l'URL
+ngOnInit(): void {
     this.orderId = this.route.snapshot.paramMap.get('id');
-    if (this.orderId) {
-      this.getOrderDetails(this.orderId);  // Appel de la méthode pour récupérer les détails
+    console.log("ID récupéré depuis l'URL :", this.orderId);
+    if (this.orderId && this.orderId !== 'undefined') {
+        this.getOrderDetails(this.orderId);
+    } else {
+        Swal.fire('Erreur', 'ID de commande invalide ou manquant dans l\'URL', 'error');
+        this.router.navigate(['/orders']); // Rediriger vers la liste des commandes
     }
-  }
+}
+
 
   getOrderDetails(id: string) {
     this.service.Detailsdeorder(id).subscribe(
@@ -39,5 +43,8 @@ export class DetaisorderComponent implements OnInit {
         Swal.fire('Erreur', 'Une erreur est survenue lors de la récupération des détails', 'error');
       }
     );
+  }
+  goBack(): void {
+    this.router.navigate(['/orders']);
   }
 }

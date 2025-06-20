@@ -239,3 +239,117 @@ table td {
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
 }
 
+
+
+
+
+
+
+
+
+.availability-card {
+  max-width: 600px; /* Limite la largeur du card */
+  border-radius: 10px; /* Coins arrondis */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre légère */
+}
+
+.availability-card .card-body {
+  padding: 15px; /* Réduit le padding interne */
+}
+
+.availability-section {
+  display: flex;
+  align-items: center;
+  gap: 20px; /* Augmentation de l'espacement entre les éléments */
+  margin-bottom: 15px;
+}
+
+.availability-indicator {
+  display: flex;
+  align-items: center;
+  gap: 12px; /* Augmentation de l'espacement entre lampes et texte */
+}
+
+.lamp {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+.lamp-green {
+  background-color: #28a745;
+}
+
+.lamp-red {
+  background-color: #dc3545;
+}
+
+.lamp-active {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3), 0 0 15px currentColor;
+  opacity: 1;
+  animation: glow 1.5s infinite;
+}
+
+.lamp-inactive {
+  box-shadow: none;
+  opacity: 0.3;
+}
+
+@keyframes glow {
+  0% { box-shadow: 0 0 5px currentColor; }
+  50% { box-shadow: 0 0 15px currentColor; }
+  100% { box-shadow: 0 0 5px currentColor; }
+}
+
+.status-text {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.toggle-availability-btn {
+  padding: 8px 16px; /* Taille du bouton inchangée */
+  font-size: 15px; /* Taille du texte inchangée */
+  border-radius: 8px; /* Réduction du border-radius pour une forme plus rectangulaire */
+  transition: all 0.3s ease;
+}
+
+.toggle-availability-btn:hover {
+  transform: scale(1.05);
+}
+
+
+
+
+
+
+
+/* Add to livreur.component.css for SweetAlert2 styling */
+.swal-gradient-success {
+  background: linear-gradient(135deg, #2196F3, #21CBF3);
+  color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.swal-gradient-error {
+  background: linear-gradient(135deg, #f44336, #ff6b6b);
+  color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.swal-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.swal-text {
+  font-size: 1.1rem;
+}
+
+/* Ensure SweetAlert2 progress bar matches the theme */
+.swal2-progress-bar {
+  background-color: #fff !important;
+}

@@ -15,22 +15,20 @@
 Update Delivery Person
 
               </h3>
-              <!--
-              <nav aria-label="breadcrumb">
-                <ul class="breadcrumb">
-                  <li class="breadcrumb-item active" aria-current="page">
-                    Détails de l'utilisateur
-                  </li>
-                </ul>
-      
-              </nav>
-              -->
+ 
             </div>
   
+            
             <div class="col-lg-6 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <p class="card-description">{{ user.username }} {{ user.lastname }}</p>
+                  <p class="card-description">{{ livreur.username }} {{ livreur.lastname }}</p>
+  
+                  <!-- Alerte de succès -->
+                  <div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="showSuccessAlert" style="background-color: #c4b5fd; color: #1e1b4b;">
+                    <strong>Success, slaw!</strong> livreur information updated successfully.
+                    <button type="button" class="btn-close" (click)="hideAlert()" aria-label="Close"></button>
+                  </div>
   
                   <table class="table table-hover">
                     <thead>
@@ -40,70 +38,80 @@ Update Delivery Person
                       <!-- ID (lecture seule) -->
                       <tr>
                         <th>ID</th>
-                        <td>{{ user.id }}</td>
+                        <td>{{ livreur.id }}</td>
                         <td></td>
                       </tr>
   
                       <!-- Nom -->
                       <tr>
-                        <th>Username</th>
-                        <td #tdUsername (blur)="onBlur('username', tdUsername)">{{ user.username }}</td>
+                        <th>livreurname</th>
+                        <td #tdlivreurname (blur)="onBlur('livreurname', tdlivreurname)">{{ livreur.livreurname }}</td>
                         <td>
-                          <label class="badge badge-warning" (click)="startEditing('username', tdUsername)">Update</label>
+                          <i class="fas fa-edit" style="color: #a78bfa; cursor: pointer;" (click)="startEditing('livreurname', tdlivreurname)" title="Update"></i>
                         </td>
                       </tr>
   
                       <!-- Prénom -->
                       <tr>
                         <th>Firstname</th>
-                        <td #tdFirstname (blur)="onBlur('firstname', tdFirstname)">{{ user.firstname }}</td>
+                        <td #tdFirstname (blur)="onBlur('firstname', tdFirstname)">{{ livreur.firstname }}</td>
                         <td>
-                          <label class="badge badge-warning" (click)="startEditing('firstname', tdFirstname)">Update</label>
+                          <i class="fas fa-edit" style="color: #a78bfa; cursor: pointer;" (click)="startEditing('firstname', tdFirstname)" title="Update"></i>
                         </td>
                       </tr>
   
                       <!-- Nom de famille -->
                       <tr>
                         <th>Lastname</th>
-                        <td #tdLastname (blur)="onBlur('lastname', tdLastname)">{{ user.lastname }}</td>
+                        <td #tdLastname (blur)="onBlur('lastname', tdLastname)">{{ livreur.lastname }}</td>
                         <td>
-                          <label class="badge badge-warning" (click)="startEditing('lastname', tdLastname)">Update</label>
+                          <i class="fas fa-edit" style="color: #a78bfa; cursor: pointer;" (click)="startEditing('lastname', tdLastname)" title="Update"></i>
                         </td>
                       </tr>
   
                       <!-- Email -->
                       <tr>
                         <th>Email</th>
-                        <td #tdEmail (blur)="onBlur('email', tdEmail)">{{ user.email }}</td>
+                        <td #tdEmail (blur)="onBlur('email', tdEmail)">{{ livreur.email }}</td>
                         <td>
-                          <label class="badge badge-warning" (click)="startEditing('email', tdEmail)">Update</label>
+                          <i class="fas fa-edit" style="color: #a78bfa; cursor: pointer;" (click)="startEditing('email', tdEmail)" title="Update"></i>
                         </td>
                       </tr>
   
                       <!-- Téléphone -->
                       <tr>
                         <th>Phone</th>
-                        <td #tdPhone (blur)="onBlur('phone', tdPhone)">{{ user.phone }}</td>
+                        <td #tdPhone (blur)="onBlur('phone', tdPhone)">{{ livreur.phone }}</td>
+                       
                         <td>
-                          <label class="badge badge-warning" (click)="startEditing('phone', tdPhone)">Update</label>
+                          <i class="fas fa-edit" style="color: #a78bfa; cursor: pointer;" (click)="startEditing('phone', tdPhone)" title="Update"></i>
                         </td>
                       </tr>
   
                       <!-- Adresse -->
                       <tr>
-                        <th>Adress</th>
-                        <td #tdAddress (blur)="onBlur('address', tdAddress)">{{ user.address }}</td>
+                        <th>Address</th>
+                        <td #tdAddress (blur)="onBlur('address', tdAddress)">{{ livreur.address }}</td>
                         <td>
-                          <label class="badge badge-warning" (click)="startEditing('address', tdAddress)">Update</label>
+                          <i class="fas fa-edit" style="color: #a78bfa; cursor: pointer;" (click)="startEditing('address', tdAddress)" title="Update"></i>
+                        </td>
+                      </tr>
+  
+                      <!-- Gouvernorat -->
+                      <tr>
+                        <th>Gouvernorat</th>
+                        <td #tdGouvernorat (blur)="onBlur('gouvernorat', tdGouvernorat)">{{ livreur.gouvernorat }}</td>
+                        <td>
+                          <i class="fas fa-edit" style="color: #a78bfa; cursor: pointer;" (click)="startEditing('gouvernorat', tdGouvernorat)" title="Update"></i>
                         </td>
                       </tr>
   
                       <!-- Type -->
                       <tr>
                         <th>Role</th>
-                        <td #tdRole (blur)="onBlur('role', tdRole)">{{ user.role }}</td>
+                        <td #tdRole (blur)="onBlur('role', tdRole)">{{ livreur.role }}</td>
                         <td>
-                          <label class="badge badge-warning" (click)="startEditing('role', tdRole)">Update</label>
+                          <i class="fas fa-edit" style="color: #a78bfa; cursor: pointer;" (click)="startEditing('role', tdRole)" title="Update"></i>
                         </td>
                       </tr>
   
@@ -111,22 +119,21 @@ Update Delivery Person
                       <tr>
                         <th>Photo</th>
                         <td>
-
-
-                          <img [src]="'http://localhost:8762/User/files/' + user.photo" alt="avatar" style="width:100px; height:100px;"  class="me-2" alt="image">
+                          <img [src]="'http://localhost:8762/User/files/' + livreur.photo" alt="avatar" style="width:100px; height:100px;" class="me-2" alt="image">
                           <input type="file" #fileInput style="display: none;" (change)="onPhotoSelected($event)" />
                         </td>
                         <td>
-                          <label class="badge badge-warning" (click)="fileInput.click()">Update</label>
+                          <i class="fas fa-edit" style="color: #a78bfa; cursor: pointer;" (click)="fileInput.click()" title="Update"></i>
                         </td>
                       </tr>
                     </tbody>
                   </table>
-  
-                  <div class="mt-3">
-                    <button class="btn btn-gradient-primary" (click)="submitAll()">Submit</button>
-                    <button class="btn btn-outline-danger" (click)="cancelChanges()">Cancel</button>
+                  <div class="button-group">
+                    <button class="btn btn-violet-primary" (click)="submitAll()">Submit</button>
+                    <button class="btn btn-violet-outline" (click)="cancelChanges()">Cancel</button>
                   </div>
+  
+                  <div class="mt-3"></div>
                 </div>
               </div>
             </div>
@@ -135,5 +142,4 @@ Update Delivery Person
       </div>
       <app-footer></app-footer>
     </div>
-  </body>
-  
+</body>

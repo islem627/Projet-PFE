@@ -161,21 +161,25 @@ export class WebSocketServiceeService {
 }*/
 
 
+
+
 import { Injectable } from '@angular/core';
 import { Client, IMessage } from '@stomp/stompjs';
 import SockJS from 'sockjs-client';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 export interface OrderUpdate {
-  orderId: string;
+  orderId: number;
   status: string;
   articelCommande?: string;
   adresseLivraison?: string;
   dateCommande?: string;
+  CommandeDto:any;
+
 }
 
 @Injectable({ providedIn: 'root' })
-export class WebSocketService {
+export class WebSocketServiceeService {
   private stompClient: Client | null = null;
   private notificationsSubject = new BehaviorSubject<OrderUpdate[]>([]);
   notifications$: Observable<OrderUpdate[]> = this.notificationsSubject.asObservable();

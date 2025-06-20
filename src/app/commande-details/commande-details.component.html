@@ -1,0 +1,221 @@
+<body>
+  <div class="container-scroller">
+    <app-header></app-header>
+    <br><br><br>
+    <div class="container-fluid page-body-wrapper">
+      <app-sidebar></app-sidebar>
+      <div class="main-panel">
+        <div class="content-wrapper">
+          <div class="page-header">
+            <h3 class="page-title">
+              <span class="page-title-icon bg-gradient-primary text-white me-2">
+                <i class="mdi mdi-receipt"></i>
+              </span> Order Details
+            </h3>
+            <nav aria-label="breadcrumb">
+              <ul class="breadcrumb">
+                <li class="breadcrumb-item active" aria-current="page"></li>
+              </ul>
+            </nav>
+          </div>
+
+          <div class="row">
+            <div class="col-12 grid-margin">
+              <div class="card">
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <div class="card">
+                      <div class="card-body">
+                        <p class="card-description"></p>
+                        <table class="table table-striped" *ngIf="commande && !loading">
+                          <tbody>
+                            <tr>
+                              <td><strong>Order ID</strong></td>
+                              <td>{{ commande.id_commande }}</td>
+                            </tr>
+                            <tr>
+                              <td><strong>Order Date</strong></td>
+                              <td>{{ commande.dateCommande }}</td>
+                            </tr>
+                            <tr>
+                              <td><strong>Status</strong></td>
+                              <td>{{ commande.statut_commande }}</td>
+                            </tr>
+                            <tr>
+                              <td><strong>Delivery Address</strong></td>
+                              <td>{{ commande.adresse_livraison }}</td>
+                            </tr>
+                            <tr>
+                              <td><strong>Total</strong></td>
+                              <td>{{ commande.total }} TND</td>
+                            </tr>
+                            <tr>
+                              <td><strong>Discount</strong></td>
+                              <td>{{ commande.remise }} TND</td>
+                            </tr>
+                            <tr>
+                              <td><strong>Delivery Fee</strong></td>
+                              <td>{{ commande.fraisLivraison ?? 'N/A' }} TND</td>
+                            </tr>
+                            <tr>
+                              <td><strong>Ordered Item</strong></td>
+                              <td>{{ commande.articel_commande ?? 'N/A' }}</td>
+                            </tr>
+                            <tr>
+                              <td><strong>Estimated Delivery Date</strong></td>
+                              <td>{{ commande.date_livraison_estimee ?? 'N/A' }}</td>
+                            </tr>
+                            <tr>
+                              <td><strong>Comments</strong></td>
+                              <td>{{ commande.commentaires ?? 'None' }}</td>
+                            </tr>
+                            <tr>
+                              <td><strong>Paid</strong></td>
+                              <td>{{ commande.isPaid ? 'Yes' : 'No' }}</td>
+                            </tr>
+                            <tr>
+                              <td><strong>Latitude</strong></td>
+                              <td>{{ commande.latitude ?? 'N/A' }}</td>
+                            </tr>
+                            <tr>
+                              <td><strong>Longitude</strong></td>
+                              <td>{{ commande.longitude ?? 'N/A' }}</td>
+                            </tr>
+                            <tr>
+                              <td><strong>Governorate</strong></td>
+                              <td>{{ commande.gouvernoratCmd ?? 'N/A' }}</td>
+                            </tr>
+                            <tr>
+                              <td><strong>Delivery Person ID</strong></td>
+                              <td>{{ commande.livreurId ?? 'N/A' }}</td>
+                            </tr>
+                            <tr>
+                              <td><strong>System Entry Date</strong></td>
+                              <td>{{ commande.date_ajoutsystem ?? 'N/A' }}</td>
+                            </tr>
+                            <tr>
+                              <td><strong>Assignment Date</strong></td>
+                              <td>{{ commande.date_affection ?? 'N/A' }}</td>
+                            </tr>
+                            <tr>
+                              <td><strong>Shipping Date</strong></td>
+                              <td>{{ commande.date_expidetion ?? 'N/A' }}</td>
+                            </tr>
+                            <tr>
+                              <td><strong>Delivered Date</strong></td>
+                              <td>{{ commande.date_livree ?? 'N/A' }}</td>
+                            </tr>
+                            <tr>
+                              <td><strong>Store</strong></td>
+                              <td>{{ commande.enseigne ?? 'N/A' }}</td>
+                            </tr>
+                            <tr>
+                              <td><strong>Store Destination</strong></td>
+                              <td>{{ commande.destination_enseigne ?? 'N/A' }}</td>
+                            </tr>
+                            <tr>
+                              <td><strong>Weight (grams)</strong></td>
+                              <td>{{ commande.poids_grammes ?? 'N/A' }}</td>
+                            </tr>
+                            <tr>
+                              <td><strong>Height (cm)</strong></td>
+                              <td>{{ commande.hauteur_cm ?? 'N/A' }}</td>
+                            </tr>
+                            <tr>
+                              <td><strong>Width (cm)</strong></td>
+                              <td>{{ commande.largeur_cm ?? 'N/A' }}</td>
+                            </tr>
+                            <tr>
+                              <td><strong>Length (cm)</strong></td>
+                              <td>{{ commande.longueur_cm ?? 'N/A' }}</td>
+                            </tr>
+                            <tr>
+                              <td><strong>Archived</strong></td>
+                              <td>{{ commande.archived ? 'Yes' : 'No' }}</td>
+                            </tr>
+                            <tr>
+                              <td><strong>Client Comment</strong></td>
+                              <td>{{ commande.commentaireClient ?? 'None' }}</td>
+                            </tr>
+                            <tr>
+                              <td><strong>Client Rating</strong></td>
+                              <td>{{ commande.noteClient ?? 'N/A' }}</td>
+                            </tr>
+                            <tr>
+                              <td><strong>Partner ID</strong></td>
+                              <td>{{ commande.idpartenaire ?? 'N/A' }}</td>
+                            </tr>
+                            <tr>
+                              <td><strong>Fixed Time</strong></td>
+                              <td>{{ commande.fixe_temps ?? 'N/A' }}</td>
+                            </tr>
+                            <tr>
+                              <td><strong>User ID</strong></td>
+                              <td>{{ commande.iduser ?? 'N/A' }}</td>
+                            </tr>
+                            <!-- User Details (One Field Per Row) -->
+                            <tr *ngIf="commande.userDTO; else noUser">
+                              <td><strong>User First Name</strong></td>
+                              <td>{{ commande.userDTO.firstname ?? 'N/A' }}</td>
+                            </tr>
+                            <tr *ngIf="commande.userDTO">
+                              <td><strong>User Last Name</strong></td>
+                              <td>{{ commande.userDTO.lastname ?? 'N/A' }}</td>
+                            </tr>
+                            <tr *ngIf="commande.userDTO">
+                              <td><strong>User Email</strong></td>
+                              <td>{{ commande.userDTO.email ?? 'N/A' }}</td>
+                            </tr>
+                            <tr *ngIf="commande.userDTO">
+                              <td><strong>User Phone</strong></td>
+                              <td>{{ commande.userDTO.phone ?? 'N/A' }}</td>
+                            </tr>
+                            <tr *ngIf="commande.userDTO">
+                              <td><strong>User Address</strong></td>
+                              <td>{{ commande.userDTO.address ?? 'N/A' }}</td>
+                            </tr>
+                            <tr *ngIf="commande.userDTO">
+                              <td><strong>User Role</strong></td>
+                              <td>{{ commande.userDTO.role ?? 'N/A' }}</td>
+                            </tr>
+                            <tr *ngIf="commande.userDTO">
+                              <td><strong>User Governorate</strong></td>
+                              <td>{{ commande.userDTO.gouvernorat ?? 'N/A' }}</td>
+                            </tr>
+                            <tr *ngIf="commande.userDTO && commande.userDTO.photo">
+                              <td><strong>User Photo</strong></td>
+                              <td>
+                                <img
+                                  [src]="'http://localhost:8762/User/files/' + commande.userDTO.photo"
+                                  alt="User Photo"
+                                  style="width: 100px; height: 100px;"
+                                />
+                              </td>
+                            </tr>
+                            <ng-template #noUser>
+                              <tr>
+                                <td><strong>User Details</strong></td>
+                                <td>Non disponible (Utilisateur non trouvé ou ID manquant)</td>
+                              </tr>
+                            </ng-template>
+                          </tbody>
+                        </table>
+                        <div *ngIf="loading" class="text-center">
+                          <p>Loading...</p>
+                        </div>
+                        <div *ngIf="error" class="alert alert-danger">
+                          {{ error }}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <app-footer></app-footer>
+      </div>
+    </div>
+  </div>
+</body>

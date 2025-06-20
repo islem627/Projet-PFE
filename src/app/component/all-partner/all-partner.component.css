@@ -1,0 +1,68 @@
+.add-user-button {
+ 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #b388ff, #e1bee7);
+  color: white;
+  border: none;
+  margin-left: 1100px;
+  border-radius: 30px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease;
+  z-index: 9999; /* Très haut pour qu’il reste visible */
+}
+
+.add-user-button:hover {
+  background-color: #7b1fa2 !important;
+}
+
+.add-user-button .icon {
+  font-size: 20px;
+  margin-right: 8px;
+  color: white;
+}
+
+
+
+/* Style des boutons de statut */
+.status-buttons {
+    margin-bottom: 20px;
+  }
+  
+  .status-buttons button {
+    margin: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+  }
+  
+  
+
+  button {
+    padding: 10px 15px;
+    margin-top: 10px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+ 
+  
+
+ 
+  
+  .notification-item {
+    background-color: #f4f4f4;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 5px 0;
+  }
+
+
+.action-btn {
+  margin-right: 8px; /* espace entre les boutons */
+}
+
+

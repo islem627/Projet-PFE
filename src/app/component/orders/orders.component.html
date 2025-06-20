@@ -24,9 +24,8 @@
               <ul class="breadcrumb">
                 <li class="breadcrumb-item active" aria-current="page">
                   <div style="
-                    display: flex;
+                     display: flex;
                     align-items: center;
-                    background-color: #caafd26e; /* Violet pastel foncé */
                     border-radius: 12px;
                     padding: 6px 10px;
                     box-shadow: 0 2px 6px rgba(218, 161, 230, 0.742);
@@ -85,6 +84,7 @@
                           <th>Total</th>
                           <th>Discount</th>
 
+
                         </tr>
                       </thead>
                       <tbody>
@@ -94,18 +94,20 @@
                           <td>    {{o.statut_commande}}   </td>
                           <td> {{o.adresse_livraison}} </td>
                           <td> {{o.remise}} </td>
+
                           <td>
 <button type="button" 
-class="btn-circle btn-gradient-primary btn-rounded action-btn" 
-(click)="detailsorder(o.id)">
-<i class="mdi mdi-eye-outline text-white" style="cursor: pointer;"></i>
+        class="btn-circle btn-gradient-primary btn-rounded action-btn" 
+        (click)="detailsorder(o.id_commande)">
+    <i class="mdi mdi-eye-outline text-white" style="cursor: pointer;"></i>
 </button>
 
 <button type="button" 
 class="btn-circle btn-gradient-success btn-rounded action-btn" 
-(click)="updateorder(o.id)">
+(click)="updateorder(o.id_commande)">
 <i class="mdi mdi-pencil-outline text-white" style="cursor: pointer;"></i>
 </button>
+
 
 <button type="button" 
 class="btn-circle btn-gradient-danger btn-rounded action-btn" 
@@ -120,33 +122,15 @@ class="btn-circle btn-gradient-danger btn-rounded action-btn"
                  </tbody>
                </table>
                <pagination-controls (pageChange)="c=$event"></pagination-controls>
-               <button type="button"
-               class="btn-gradient-danger btn-rounded btn-fw add-order-button"
-               (click)="addorder()"
-               style="
-                 position: fixed;
-                 bottom: 200px; /* Distance from the bottom of the viewport */
-                 right: 90px;  /* Distance from the right of the viewport */
-                 display: flex;
-                 align-items: center;
-                 justify-content: center;
-                 background: linear-gradient(135deg, #b388ff, #e1bee7);
-                 color: white;
-                 border: none;
-                 padding: 8px 16px;
-                 border-radius: 25px;
-                 cursor: pointer;
-                 transition: background-color 0.3s ease;
-               "
-               onmouseover="this.style.backgroundColor='#7b1fa2'" 
-               onmouseout="this.style.backgroundColor='#9c4dcc'">
-         
-         <!-- Icon for adding order -->
-         <i class="mdi mdi-cart-plus" style="font-size: 20px; margin-right: 8px; color: white;"></i>
-         
-         <!-- Button Text -->
-         Add Order
-       </button>
+     
+       <button
+  type="button"
+  class="add-user-button"
+  (click)="addorder()"
+>
+  <i class="mdi mdi-account-plus icon"></i>
+  Add Order
+</button>
        
                
              </div>

@@ -25,7 +25,6 @@
                   <div style="
                     display: flex;
                     align-items: center;
-                    background-color: #caafd26e; /* Violet pastel foncé */
                     border-radius: 12px;
                     padding: 6px 10px;
                     box-shadow: 0 2px 6px rgba(218, 161, 230, 0.742);
@@ -89,7 +88,7 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr *ngFor="let u of listusers |paginate:{itemsPerPage:3,currentPage:c};">
+                        <tr *ngFor="let u of listusers |paginate:{itemsPerPage:6,currentPage:c};">
                           <td>{{u.id}}</td>
                       
                           <td>
@@ -132,37 +131,15 @@ class="btn-circle btn-gradient-danger btn-rounded action-btn"
 
                     </table>
                     <pagination-controls (pageChange)="c=$event"></pagination-controls>
-
-                    <!-- Add User Button -->
-                    <button type="button"
-                    class="btn-gradient-danger btn-rounded btn-fw add-user-button"
-                    (click)="ajouteruser()"
-                    style="
-                      position: fixed;
-                      bottom: 200px; /* Distance from the bottom of the viewport */
-                      right: 90px;  /* Distance from the right of the viewport */
-                      display: flex;
-                      align-items: center;
-                      justify-content: center;
-                      background: linear-gradient(135deg, #b388ff, #e1bee7);
-                      color: white;
-                      border: none;
-                      padding: 8px 16px;
-                      border-radius: 25px;
-                      cursor: pointer;
-                      transition: background-color 0.3s ease;
-                    "
-                    onmouseover="this.style.backgroundColor='#7b1fa2'" 
-                    onmouseout="this.style.backgroundColor='#9c4dcc'">
-            
-              <!-- Icon for adding user -->
-              <i class="mdi mdi-account-plus" style="font-size: 20px; margin-right: 8px; color: white;"></i>
-            
-              <!-- Button Text -->
-              Add User
-            </button>
-            
-                    
+<button
+  type="button"
+  class="add-user-button"
+  (click)="ajouteruser()"
+>
+  <i class="mdi mdi-account-plus icon"></i>
+  Add User
+</button>
+              
                     </div>
                     </div>
                     </div>

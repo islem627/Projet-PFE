@@ -3,7 +3,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { OrderUpdate } from 'src/app/models/OrderUpdate';
 import { Commande, OrderService } from 'src/app/services/order-service.service';
-import { Websocket30Service } from 'src/app/services/websocket30.service';
+
 
 @Component({
   selector: 'app-delivery',
@@ -20,19 +20,13 @@ export class DeliveryComponent implements OnInit, OnDestroy {
 
   constructor(
     private orderService: OrderService,
-    private websocketService: Websocket30Service
+
   ) {}
 
   ngOnInit(): void {
     this.loadOrders();
     const userId = 60; // Pour tester les notifications côté client
-    this.websocketService.connect(userId);
-    this.subscription.add(
-      this.websocketService.notifications$.subscribe((notification) => {
-        this.notifications.push(notification);
-        console.log('Nouvelle notification :', notification);
-      })
-    );
+  
   }
 
   loadOrders(): void {
@@ -69,7 +63,7 @@ export class DeliveryComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.websocketService.disconnect();
+  
     this.subscription.unsubscribe();
   }
 }

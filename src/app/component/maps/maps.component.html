@@ -1,0 +1,31 @@
+<h1>Delivery Tracker</h1>
+<div *ngIf="location">
+  <p>Livreur ID: {{ livreurId }}</p>
+  <p>Position: {{ location.latitude }}, {{ location.longitude }}</p>
+</div>
+<div *ngIf="route.length > 0">
+  <h2>Itinéraire optimisé</h2>
+  <ul>
+    <li *ngFor="let point of route; let i = index">
+      Point {{ i + 1 }}: {{ point.adresse }} ({{ point.latitude }}, {{ point.longitude }})
+      - Statut: {{ point.statut }} - Livraison estimée: {{ point.dateLivraisonEstimee }}
+    </li>
+  </ul>
+</div>
+<google-map
+  height="500px"
+  width="100%"
+  [center]="center"
+  [zoom]="zoom">
+  <map-marker
+    *ngFor="let marker of markers"
+    [position]="marker.position"
+    [label]="marker.label"
+    [title]="marker.title"
+    [icon]="marker.icon">
+  </map-marker>
+  <map-polyline
+    [path]="getPolylinePath()"
+    [options]="polylineOptions">
+  </map-polyline>
+</google-map>

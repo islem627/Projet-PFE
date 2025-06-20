@@ -1,29 +1,152 @@
-<div class="container mt-4">
-    <h2>📤 Envoyer une mise à jour de commande au client</h2>
-  
-    <form (ngSubmit)="envoyerNotification()" #formNotif="ngForm">
-      <div class="form-group">
-        <label for="clientId">ID du client</label>
-        <input type="text" class="form-control" id="clientId" [(ngModel)]="clientId" name="clientId" required>
-      </div>
-  
-      <div class="form-group mt-2">
-        <label for="orderId">ID de la commande</label>
-        <input type="text" class="form-control" id="orderId" [(ngModel)]="orderId" name="orderId" required>
-      </div>
-  
-      <div class="form-group mt-2">
-        <label for="status">Statut</label>
-        <select class="form-control" id="status" [(ngModel)]="status" name="status" required>
-          <option value="en préparation">En préparation</option>
-          <option value="en cours de livraison">En cours de livraison</option>
-          <option value="livrée">Livrée</option>
-        </select>
-      </div>
-  
-      <button type="submit" class="btn btn-primary mt-3">Envoyer</button>
-    </form>
-  
-    <p class="mt-3 text-success" *ngIf="notificationEnvoyee">✅ Notification envoyée !</p>
-  </div>
-  
+<body>
+  <div class="container-scroller">
+   
+    <!-- partial:partials/_navbar.html -->
+     <app-header></app-header>
+
+    <br><br><br>
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+      <!-- partial:partials/_sidebar.html -->
+     <app-sidebar></app-sidebar>
+      <!-- partial -->
+      <div class="main-panel">
+        <div class="content-wrapper">
+          <div class="page-header">
+            <h3 class="page-title">
+              <span class="page-title-icon bg-gradient-primary text-white me-2">
+                <i class="mdi mdi-account-multiple"></i>
+              </span>
+              Users List            
+            </h3>
+            <nav aria-label="breadcrumb">
+              <ul class="breadcrumb">
+                <li class="breadcrumb-item active" aria-current="page">
+                  <div style="
+                    display: flex;
+                    align-items: center;
+                    border-radius: 12px;
+                    padding: 6px 10px;
+                    box-shadow: 0 2px 6px rgba(218, 161, 230, 0.742);
+                    width: fit-content;
+                    gap: 8px;
+                  ">
+                    <input type="text"
+                           [(ngModel)]="searchText"
+                           placeholder="Search User by Username..."
+                           style="
+                             border: none;
+                             background: linear-gradient(135deg, #b388ff, #e1bee7);
+                             border-radius: 8px;
+                             outline: none;
+                             padding: 8px 10px;
+                             color: white;
+                             font-size: 14px;
+                             width: 180px;
+                           "/>
+                
+                    <button (click)="search()"
+                            style="
+                             background: linear-gradient(135deg, #b388ff, #e1bee7);
+                             border: none;
+                              border-radius: 50%;
+                              width: 36px;
+                              height: 36px;
+                              display: flex;
+                              align-items: center;
+                              justify-content: center;
+                              cursor: pointer;
+                              transition: background-color 0.3s ease;
+                            "
+                            onmouseover="this.style.backgroundColor='#6a1b9a'"
+                            onmouseout="this.style.backgroundColor='#8e24aa'">
+                      <i class="mdi mdi-magnify" style="color: white; font-size: 20px;"></i>
+                    </button>
+                  </div>
+                </li>
+              </ul>
+            </nav>
+          </div>
+       
+          <div class="row">
+            <div class="col-12 grid-margin">
+              <div class="card">
+                <div class="card-body">
+              
+                  <div class="table-responsive">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th>ID</th>
+                          <th>Photo</th>
+                          <th> Username </th>
+                          <th> Email </th>
+                          <th> Phone </th>
+                          <th> Adress </th>
+                          <th> Role </th>
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let u of listusers |paginate:{itemsPerPage:6,currentPage:c};">
+                          <td>{{u.id}}</td>
+                      
+                          <td>
+                            <img [src]="'http://localhost:8762/User/files/' + u.photo" class="me-2" alt="image">
+                          </td>
+                          <td> {{u.username}}</td>
+                          
+                          <td> {{u.email}}</td>
+                          <td> {{u.phone}}</td> 
+                          <td> {{u.address}} </td>
+                          <td> {{u.role}} </td>
+                          <td>
+                                    <!-- Détails Livreur -->
+<button type="button" 
+class="btn-circle btn-gradient-primary btn-rounded  action-btn" 
+(click)="detailsuser(u.id)">
+<i class="mdi mdi-account-search-outline text-white" style="cursor: pointer;"></i>
+</button>
+
+<!-- Modifier Livreur -->
+<button type="button" 
+class="btn-circle btn-gradient-success btn-rounded  action-btn" 
+(click)="updateuser(u.id)">
+<i class="mdi mdi-account-edit-outline" style="cursor: pointer;"></i>
+</button>
+
+<!-- Supprimer Livreur -->
+<button type="button"
+class="btn-circle btn-gradient-danger btn-rounded action-btn" 
+(click)="deleteuser(u.id)">
+<i class="mdi mdi-account-remove-outline text-white" style="cursor: pointer;"></i>
+</button>
+
+
+
+                          </td>
+                        </tr>
+                        
+                      </tbody>
+
+                    </table>
+                    <pagination-controls (pageChange)="c=$event"></pagination-controls>
+<button
+  type="button"
+  class="add-user-button"
+  (click)="ajouteruser()"
+>
+  <i class="mdi mdi-account-plus icon"></i>
+  Add User
+</button>
+              
+                    </div>
+                    </div>
+                    </div>
+                    </div>
+                    </div>
+                    </div>
+                    
+ 
+
+

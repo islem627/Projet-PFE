@@ -1,0 +1,86 @@
+/* Conteneur principal */
+.delivery-container {
+  background-color: white; /* Violet très clair */
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(149, 117, 205, 0.2); /* Violet foncé ombré */
+  max-width: 850px;
+  margin: auto;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+
+
+/* Grille */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+}
+
+/* Champs de formulaire */
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #6a1b9a;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+input, select {
+  padding: 10px;
+  border: 1px solid #d1c4e9;
+  border-radius: 6px;
+  background-color: #ffffff;
+  transition: border 0.3s;
+}
+
+input:focus, select:focus {
+  border-color: #9575cd;
+  outline: none;
+}
+
+/* Message d'erreur */
+.error-message {
+  color: #d32f2f;
+  font-size: 13px;
+  margin-top: 5px;
+}
+
+/* Bouton */
+.submit-btn {
+  margin-top: 30px;
+  padding: 12px 24px;
+  background: #9575cd;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background 0.3s ease-in-out;
+}
+
+.submit-btn:hover {
+  background: #7e57c2;
+}
+
+.submit-btn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+}

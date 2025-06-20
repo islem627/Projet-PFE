@@ -1,0 +1,43 @@
+<nav class="sidebar sidebar-offcanvas" id="sidebar">
+  <ul class="nav">
+    <li class="nav-item">
+      <a class="nav-link animated-link" routerLink="/itinerary">
+        <span class="menu-title">Itinerary</span>
+        <i class="mdi mdi-directions menu-icon"></i>
+      </a>
+    </li>
+    <!-- Élément pour Contacter, stylisé comme Itinerary -->
+    <li class="nav-item ">
+      <a class="nav-link animated-link dropdown-toggle" id="messageDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <span class="menu-title">Contacter</span>
+        <i class="mdi mdi-message-processing menu-icon"></i>
+        <span class="count-symbol" *ngIf="unreadCount > 0">{{ unreadCount }}</span>
+      </a>
+      <div class="dropdown-menu dropdown-menu-end" aria-labelledby="messageDropdown">
+        <div id="clientList" class="dropdown-item">
+          <!-- Chargement en cours -->
+          <ng-container *ngIf="loading">
+            <p class="dropdown-item">Chargement...</p>
+          </ng-container>
+          <!-- Aucun client -->
+          <ng-container *ngIf="!loading && clients.length === 0">
+            <p class="dropdown-item">Aucun client à afficher</p>
+          </ng-container>
+          <!-- Liste des clients -->
+          <div *ngFor="let client of clients" class="dropdown-item">
+            <div class="d-flex align-items-center">
+              <img [src]="'http://localhost:8762/User/files/' + (client.photo || 'default-image.jpg')"
+                   class="me-2 rounded-circle" alt="client" width="40" height="40">
+              <div class="ms-2">
+                <p class="mb-0 fw-bold">{{ client.firstname }} {{ client.lastname }}</p>
+                <p class="mb-0 small text-muted">Téléphone: {{ client.phone }}</p>
+                <a [routerLink]="['/chat', client.id]" class="btn btn-sm btn-outline-warning mt-1">Contacter</a>
+              </div>
+            </div>
+            <hr class="my-2">
+          </div>
+        </div>
+      </div>
+    </li>
+  </ul>
+</nav>

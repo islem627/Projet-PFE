@@ -1,125 +1,238 @@
-<body>
-    <div class="container-scroller">
-     
-      <!-- partial:partials/_navbar.html -->
-    <app-header></app-header>
-    <br><br><br>
-      <!-- partial -->
-      <div class="container-fluid page-body-wrapper">
-        <!-- partial:partials/_sidebar.html -->
-       <app-sidebar></app-sidebar>
-        <!-- partial -->
-        <div class="main-panel">
-          <div class="content-wrapper">
-            <div class="page-header">
-              <h3 class="page-title">
-                <span class="page-title-icon bg-gradient-primary text-white me-2">
-                  <i class="mdi mdi-cart-outline"></i>
-                </span>
-                Interface
-                
-              </h3>
-             
+
+<div class="LUT-scroller">
+        <app-headerclient></app-headerclient>
+  <br><br><br>
+  <div class="container-fluid page-body-wrapper">
+    <app-sidebar-partner></app-sidebar-partner>
+    <div class="main-panel">
+      <div class="content-wrapper">
+        <div class="page-header">
+          <h3 class="page-title">
+            <span class="page-title-icon bg-gradient-primary text-white me-2">
+              <i class="mdi mdi-cart-outline"></i>
+            </span>
+            Interface
+          </h3>
+        </div>
+        <div class="container">
+          <h2 class="text-2xl font-bold text-center text-purple-800 mb-6">Create an Order</h2>
+          
+          <!-- Main Form -->
+          <form [formGroup]="orderForm" (ngSubmit)="onNext()" *ngIf="!showDeliveryOptions">
+            <!-- Order Date -->
+            <div class="form-group">
+              <label for="dateCommande">Order Date</label>
+              <input type="date" id="dateCommande" formControlName="dateCommande" class="form-control">
+              <div *ngIf="orderForm.get('dateCommande')?.invalid && orderForm.get('dateCommande')?.touched" class="text-danger">
+                Order date is required
+              </div>
             </div>
-        
-         
-        
-            <div class="form-container bg-white p-8 rounded-xl shadow-lg w-full max-w-2xl">
-              <h2 class="text-2xl font-bold text-center text-purple-800 mb-6">Créer une Commande</h2>
-              <form [formGroup]="commandeForm" (ngSubmit)="onSubmit()" class="space-y-4">
-                <div>
-                  <label for="dateCommande" class="block text-sm font-medium text-purple-700">Date de Commande</label>
-                  <input type="date" id="dateCommande" formControlName="dateCommande" required
-                         class="mt-1 block w-full p-2 border border-purple-200 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-400">
-                  <div *ngIf="commandeForm.get('dateCommande')?.invalid && commandeForm.get('dateCommande')?.touched"
-                       class="text-red-500 text-sm">Date de commande requise</div>
+
+            <!-- Delivery Address -->
+            <div class="form-group">
+              <label for="adresse_livraison">Delivery Address</label>
+              <input type="text" id="adresse_livraison" formControlName="adresse_livraison" class="form-control" placeholder="Delivery Address">
+              <div *ngIf="orderForm.get('adresse_livraison')?.invalid && orderForm.get('adresse_livraison')?.touched" class="text-danger">
+                Delivery address is required
+              </div>
+            </div>
+
+            
+            <!-- Total -->
+            <div class="form-group">
+              <label for="total">Total (DNT)</label>
+              <input type="number" id="total" formControlName="total" class="form-control" step="0.01" min="0" placeholder="Total (DNT)">
+              <div *ngIf="orderForm.get('total')?.invalid && orderForm.get('total')?.touched" class="text-danger">
+                Total must be a positive number
+              </div>
+            </div>
+
+            
+             <div class="form-group">
+              <label for="total">Discount (DNT)</label>
+              <input type="number" id="remise" formControlName="remise" class="form-control" step="0.01" min="0" placeholder="Total (DNT)">
+              <div *ngIf="orderForm.get('total')?.invalid && orderForm.get('total')?.touched" class="text-danger">
+                Total must be a positive number
+              </div>
+            </div>
+
+
+            <!-- Ordered Item -->
+            <div class="form-group">
+              <label for="articel_commande">Ordered Item</label>
+              <input type="text" id="articel_commande" formControlName="articel_commande" class="form-control" placeholder="Ordered Item">
+              <div *ngIf="orderForm.get('articel_commande')?.invalid && orderForm.get('articel_commande')?.touched" class="text-danger">
+                Ordered item is required
+              </div>
+            </div>
+
+            <!-- Estimated Delivery Date -->
+            <div class="form-group">
+              <label for="date_livraison_estimee">Estimated Delivery Date</label>
+              <input type="date" id="date_livraison_estimee" formControlName="date_livraison_estimee" class="form-control" placeholder="Estimated Delivery Date (YYYY-MM-DD)">
+              <div *ngIf="orderForm.get('date_livraison_estimee')?.invalid && orderForm.get('date_livraison_estimee')?.touched" class="text-danger">
+                Estimated delivery date is required
+              </div>
+            </div>
+
+            <!-- Paid -->
+            <div class="form-group">
+              <label for="ispaied">Paid?</label>
+              <select id="ispaied" formControlName="ispaied" class="form-control">
+                <option [value]="true">Yes</option>
+                <option [value]="false">No</option>
+              </select>
+              <div *ngIf="orderForm.get('ispaied')?.invalid && orderForm.get('ispaied')?.touched" class="text-danger">
+                Payment status is required
+              </div>
+            </div>
+
+            <!-- Dimensions -->
+            <div class="form-group">
+              <label for="longueur_cm">Length (cm)</label>
+              <input type="number" id="longueur_cm" formControlName="longueur_cm" class="form-control" step="0.1" min="0" placeholder="Length ">
+              <div *ngIf="orderForm.get('longueur_cm')?.invalid && orderForm.get('longueur_cm')?.touched" class="text-danger">
+                Length must be a positive number
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="largeur_cm">Width (cm)</label>
+              <input type="number" id="largeur_cm" formControlName="largeur_cm" class="form-control" step="0.1" min="0" placeholder="Width">
+              <div *ngIf="orderForm.get('largeur_cm')?.invalid && orderForm.get('largeur_cm')?.touched" class="text-danger">
+                Width must be a positive number
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="hauteur_cm">Height (cm)</label>
+              <input type="number" id="hauteur_cm" formControlName="hauteur_cm" class="form-control" step="0.1" min="0" placeholder="Height">
+              <div *ngIf="orderForm.get('hauteur_cm')?.invalid && orderForm.get('hauteur_cm')?.touched" class="text-danger">
+                Height must be a positive number
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="poids_grammes">Weight (grams)</label>
+              <input type="number" id="poids_grammes" formControlName="poids_grammes" class="form-control" step="0.1" min="0" placeholder="Weight">
+              <div *ngIf="orderForm.get('poids_grammes')?.invalid && orderForm.get('poids_grammes')?.touched" class="text-danger">
+                Weight is required and must be a positive number (in grams)
+              </div>
+            </div>
+
+            <!-- Governorate -->
+            <div class="form-group">
+              <label for="gouvernoratCmd">Governorate</label>
+              <select id="gouvernoratCmd" formControlName="gouvernoratCmd" class="form-control">
+                <option value="">Select a governorate</option>
+                <option *ngFor="let gov of gouvernorat" [value]="gov">{{ gov }}</option>
+              </select>
+              <div *ngIf="orderForm.get('gouvernoratCmd')?.invalid && orderForm.get('gouvernoratCmd')?.touched" class="text-danger">
+                Governorate is required
+              </div>
+            </div>
+
+            <!-- Brand Name -->
+            <div class="form-group">
+              <label for="enseigne">Brand Name</label>
+              <input type="text" id="enseigne" formControlName="enseigne" class="form-control" placeholder="Brand Name">
+              <div *ngIf="orderForm.get('enseigne')?.invalid && orderForm.get('enseigne')?.touched" class="text-danger">
+                Brand name is required
+              </div>
+            </div>
+
+            <!-- Stores -->
+            <div class="form-group">
+              <label for="destination_enseigne">Destination Store</label>
+              <input type="text" id="destination_enseigne" formControlName="destination_enseigne" class="form-control" placeholder="Destination Store">
+              <div *ngIf="orderForm.get('destination_enseigne')?.invalid && orderForm.get('destination_enseigne')?.touched" class="text-danger">
+                Destination store is required
+              </div>
+            </div>
+
+            <!-- User ID (Client) -->
+            <div class="form-group">
+              <label for="iduser">Customer ID</label>
+              <input type="text" id="iduser" formControlName="iduser" class="form-control" placeholder="Customer ID">
+              <div *ngIf="orderForm.get('iduser')?.invalid && orderForm.get('iduser')?.touched" class="text-danger">
+                Customer ID is required and must be numeric
+              </div>
+            </div>
+
+            <!-- Partner ID and System Date (hidden) -->
+            <input type="hidden" formControlName="idpartenaire">
+            <input type="hidden" formControlName="date_ajoutsystem">
+
+            <!-- Buttons -->
+           
+
+            <div class="mt-4">
+              <button type="submit" class="btn btn-primary me-2">Next</button>
+              <button type="reset" class="btn btn-secondary" (click)="resetForm()">Cancel</button>
+            </div>
+          </form>
+
+          <!-- Delivery Options and Summary -->
+          <div *ngIf="showDeliveryOptions" class="delivery-container">
+            <div class="delivery-options">
+              <h3 class="text-xl font-bold text-purple-800 mb-4">Select Delivery Option</h3>
+              <p class="text-sm text-gray-600 mb-4">Fees are based on weight:</p>
+              <form [formGroup]="deliveryForm" (ngSubmit)="submitOrder()">
+                <div class="form-group">
+                  <div *ngFor="let option of deliveryOptions" class="delivery-option-card">
+                    <label [for]="option.value" class="delivery-option-label">
+                      <input type="radio" [id]="option.value" [value]="option.value" formControlName="deliveryOption" class="delivery-option-input" (change)="onDeliveryOptionChange()">
+                      <div class="delivery-option-content">
+                        <span class="delivery-option-title">{{ option.label }}</span>
+                        <div class="delivery-option-fees">
+                          <span class="delivery-option-price"><br>Supplement: +{{ option.supplement | number:'1.2-2' }} DNT</span>
+                          <span class="delivery-option-total">Total: {{ option.totalFee | number:'1.2-2' }} DNT</span>
+                        </div>
+                      </div>
+                    </label>
+                  </div>
+                  <div *ngIf="deliveryForm.get('deliveryOption')?.invalid && deliveryForm.get('deliveryOption')?.touched" class="text-danger mt-2">
+                    Please select a delivery option
+                  </div>
                 </div>
-                <div>
-                  <label for="adresse_livraison" class="block text-sm font-medium text-purple-700">Adresse de Livraison</label>
-                  <input type="text" id="adresse_livraison" formControlName="adresse_livraison" required
-                         class="mt-1 block w-full p-2 border border-purple-200 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-400"
-                         placeholder="123 Rue Exemple, Tunis">
-                  <div *ngIf="commandeForm.get('adresse_livraison')?.invalid && commandeForm.get('adresse_livraison')?.touched"
-                       class="text-red-500 text-sm">Adresse de livraison requise</div>
-                </div>
-                <div>
-                  <label for="total" class="block text-sm font-medium text-purple-700">Total (€)</label>
-                  <input type="number" id="total" formControlName="total" step="0.01" required
-                         class="mt-1 block w-full p-2 border border-purple-200 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-400"
-                         placeholder="100.50">
-                  <div *ngIf="commandeForm.get('total')?.invalid && commandeForm.get('total')?.touched"
-                       class="text-red-500 text-sm">Total requis et doit être positif</div>
-                </div>
-                <div>
-                  <label for="articel_commande" class="block text-sm font-medium text-purple-700">Article Commandé</label>
-                  <input type="text" id="articel_commande" formControlName="articel_commande"
-                         class="mt-1 block w-full p-2 border border-purple-200 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-400"
-                         placeholder="Article XYZ">
-                </div>
-                <div>
-                  <label for="longueur_cm" class="block text-sm font-medium text-purple-700">Longueur (cm)</label>
-                  <input type="number" id="longueur_cm" formControlName="longueur_cm" step="0.1"
-                         class="mt-1 block w-full p-2 border border-purple-200 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-400"
-                         placeholder="40.0">
-                </div>
-                <div>
-                  <label for="largeur_cm" class="block text-sm font-medium text-purple-700">Largeur (cm)</label>
-                  <input type="number" id="largeur_cm" formControlName="largeur_cm" step="0.1"
-                         class="mt-1 block w-full p-2 border border-purple-200 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-400"
-                         placeholder="30.0">
-                </div>
-                <div>
-                  <label for="hauteur_cm" class="block text-sm font-medium text-purple-700">Hauteur (cm)</label>
-                  <input type="number" id="hauteur_cm" formControlName="hauteur_cm" step="0.1"
-                         class="mt-1 block w-full p-2 border border-purple-200 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-400"
-                         placeholder="20.0">
-                </div>
-                <div>
-                  <label for="poids_grammes" class="block text-sm font-medium text-purple-700">Poids (g)</label>
-                  <input type="number" id="poids_grammes" formControlName="poids_grammes" step="0.1"
-                         class="mt-1 block w-full p-2 border border-purple-200 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-400"
-                         placeholder="1500.5">
-                </div>
-                <div>
-                  <label for="gouvernoratCmd" class="block text-sm font-medium text-purple-700">Gouvernorat</label>
-                  <input type="text" id="gouvernoratCmd" formControlName="gouvernoratCmd"
-                         class="mt-1 block w-full p-2 border border-purple-200 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-400"
-                         placeholder="Tunis">
-                </div>
-                <div>
-                  <label for="enseigne" class="block text-sm font-medium text-purple-700">Enseigne</label>
-                  <input type="text" id="enseigne" formControlName="enseigne"
-                         class="mt-1 block w-full p-2 border border-purple-200 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-400"
-                         placeholder="MyStore">
-                </div>
-                <div>
-                  <label for="destination_enseigne" class="block text-sm font-medium text-purple-700">Destination Enseigne</label>
-                  <input type="text" id="destination_enseigne" formControlName="destination_enseigne"
-                         class="mt-1 block w-full p-2 border border-purple-200 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-400"
-                         placeholder="Warehouse1">
-                </div>
-                <div>
-                  <label for="iduser" class="block text-sm font-medium text-purple-700">ID Utilisateur</label>
-                  <input type="number" id="iduser" formControlName="iduser" required
-                         class="mt-1 block w-full p-2 border border-purple-200 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-400"
-                         placeholder="61">
-                  <div *ngIf="commandeForm.get('iduser')?.invalid && commandeForm.get('iduser')?.touched"
-                       class="text-red-500 text-sm">ID utilisateur requis</div>
-                </div>
-                <div>
-                  <label for="idproduit" class="block text-sm font-medium text-purple-700">ID Produit</label>
-                  <input type="number" id="idproduit" formControlName="idproduit" required
-                         class="mt-1 block w-full p-2 border border-purple-200 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-400"
-                         placeholder="7">
-                  <div *ngIf="commandeForm.get('idproduit')?.invalid && commandeForm.get('idproduit')?.touched"
-                       class="text-red-500 text-sm">ID produit requis</div>
-                </div>
-                <div>
-                  <button type="submit" [disabled]="commandeForm.invalid"
-                          class="w-full p-3 bg-purple-500 text-white font-semibold rounded-md hover:bg-purple-600 transition duration-300">
-                    Ajouter la Commande
-                  </button>
+                <div class="mt-4">
+                  <button type="submit" class="btn btn-primary me-2">Submit Order</button>
+                  <button type="button" class="btn btn-secondary me-2" (click)="goBackToForm()">Back</button>
+                  <button *ngIf="lastOrderId" type="button" class="btn btn-success" (click)="viewInvoice()">View Invoice</button>
                 </div>
               </form>
             </div>
-            
+            <div class="quote-summary" [ngClass]="{'highlight': deliveryForm.get('deliveryOption')?.value}">
+              <h3 class="quote-title">Order Summary</h3>
+              <div class="quote-section">
+                <h4>Sender Details</h4>
+                <p><strong>Brand:</strong> {{ partnerEnseigne }}</p>
+                <p><strong>Phone:</strong> {{ partnerPhone }}</p>
+                <p><strong>Address:</strong> {{ partnerAddress }}</p>
+              </div>
+              <div class="quote-spacer"></div>
+              <div class="quote-section">
+                <h4>Recipient Details</h4>
+                <p><strong>Name:</strong> {{ clientDetails?.firstName || 'N/A' }} {{ clientDetails?.lastName || 'N/A' }}</p>
+                <p><strong>Phone:</strong> {{ clientDetails?.phone || 'N/A' }}</p>
+                <p><strong>Address:</strong> {{ clientDetails?.adresse_livraison || 'N/A' }}</p>
+                <p><strong>Governorate:</strong> {{ clientDetails?.gouvernorat || 'N/A' }}</p>
+              </div>
+              <div class="quote-spacer"></div>
+              <div class="quote-section">
+                <h4>Order Details</h4>
+                <p><strong>Weight:</strong> {{ orderForm.value.poids_grammes }} grams</p>
+                <p><strong>Dimensions:</strong> {{ orderForm.value.longueur_cm }} x {{ orderForm.value.largeur_cm }} x {{ orderForm.value.hauteur_cm }} cm</p>
+                <p><strong>Delivery Mode:</strong> {{ selectedDeliveryLabel }}</p>
+                <p><strong>Delivery Cost:</strong> {{ selectedDeliveryCost | number:'1.2-2' }} DNT</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Notification Panel -->
+          <div *ngIf="showNotification" class="notification-panel">
+            <div class="notification-bubble">
+              <p>{{ notificationMessage }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

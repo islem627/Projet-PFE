@@ -187,3 +187,9 @@
   background-color: #ffffff; /* Gris pour une notification lue */
   color: black;
 }
+
+
+.header {
+  align-items: center;
+  margin-right: 600px;
+}

@@ -1,0 +1,156 @@
+<div class="container-scroller">
+    <app-header></app-header>
+    <br><br><br>
+    <div class="container-fluid page-body-wrapper">
+      <app-sidebar-partner></app-sidebar-partner>
+      <div class="main-panel">
+        <div class="content-wrapper">
+          <div class="page-header">
+            <h3 class="page-title">
+              <span class="page-title-icon bg-gradient-primary text-white me-2">
+                <i class="mdi mdi-calendar-clock"></i>
+              </span>
+              <span class="fw-bold">Historique Partenaire</span>
+              <span class="ms-2 text-muted" style="font-weight: normal; font-size: 16px;">
+                {{ today | date: 'fullDate' }}
+              </span>
+            </h3>
+          </div>
+  
+          <!-- Loading spinner -->
+          <div *ngIf="isLoading" class="text-center my-4">
+            <div class="spinner-border" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </div>
+  
+          <!-- Delivered Orders -->
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header">
+                  <h4>Commandes Livrées</h4>
+                </div>
+                <div class="card-body">
+                  <!-- Filters for Delivered Orders -->
+                  <div class="mb-4">
+                    <div class="row">
+                    
+                      <div class="col-md-4">
+                        <label for="deliveryDateFilter" class="form-label">Filtrer par Date d'Ajout</label>
+                        <input id="deliveryDateFilter" type="date" class="form-control" [(ngModel)]="deliveryDateFilter" (ngModelChange)="filterDeliveredOrders()">
+                      </div>
+                      <div class="col-md-4">
+                        <label class="form-label">Filtrer par Note</label>
+                        <div class="star-filter">
+                          <span *ngFor="let star of [1, 2, 3, 4, 5]" 
+                                class="star" 
+                                [ngClass]="{'selected': ratingFilter === star}" 
+                                (click)="setRatingFilter(star)">
+                            ★
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="table-responsive">
+                    <table class="table table-striped custom-table">
+                      <thead>
+                        <tr>
+                          <th>ID Commande</th>
+                          <th>ID Livreur</th>
+                          <th>ID Client</th>
+                          <th>Gouvernorat</th>
+                          <th (click)="toggleSort('date_ajoutsystem')" class="sortable">
+                            Date d'Ajout
+                            <span *ngIf="sortBy === 'date_ajoutsystem'" [ngClass]="{'asc': sortDirection === 'asc', 'desc': sortDirection === 'desc'}"></span>
+                          </th>
+                          <th (click)="toggleSort('date_livree')" class="sortable">
+                            Date de Livraison
+                            <span *ngIf="sortBy === 'date_livree'" [ngClass]="{'asc': sortDirection === 'asc', 'desc': sortDirection === 'desc'}"></span>
+                          </th>
+                          <th (click)="toggleSort('noteClient')" class="sortable">
+                            Note
+                            <span *ngIf="sortBy === 'noteClient'" [ngClass]="{'asc': sortDirection === 'asc', 'desc': sortDirection === 'desc'}"></span>
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let order of filteredDeliveredOrders" 
+                            [ngClass]="{'rating-1': order.noteClient === 1, 'rating-2': order.noteClient === 2, 'rating-3': order.noteClient === 3, 'rating-4': order.noteClient === 4, 'rating-5': order.noteClient === 5}">
+                          <td>{{ order.id_commande }}</td>
+                          <td>{{ order.livreurId }}</td>
+                          <td>{{ order.iduser }}</td>
+                          <td>{{ order.gouvernoratCmd }}</td>
+                          <td>{{ order.date_ajoutsystem ? (order.date_ajoutsystem | date: 'dd/MM/yyyy HH:mm:ss' : 'Africa/Tunis') : 'N/A' }}</td>
+                          <td>{{ order.date_livree ? (order.date_livree | date: 'dd/MM/yyyy HH:mm:ss' : 'Africa/Tunis') : 'N/A' }}</td>
+                          <td>
+                            <span *ngFor="let star of [1, 2, 3, 4, 5]" class="star" [ngClass]="{'filled': star <= (order.noteClient || 0)}">★</span>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+  
+          <!-- Cancelled Orders -->
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header">
+                  <h4>Commandes Annulées</h4>
+                </div>
+                <div class="card-body">
+                  <!-- Filters for Cancelled Orders -->
+                  <div class="mb-4">
+                    <div class="row">
+                    
+                      <div class="col-md-4">
+                        <label for="cancelledDateFilter" class="form-label">Filtrer par Date d'Ajout</label>
+                        <input id="cancelledDateFilter" type="date" class="form-control" [(ngModel)]="cancelledDateFilter" (ngModelChange)="filterCancelledOrders()">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="table-responsive">
+                    <table class="table table-striped custom-table">
+                      <thead>
+                        <tr>
+                          <th>ID Commande</th>
+                          <th>ID Livreur</th>
+                          <th>ID Client</th>
+                          <th>Gouvernorat</th>
+                          <th (click)="toggleSort('date_ajoutsystem')" class="sortable">
+                            Date d'Ajout
+                            <span *ngIf="sortBy === 'date_ajoutsystem'" [ngClass]="{'asc': sortDirection === 'asc', 'desc': sortDirection === 'desc'}"></span>
+                          </th>
+                          <th (click)="toggleSort('date_livree')" class="sortable">
+                            Date d'Annulation
+                            <span *ngIf="sortBy === 'date_livree'" [ngClass]="{'asc': sortDirection === 'asc', 'desc': sortDirection === 'desc'}"></span>
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let order of filteredCancelledOrders">
+                          <td>{{ order.id_commande }}</td>
+                          <td>{{ order.livreurId }}</td>
+                          <td>{{ order.iduser }}</td>
+                          <td>{{ order.gouvernoratCmd }}</td>
+                          <td>{{ order.date_ajoutsystem ? (order.date_ajoutsystem | date: 'dd/MM/yyyy HH:mm:ss' : 'Africa/Tunis') : 'N/A' }}</td>
+                          <td>{{ order.date_livree ? (order.date_livree | date: 'dd/MM/yyyy HH:mm:ss' : 'Africa/Tunis') : 'N/A' }}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+  
+          <br><br>
+        </div>
+      </div>
+    </div>
+</div>

@@ -1,0 +1,124 @@
+/* Conteneur pour espacement des boutons */
+.button-group {
+  display: flex;
+  gap: 12px; /* Espacement entre les boutons */
+  justify-content: flex-start; /* Alignement à gauche */
+  margin-top: 16px; /* Espace au-dessus des boutons */
+}
+
+/* Bouton Submit (style violet pastel) */
+.btn-violet-primary {
+  background: linear-gradient(135deg, #c4b5fd, #a78bfa); /* Dégradé violet pastel */
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  font-weight: 500;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.btn-violet-primary:hover {
+  background: linear-gradient(135deg, #b0a0fa, #8b5cf6); /* Dégradé pastel légèrement plus foncé */
+  box-shadow: 0 2px 8px rgba(167, 139, 250, 0.3);
+  transform: translateY(-1px);
+}
+
+.btn-violet-primary:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+/* Bouton Cancel (style violet pastel outline) */
+.btn-violet-outline {
+  background: transparent;
+  color: #a78bfa;
+  border: 1px solid #a78bfa;
+  padding: 8px 16px;
+  font-weight: 500;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.btn-violet-outline:hover {
+  background: #a78bfa;
+  color: white;
+  border-color: #a78bfa;
+  box-shadow: 0 2px 8px rgba(167, 139, 250, 0.3);
+  transform: translateY(-1px);
+}
+
+.btn-violet-outline:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+
+
+
+
+/* Conteneur pour espacement des boutons */
+.button-group {
+  display: flex;
+  gap: 12px; /* Espacement entre les boutons */
+  justify-content: flex-start; /* Alignement à gauche */
+  margin-top: 16px; /* Espace au-dessus des boutons */
+}
+
+/* Bouton Submit (style violet pastel) */
+.btn-violet-primary {
+  background: linear-gradient(135deg, #c4b5fd, #a78bfa); /* Dégradé violet pastel */
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  font-weight: 500;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.btn-violet-primary:hover {
+  background: linear-gradient(135deg, #b0a0fa, #8b5cf6); /* Dégradé pastel légèrement plus foncé */
+  box-shadow: 0 2px 8px rgba(167, 139, 250, 0.3);
+  transform: translateY(-1px);
+}
+
+.btn-violet-primary:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+/* Bouton Cancel (style violet pastel outline) */
+.btn-violet-outline {
+  background: transparent;
+  color: #a78bfa;
+  border: 1px solid #a78bfa;
+  padding: 8px 16px;
+  font-weight: 500;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.btn-violet-outline:hover {
+  background: #a78bfa;
+  color: white;
+  border-color: #a78bfa;
+  box-shadow: 0 2px 8px rgba(167, 139, 250, 0.3);
+  transform: translateY(-1px);
+}
+
+.btn-violet-outline:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+/* Style pour l'alerte */
+.alert-success {
+  background-color: #c4b5fd; /* Violet pastel */
+  color: #1e1b4b; /* Texte sombre pour contraste */
+  border: none;
+  border-radius: 4px;
+  margin-bottom: 16px;
+}
+
+.alert-success .btn-close {
+  filter: invert(15%) sepia(50%) saturate(300%) hue-rotate(240deg); /* Bouton de fermeture assorti */
+}

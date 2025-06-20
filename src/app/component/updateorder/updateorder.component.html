@@ -1,169 +1,318 @@
 <body>
-  <div class="container-scroller">
-    <app-header></app-header>
-    <br><br><br>
-    <div class="container-fluid page-body-wrapper">
-      <app-sidebar></app-sidebar>
-      <div class="main-panel">
-        <div class="content-wrapper">
-          <div class="page-header">
-            <h3 class="page-title">
-              <span class="page-title-icon bg-gradient-primary text-white me-2">
-                <i class="mdi mdi-pencil-box-outline"></i>
-              </span>
-              Update Order
-            </h3>
-          </div>
+    <div class="container-scroller">
+        <app-header></app-header>
+        <br><br><br>
 
-          <div class="col-lg-10 grid-margin stretch-card">
-            <div class="card">
-              <div class="card-body">
-                <h4 class="card-title"></h4>
-                <p class="card-description"> {{ order.id_commande }} </p>
+        <div class="container-fluid page-body-wrapper">
+            <app-sidebar></app-sidebar>
+            <div class="main-panel">
+                <div class="content-wrapper">
+                    <div class="page-header">
+                        <h3 class="page-title">
+                            <span class="page-title-icon bg-gradient-primary text-white me-2">
+                                <i class="mdi mdi-pencil-box-outline"></i>
+                            </span>
+                            Update Order
+                        </h3>
+                    </div>
 
-                <table class="table table-hover">
-                  <thead>
-                    <tr><th>Order</th></tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <th>ID Order</th>
-                      <td>{{ order.id_commande }}</td>
-                    </tr>
+                    <div class="col-lg-10 grid-margin stretch-card">
+                        <div class="card">
+                            <div class="card-body">
+                                <p class="card-description">{{ order.id_commande }}</p>
 
-                    <tr>
-                      <th>Order Date</th>
-                      <td><input type="date" [(ngModel)]="order.dateCommande" class="form-control" name="dateCommande"></td>
-                      <td><label class="badge badge-warning" (click)="submitField('dateCommande')">Update</label></td>
-                    </tr>
+                                <!-- Success Alert -->
+                                <div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="showSuccessAlert" style="background-color: #c4b5fd; color: #1e1b4b;">
+                                    <strong>Success, slaw!</strong> Order information updated successfully.
+                                    <button type="button" class="btn-close" (click)="hideAlert()" aria-label="Close"></button>
+                                </div>
 
-                    <tr>
-                      <th>Order Status</th>
-                      <td><input type="text" [(ngModel)]="order.statut_commande" class="form-control" name="statut_commande"></td>
-                      <td><label class="badge badge-warning" (click)="submitField('statut_commande')">Update</label></td>
-                    </tr>
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr><th>Order Details</th></tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- ID (read-only) -->
+                                        <tr>
+                                            <th>Order ID</th>
+                                            <td>{{ order.id_commande }}</td>
+                                            <td></td>
+                                        </tr>
 
-                    <tr>
-                      <th>Delivery Address</th>
-                      <td><input type="text" [(ngModel)]="order.adresse_livraison" class="form-control" name="adresse_livraison"></td>
-                      <td><label class="badge badge-warning" (click)="submitField('adresse_livraison')">Update</label></td>
-                    </tr>
+                                        <!-- Date Commande -->
+                                        <tr>
+                                            <th>Order Date</th>
+                                            <td #tdDateCommande (blur)="onBlur('dateCommande', tdDateCommande)">{{ order.dateCommande }}</td>
+                                            <td>
+                                                <i class="fas fa-edit" style="color: #a78bfa; cursor: pointer;" (click)="startEditing('dateCommande', tdDateCommande)" title="Update"></i>
+                                            </td>
+                                        </tr>
 
-                    <tr>
-                      <th>Total</th>
-                      
-                      <ng-container *ngIf="!isEditing['total']; else editPrice">
-                        {{order.total }}
-                      </ng-container>
-                      <ng-template #editPrice>
-                        <input type="number" step="0.01" class="form-control"
-                               [(ngModel)]="editValues.total">
-                      </ng-template>
-                      </tr>
-                      <tr>
-                        <th>Ordered Item</th>
-                        <td #tdArticelCommande (blur)="onBlur('articel_commande', tdArticelCommande)">
-                          {{ order.articel_commande }}
-                        </td>
-                        <td>
-                          <label class="badge badge-warning" (click)="startEditing('articel_commande', tdArticelCommande)">Update</label>
-                        </td>
-                      </tr>
-                      
+                                        <!-- Statut Commande -->
+                                        <tr>
+                                            <th>Status</th>
+                                            <td #tdStatutCommande (blur)="onBlur('statut_commande', tdStatutCommande)">{{ order.statut_commande }}</td>
+                                            <td>
+                                                <i class="fas fa-edit" style="color: #a78bfa; cursor: pointer;" (click)="startEditing('statut_commande', tdStatutCommande)" title="Update"></i>
+                                            </td>
+                                        </tr>
 
-                    <tr>
-                      <th>Discount</th>
+                                        <!-- Adresse Livraison -->
+                                        <tr>
+                                            <th>Delivery Address</th>
+                                            <td #tdAdresseLivraison (blur)="onBlur('adresse_livraison', tdAdresseLivraison)">{{ order.adresse_livraison }}</td>
+                                            <td>
+                                                <i class="fas fa-edit" style="color: #a78bfa; cursor: pointer;" (click)="startEditing('adresse_livraison', tdAdresseLivraison)" title="Update"></i>
+                                            </td>
+                                        </tr>
 
-                      <td>
-                        <ng-container *ngIf="!isEditing['remise']; else editPrice">
-                          {{ order.remise  }}
-                        </ng-container>
-                        <ng-template #editPrice>
-                          <input type="number" step="0.01" class="form-control"
-                                 [(ngModel)]="editValues.remise">
-                        </ng-template>
-                      </td>
-                      <td>
-                        <label class="badge badge-success" (click)="toggleEdit('remise', order.remise)">Update</label>
-                      </td>
-                   
-                   
-                    </tr>
+                                        <!-- Total -->
+                                        <tr>
+                                            <th>Total</th>
+                                            <td #tdTotal (blur)="onBlur('total', tdTotal)">{{ order.total }}</td>
+                                            <td>
+                                                <i class="fas fa-edit" style="color: #a78bfa; cursor: pointer;" (click)="startEditing('total', tdTotal)" title="Update"></i>
+                                            </td>
+                                        </tr>
 
-                    <tr>
-                      <th>Delivery Fee</th>
-                     
-                      <td>
-                        <ng-container *ngIf="!isEditing['fraisLivraison']; else editPrice">
-                          {{ order.fraisLivraison  }}
-                        </ng-container>
-                        <ng-template #editPrice>
-                          <input type="number" step="0.01" class="form-control"
-                                 [(ngModel)]="editValues.fraisLivraison">
-                        </ng-template>
-                      </td>
-                      <td>
-                        <label class="badge badge-success" (click)="toggleEdit('fraisLivraison', order.fraisLivraison)">Update</label>
-                      </td>
-                    </tr>
+                                        <!-- Article Commande -->
+                                        <tr>
+                                            <th>Article</th>
+                                            <td #tdArticelCommande (blur)="onBlur('articel_commande', tdArticelCommande)">{{ order.articel_commande }}</td>
+                                            <td>
+                                                <i class="fas fa-edit" style="color: #a78bfa; cursor: pointer;" (click)="startEditing('articel_commande', tdArticelCommande)" title="Update"></i>
+                                            </td>
+                                        </tr>
 
-                    <tr>
-                      <th>Estimated Delivery Date</th>
-                      <td><input type="date" [(ngModel)]="order.date_livraison_estimee" class="form-control"  name="date_livraison_estimee"></td>
-                      <td><label class="badge badge-warning" (click)="submitField('date_livraison_estimee')">Update</label></td>
-                  
-                     
-                  
-                    </tr>
+                                        <!-- Remise -->
+                                        <tr>
+                                            <th>Discount</th>
+                                            <td #tdRemise (blur)="onBlur('remise', tdRemise)">{{ order.remise }}</td>
+                                            <td>
+                                                <i class="fas fa-edit" style="color: #a78bfa; cursor: pointer;" (click)="startEditing('remise', tdRemise)" title="Update"></i>
+                                            </td>
+                                        </tr>
 
-                    <tr>
-                      <th>Comments</th>
-            
-                    <td>
-                      <textarea [(ngModel)]="order.commentaires"
-                      name="commentaires"
-                      class="form-control"
-                      rows="3"></textarea>
-          </td>
-          <td>
-            <label class="badge badge-info"
-                   (click)="submitField('commentaires')">
-              Update
-            </label>
-          </td>
-                    </tr>
+                                        <!-- Frais Livraison -->
+                                        <tr>
+                                            <th>Delivery Fee</th>
+                                            <td #tdFraisLivraison (blur)="onBlur('fraisLivraison', tdFraisLivraison)">{{ order.fraisLivraison }}</td>
+                                            <td>
+                                                <i class="fas fa-edit" style="color: #a78bfa; cursor: pointer;" (click)="startEditing('fraisLivraison', tdFraisLivraison)" title="Update"></i>
+                                            </td>
+                                        </tr>
 
-                    <tr>
-                      <th>Paid</th>
-                      <input type="checkbox" [(ngModel)]="order.ispaied">
-                      <td><label class="badge badge-warning" (click)="submitField('ispaied')">Update</label></td>
-                    </tr>
+                                        <!-- Date Livraison Estimée -->
+                                        <tr>
+                                            <th>Estimated Delivery Date</th>
+                                            <td #tdDateLivraisonEstimee (blur)="onBlur('date_livraison_estimee', tdDateLivraisonEstimee)">{{ order.date_livraison_estimee }}</td>
+                                            <td>
+                                                <i class="fas fa-edit" style="color: #a78bfa; cursor: pointer;" (click)="startEditing('date_livraison_estimee', tdDateLivraisonEstimee)" title="Update"></i>
+                                            </td>
+                                        </tr>
 
-                    <tr>
-                      <th>ID Produit</th>
-                      <td>{{ order.idproduit }}</td>
-                    </tr>
 
-                    <tr>
-                      <th>ID Client</th>
-                      <td>{{ order.iduser }}</td>
-                    </tr>
+                                        <!-- Is Paid -->
+                                        <tr>
+                                            <th>Paid</th>
+                                         
 
-                  </tbody>
-                </table>
+                                            
+                              <td>{{ order.isPaid ? 'Yes' : 'No' }}
+                                            </td>
+                                          
+                                        </tr>
 
-                <div class="mt-3">
-                  <button class="btn btn-gradient-primary" (click)="submitAll()">Submit</button>
-                  <button class="btn btn-outline-danger" (click)="cancelChanges()">Cancel</button>
+                                        <!-- Latitude -->
+                                        <tr>
+                                            <th>Latitude</th>
+                                            <td #tdLatitude (blur)="onBlur('latitude', tdLatitude)">{{ order.latitude }}</td>
+                                            <td>
+                                                <i class="fas fa-edit" style="color: #a78bfa; cursor: pointer;" (click)="startEditing('latitude', tdLatitude)" title="Update"></i>
+                                            </td>
+                                        </tr>
+
+                                        <!-- Longitude -->
+                                        <tr>
+                                            <th>Longitude</th>
+                                            <td #tdLongitude (blur)="onBlur('longitude', tdLongitude)">{{ order.longitude }}</td>
+                                            <td>
+                                                <i class="fas fa-edit" style="color: #a78bfa; cursor: pointer;" (click)="startEditing('longitude', tdLongitude)" title="Update"></i>
+                                            </td>
+                                        </tr>
+
+                                        <!-- Gouvernorat Commande -->
+                                        <tr>
+                                            <th>Gouvernorat</th>
+                                            <td #tdGouvernoratCmd (blur)="onBlur('gouvernoratCmd', tdGouvernoratCmd)">{{ order.gouvernoratCmd }}</td>
+                                            <td>
+                                                <i class="fas fa-edit" style="color: #a78bfa; cursor: pointer;" (click)="startEditing('gouvernoratCmd', tdGouvernoratCmd)" title="Update"></i>
+                                            </td>
+                                        </tr>
+
+                                        <!-- Date Ajout System -->
+                                        <tr>
+                                            <th>System Add Date</th>
+                                            <td #tdDateAjoutSystem (blur)="onBlur('date_ajoutsystem', tdDateAjoutSystem)">{{ order.date_ajoutsystem }}</td>
+                                            <td>
+                                                <i class="fas fa-edit" style="color: #a78bfa; cursor: pointer;" (click)="startEditing('date_ajoutsystem', tdDateAjoutSystem)" title="Update"></i>
+                                            </td>
+                                        </tr>
+
+                                        <!-- Date Affection -->
+                                        <tr>
+                                            <th>Affection Date</th>
+                                            <td #tdDateAffection (blur)="onBlur('date_affection', tdDateAffection)">{{ order.date_affection }}</td>
+                                            <td>
+                                                <i class="fas fa-edit" style="color: #a78bfa; cursor: pointer;" (click)="startEditing('date_affection', tdDateAffection)" title="Update"></i>
+                                            </td>
+                                        </tr>
+
+                                        <!-- Date Expédition -->
+                                        <tr>
+                                            <th>Expedition Date</th>
+                                            <td #tdDateExpidetion (blur)="onBlur('date_expidetion', tdDateExpidetion)">{{ order.date_expidetion }}</td>
+                                            <td>
+                                                <i class="fas fa-edit" style="color: #a78bfa; cursor: pointer;" (click)="startEditing('date_expidetion', tdDateExpidetion)" title="Update"></i>
+                                            </td>
+                                        </tr>
+
+                                        <!-- Date Livrée -->
+                                        <tr>
+                                            <th>Delivery Date</th>
+                                            <td #tdDateLivree (blur)="onBlur('date_livree', tdDateLivree)">{{ order.date_livree }}</td>
+                                            <td>
+                                                <i class="fas fa-edit" style="color: #a78bfa; cursor: pointer;" (click)="startEditing('date_livree', tdDateLivree)" title="Update"></i>
+                                            </td>
+                                        </tr>
+
+                                        <!-- Enseigne -->
+                                        <tr>
+                                            <th>Enseigne</th>
+                                            <td #tdEnseigne (blur)="onBlur('enseigne', tdEnseigne)">{{ order.enseigne }}</td>
+                                            <td>
+                                                <i class="fas fa-edit" style="color: #a78bfa; cursor: pointer;" (click)="startEditing('enseigne', tdEnseigne)" title="Update"></i>
+                                            </td>
+                                        </tr>
+
+                                        <!-- Destination Enseigne -->
+                                        <tr>
+                                            <th>Destination Enseigne</th>
+                                            <td #tdDestinationEnseigne (blur)="onBlur('destination_enseigne', tdDestinationEnseigne)">{{ order.destination_enseigne }}</td>
+                                            <td>
+                                                <i class="fas fa-edit" style="color: #a78bfa; cursor: pointer;" (click)="startEditing('destination_enseigne', tdDestinationEnseigne)" title="Update"></i>
+                                            </td>
+                                        </tr>
+
+                                        <!-- Poids Grammes -->
+                                        <tr>
+                                            <th>Weight (g)</th>
+                                            <td #tdPoidsGrammes (blur)="onBlur('poids_grammes', tdPoidsGrammes)">{{ order.poids_grammes }}</td>
+                                            <td>
+                                                <i class="fas fa-edit" style="color: #a78bfa; cursor: pointer;" (click)="startEditing('poids_grammes', tdPoidsGrammes)" title="Update"></i>
+                                            </td>
+                                        </tr>
+
+                                        <!-- Hauteur cm -->
+                                        <tr>
+                                            <th>Height (cm)</th>
+                                            <td #tdHauteurCm (blur)="onBlur('hauteur_cm', tdHauteurCm)">{{ order.hauteur_cm }}</td>
+                                            <td>
+                                                <i class="fas fa-edit" style="color: #a78bfa; cursor: pointer;" (click)="startEditing('hauteur_cm', tdHauteurCm)" title="Update"></i>
+                                            </td>
+                                        </tr>
+
+                                        <!-- Largeur cm -->
+                                        <tr>
+                                            <th>Width (cm)</th>
+                                            <td #tdLargeurCm (blur)="onBlur('largeur_cm', tdLargeurCm)">{{ order.largeur_cm }}</td>
+                                            <td>
+                                                <i class="fas fa-edit" style="color: #a78bfa; cursor: pointer;" (click)="startEditing('largeur_cm', tdLargeurCm)" title="Update"></i>
+                                            </td>
+                                        </tr>
+
+                                        <!-- Longueur cm -->
+                                        <tr>
+                                            <th>Length (cm)</th>
+                                            <td #tdLongueurCm (blur)="onBlur('longueur_cm', tdLongueurCm)">{{ order.longueur_cm }}</td>
+                                            <td>
+                                                <i class="fas fa-edit" style="color: #a78bfa; cursor: pointer;" (click)="startEditing('longueur_cm', tdLongueurCm)" title="Update"></i>
+                                            </td>
+                                        </tr>
+
+                                        <!-- Archived -->
+                                        <tr>
+                                            <th>Archived</th>
+                                            <td>
+                                                <input type="checkbox" [(ngModel)]="order.archived" name="archived" (change)="submitField('archived')">
+                                            </td>
+                                            <td></td>
+                                        </tr>
+
+                                        <!-- Commentaire Client -->
+                                        <tr>
+                                            <th>Client Comment</th>
+                                            <td #tdCommentaireClient (blur)="onBlur('commentaireClient', tdCommentaireClient)">{{ order.commentaireClient }}</td>
+                                            <td>
+                                                <i class="fas fa-edit" style="color: #a78bfa; cursor: pointer;" (click)="startEditing('commentaireClient', tdCommentaireClient)" title="Update"></i>
+                                            </td>
+                                        </tr>
+
+                                        <!-- Note Client -->
+                                        <tr>
+                                            <th>Client Rating</th>
+                                            <td #tdNoteClient (blur)="onBlur('noteClient', tdNoteClient)">{{ order.noteClient }}</td>
+                                            <td>
+                                                <i class="fas fa-edit" style="color: #a78bfa; cursor: pointer;" (click)="startEditing('noteClient', tdNoteClient)" title="Update"></i>
+                                            </td>
+                                        </tr>
+
+                                       
+
+                                        <!-- Client ID (read-only) -->
+                                        <tr>
+                                            <th>Client ID</th>
+                                            <td>{{ order.iduser }}</td>
+                                            <td></td>
+                                        </tr>
+
+                                        <!-- Livreur ID (read-only) -->
+                                        <tr>
+                                            <th>Delivery Person ID</th>
+                                            <td>{{ order.livreurId }}</td>
+                                            <td></td>
+                                        </tr>
+
+                                        <!-- Partenaire ID (read-only) -->
+                                        <tr>
+                                            <th>Partner ID</th>
+                                            <td>{{ order.idpartenaire }}</td>
+                                            <td></td>
+                                        </tr>
+
+                                        <!-- Fixe Temps -->
+                                        <tr>
+                                            <th>Fixed Time</th>
+                                            <td #tdFixeTemps (blur)="onBlur('fixe_temps', tdFixeTemps)">{{ order.fixe_temps }}</td>
+                                            <td>
+                                                <i class="fas fa-edit" style="color: #a78bfa; cursor: pointer;" (click)="startEditing('fixe_temps', tdFixeTemps)" title="Update"></i>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                                <div class="button-group">
+                                    <button class="btn btn-violet-primary" (click)="submitAll()">Submit</button>
+                                    <button class="btn btn-violet-outline" (click)="cancelChanges()">Cancel</button>
+                                </div>
+
+                                <div class="mt-3"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
-              </div>
             </div>
-          </div>
-
         </div>
-      </div>
+        <app-footer></app-footer>
     </div>
-  </div>
-  <app-footer></app-footer>
 </body>

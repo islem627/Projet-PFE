@@ -25,7 +25,6 @@ import { AddproductComponent } from './component/addproduct/addproduct.component
 import { AddorderComponent } from './component/addorder/addorder.component';
 import { UpdateproductComponent } from './component/updateproduct/updateproduct.component';
 import { UpdateuserComponent } from './component/updateuser/updateuser.component';
-import { PageClientComponent } from './component/pageclient/page-client.component';
 import { UpdateadminComponent } from './component/updateadmin/updateadmin.component';
 import { ProfileComponent } from './component/profile/profile.component';
 import { LivreursComponent } from './component/livreurs/livreurs.component';
@@ -39,6 +38,19 @@ import { PageDeleviryComponent } from './component/page-deleviry/page-deleviry.c
 import { DeliveryComponent } from './component/delivery/delivery.component';
 import { ClientNotificationsComponent } from './component/client-notifications/client-notifications.component';
 import { PartnerComponent } from './component/partner/partner.component';
+import { PlanningComponent } from './component/planning/planning.component';
+import { HistoriqueComponent } from './component/historique/historique.component';
+import { PageClientComponent } from './component/pageclient/pageclient/page-client.component';
+import { DeliveryTrackerComponent } from './component/delivery-tracker/delivery-tracker.component';
+import { MapsComponent } from './component/maps/maps.component';
+import { HistoPartnerComponent } from './component/histo-partner/histo-partner.component';
+import { DateComponent } from './component/date/date.component';
+import { DetailsOrdesComponent } from './details-ordes/details-ordes.component';
+import { DetailsComponent } from './component/details/details.component';
+import { CommandeDetailsComponent } from './commande-details/commande-details.component';
+import { AllPartnerComponent } from './component/all-partner/all-partner.component';
+import { DetailsPartnerComponent } from './component/details-partner/details-partner.component';
+import { UpdatePartnerComponent } from './component/update-partner/update-partner.component';
 
 
 
@@ -62,7 +74,6 @@ const routes: Routes = [
   {path:"products", component:ProductsComponent},
   {path:"orders", component:OrdersComponent},
   {path:"detailsuser/:id",component:DetailsuserComponent},
-  {path:"detailsorder/:id",component:DetaisorderComponent},
   {path:"updateorder",component:UpdateorderComponent},
   {path:"detailsadmin/:id",component:DetailsadminComponent},
   {path:"detailsclient/:id",component:DetailsclientComponent},
@@ -75,18 +86,32 @@ const routes: Routes = [
   {path:"updateuser/:id",component:UpdateuserComponent},
   {path:"pageclient", component:PageClientComponent},
   {path:"updateadmin/:id",component:UpdateadminComponent},
+    {path:"updatelivreur/:id",component:UpdatelivreurComponent},
+        {path:"updatepartner/:id",component:UpdatePartnerComponent},
+
+
   {path:"updateprofile",component:ProfileComponent},
   {path:"livreurs",component:LivreursComponent},
   {path:"detailslivreur/:id",component:DetailslivreurComponent},
-  {path: "updatelivreur/id",component:UpdatelivreurComponent},
-  { path: 'planning', component:AssignByGovernorateComponent },
   {path:"forgot-password",component:ForgotPasswordComponent},
   {path:"notifclient",component:NotifclientComponent},
   {path:"delivery", component:PageDeleviryComponent},
   { path: 'delivery', component: DeliveryComponent },
   { path: 'notifications', component: ClientNotificationsComponent },
   //{ path: '', redirectTo: '/notifications', pathMatch: 'full' },:
-  {path:'partner',component:PartnerComponent}
+  {path:'partner',component:PartnerComponent},
+
+  {path:'planning',component:PlanningComponent},
+  {path:'historique',component:HistoriqueComponent},
+  {path:'tracking',component:DeliveryTrackerComponent},
+  {path:'maps',component:MapsComponent},
+  {path:"his_par", component: HistoPartnerComponent},
+  {path:"fixe/:iduser",component:DateComponent},
+  {path:"detail/:id",component:DetailsComponent},
+    {path:"detailsorder/:id",component:CommandeDetailsComponent},
+{ path: 'commande/:id', component: CommandeDetailsComponent },
+{path:'all_partner',component:AllPartnerComponent},
+{path:'DetailsPartner/:id',component:DetailsPartnerComponent},
 
 
 

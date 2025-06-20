@@ -1,0 +1,129 @@
+<nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+  <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-start">
+    <a class="navbar-brand brand-logo" href="index.html"><img src="assets/livro.png" alt="logo" style="height: 70px; padding-left: -50px;" /></a>
+    <a class="navbar-brand brand-logo-mini" href="index.html"><img src="assets/livro.png" alt="logo" /></a>
+  </div>
+  <div class="navbar-menu-wrapper d-flex align-items-stretch">
+    
+    
+    <ul class="navbar-nav navbar-nav-right">
+      <div class="header">
+      <li class="nav-item nav-profile dropdown ">
+        <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+          <div class="nav-profile-img">
+            <img [src]="'http://localhost:8762/User/files/' + user.photo" alt="image">
+            <span class="availability-status online"></span>
+          </div>
+          <div class="nav-profile-text">
+            <p class="mb-1 text-black">{{usernameUserConnected}}</p>
+          </div>
+        </a>
+           <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
+                <a class="dropdown-item" (click)="logout()">
+                  <i class="mdi mdi-logout me-2 text-primary"></i> Signout </a>
+                    <div class="dropdown-divider"></div>
+                <a class="dropdown-item" (click)="profile()">
+                  <i class="mdi mdi-account"></i> Manage profile </a>
+              </div>
+
+
+             
+
+
+      
+   <!--
+        <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
+          <a class="dropdown-item" href="#">
+            <i class="mdi mdi-cached me-2 text-success"></i> Activity Log </a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">
+            <i class="mdi mdi-logout me-2 text-primary"></i> Signout </a>
+        </div>
+      </li>
+      <li class="nav-item d-none d-lg-block full-screen-link">
+        <a class="nav-link">
+          <i class="mdi mdi-fullscreen" id="fullscreen-button"></i>
+        </a>
+      </li>
+      -->
+
+
+      
+
+      <li class="nav-item dropdown">
+        <a class="nav-link count-indicator dropdown-toggle" href="#" id="notifDropdown" role="button"
+           data-bs-toggle="dropdown" aria-expanded="false" (click)="getLivreurFromCommandes()">
+          <i class="mdi mdi-truck-delivery"></i>
+          <span class="count-symbol bg-primary" *ngIf="livreurs.length > 0"></span>
+        </a>
+      
+        <div class="dropdown-menu dropdown-menu-end navbar-dropdown" aria-labelledby="notifDropdown">
+          <div id="livreurList" class="dropdown-item">
+            <!-- Loading -->
+            <ng-container *ngIf="loading">
+              <p class="dropdown-item">Chargement...</p>
+            </ng-container>
+      
+            <!-- Aucun livreur -->
+            <ng-container *ngIf="!loading && livreurs.length === 0">
+              <p class="dropdown-item">Aucun livreur assigné</p>
+            </ng-container>
+      
+            <!-- Liste des livreurs -->
+            <div *ngFor="let livreur of livreurs" class="dropdown-item">
+              <div class="d-flex align-items-center">
+                <img [src]="'http://localhost:8762/User/files/' + (livreur.photo || 'default-image.jpg')" class="me-2 rounded-circle" alt="livreur" width="40" height="40">
+                <div class="ms-2">
+                  <p class="mb-0 fw-bold">{{ livreur.firstname }} {{ livreur.lastname }}</p>
+                  <p class="mb-0 small text-muted">Téléphone: {{ livreur.phone }}</p>
+                  <a [routerLink]="['/chat', livreur.id]" class="btn btn-sm btn-outline-primary mt-1">Contacter</a>
+                </div>
+              </div>
+              <hr class="my-2">
+            </div>
+          </div>
+        </div>
+      </li>
+
+
+
+        
+  <li class="nav-item dropdown">
+  <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="javascript:void(0)" (click)="toggleNotifications($event)">
+    <i class="mdi mdi-bell-outline">
+      <span *ngIf="notificationCount > 0" class="notification-badge">{{ notificationCount }}</span>
+    </i>
+  </a>
+  <div *ngIf="showNotifications" class="dropdown-menu dropdown-menu-end navbar-dropdown preview-list show" style="max-height: 300px; overflow-y: auto; width: 300px;">
+    <button *ngIf="notifications.length > 0" class="clear-btn" (click)="clearAllNotifications()">
+      Supprimer toutes les notifications
+    </button>
+    <h6 class="p-3 mb-0">Notifications</h6>
+    <div class="dropdown-divider"></div>
+    <ng-container *ngIf="notifications.length > 0; else noNotifications">
+      <div *ngFor="let msg of notifications; let i = index" class="dropdown-item preview-item" 
+           [ngClass]="getNotificationClass(msg.status)" 
+           (click)="markAsRead(i)">  
+        <div class="d-flex align-items-center justify-content-between">
+          <div class="preview-thumbnail">
+            <div class="preview-icon">
+              <i class="mdi mdi-bell"></i>
+            </div>
+          </div>
+          <div class="preview-item-content">
+            <h6 class="preview-subject">{{ msg.message }}</h6>
+            <span class="text-muted small">{{ msg.date }}</span>
+          </div>
+          <button class="btn-delete" (click)="deleteNotification(i)">
+            <i class="mdi mdi-delete"></i>
+          </button>
+        </div>
+      </div>
+    </ng-container>
+    <ng-template #noNotifications>
+      <div class="p-3 text-center text-muted">Aucune notification</div>
+    </ng-template>
+    <div class="dropdown-divider"></div>
+    <h6 class="p-3 mb-0 text-center">Voir toutes les notifications</h6>
+  </div>
+</li>

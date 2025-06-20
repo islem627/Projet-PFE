@@ -1,0 +1,169 @@
+<div class="container-scroller">
+  <app-header></app-header>
+  <br><br><br>
+  <div class="container-fluid page-body-wrapper">
+    <app-sidebar></app-sidebar>
+    <div class="main-panel">
+      <div class="content-wrapper">
+        <div class="page-header">
+          <h3 class="page-title">
+            <span class="page-title-icon bg-gradient-primary text-white me-2">
+              <i class="mdi mdi-calendar-clock"></i>
+            </span>
+            <span class="fw-bold">Planning</span>
+            <span class="ms-2 text-muted" style="font-weight: normal; font-size: 16px;">
+              {{ today | date: 'fullDate' }}
+            </span>
+          </h3>
+        </div>
+
+        <!-- Loading spinner -->
+        <div *ngIf="isLoading" class="text-center my-4">
+          <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
+
+        <!-- Governorate filter -->
+        <div class="mb-4">
+          <label for="governorateFilter" class="form-label">Select Governorate</label>
+          <select id="governorateFilter" class="form-select" [(ngModel)]="selectedGovernorate" (change)="filterByGovernorate()">
+            <option value="">All Governorates</option>
+            <option *ngFor="let governorate of governorates" [value]="governorate">{{ governorate }}</option>
+          </select>
+        </div>
+
+        <!-- Unassigned Orders -->
+        <div class="row mb-4">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-header">
+                <h4>Unassigned Orders</h4>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th>Order ID</th>
+                        <th>Client ID</th>
+                        <th>Customer</th>
+                        <th>Phone</th>
+                        <th>Governorate</th>
+                        <th>Status</th>
+                        <th>Assigned To</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let order of unassignedOrders">
+                        <td>{{ order.id_commande }}</td>
+                        <td>{{ order.iduser }}</td>
+                        <td>{{ order.userDTO?.username }}</td>
+                        <td>{{ order.userDTO?.phone }}</td>
+                        <td>{{ order.gouvernoratCmd }}</td>
+                        <td>{{ order.statut_commande }}</td>
+                        <td>
+                          <select class="form-select form-select-sm"
+                                  (change)="assignOrder(order.id_commande, $event)">
+                            <option value="">Select Delivery Person</option>
+                            <option *ngFor="let person of filteredDeliveryPersons" 
+                                    [value]="person.id">
+                              {{ person.username }} ({{ person.gouvernorat }})
+                            </option>
+                          </select>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Assigned Orders -->
+        <div class="row mb-4">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-header">
+                <h4>Assigned Orders</h4>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th>Order ID</th>
+                        <th>Client ID</th>
+                        <th>Customer</th>
+                        <th>Phone</th>
+                        <th>Governorate</th>
+                        <th>Status</th>
+                        <th>Assigned To</th>
+                        <th>Assignment Date</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let order of assignedOrders">
+                        <td>{{ order.id_commande }}</td>
+                        <td>{{ order.iduser }}</td>
+                        <td>{{ order.userDTO?.username }}</td>
+                        <td>{{ order.userDTO?.phone }}</td>
+                        <td>{{ order.gouvernoratCmd }}</td>
+                        <td>{{ order.statut_commande }}</td>
+                        <td>{{ order.livreurId ? getLivreurUsername(order.livreurId) + ' (' + order.livreurId + ')' : 'Not Assigned' }}</td>
+                        <td>{{ order.dateAffection | date: 'dd/MM/yyyy HH:mm:ss' : 'Africa/Tunis' }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Delivery Persons -->
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-header">
+                <h4>Delivery Persons with Fewer than 8 Orders</h4>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Phone</th>
+                        <th>Governorate</th>
+                        <th>Active Orders</th>
+                        <th>Availability</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let person of filteredDeliveryPersons">
+                        <td>{{ person.id }}</td>
+                        <td>{{ person.username }}</td>
+                        <td>{{ person.phone }}</td>
+                        <td>{{ person.gouvernorat }}</td>
+                        <td>{{ person.orderCount || 0 }}</td>
+                        <td>
+                          <span class="lamp lamp-green" [ngClass]="{'lamp-active': person.disponible, 'lamp-inactive': !person.disponible}"></span>
+                          <span class="lamp lamp-red" [ngClass]="{'lamp-active': !person.disponible, 'lamp-inactive': person.disponible}"></span>
+                          <span class="status-text">{{ person.disponible ? 'Available' : 'Not Available' }}</span>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

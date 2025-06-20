@@ -1,0 +1,114 @@
+
+
+/* Style pour le texte du menu */
+.menu-title {
+  font-size: 1rem;
+  font-weight: 500;
+  margin-right: 10px;
+  color: #f3e8ff;
+}
+
+/* Style pour l'icône du menu */
+.menu-icon {
+  font-size: 1.5rem;
+  color: #f3e8ff;
+}
+
+/* Style pour le badge de notification */
+.count-symbol {
+  background-color: #6f42c1;
+  color: #ffffff;
+  border-radius: 50%;
+  padding: 0.2rem 0.5rem;
+  font-size: 0.8rem;
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  min-width: 1.2rem;
+  text-align: center;
+}
+
+/* Styles pour la bulle (dropdown) */
+.dropdown-menu {
+  background-color: #f3e8ff;
+  border: 1px solid #6f42c1;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  min-width: 250px;
+  max-width: 300px;
+  max-height: 400px;
+  overflow-y: auto;
+  z-index: 1000;
+  padding: 0;
+}
+
+/* Styles pour chaque élément de la liste */
+.dropdown-item {
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 12px;
+  margin: 5px;
+  border: 1px solid #e0d7f7;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: background-color 0.2s ease;
+  color: #5a32a3;
+}
+
+.dropdown-item:hover {
+  background-color: #f9f9fc;
+  color: #5a32a3;
+}
+
+/* Style pour l'image du client */
+.dropdown-item img.rounded-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid #c3b5f4;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  object-fit: cover;
+}
+
+/* Style pour le nom du client */
+.dropdown-item p.fw-bold {
+  font-size: 0.9rem;
+  color: #333;
+  margin-bottom: 4px;
+}
+
+/* Style pour le téléphone */
+.dropdown-item p.text-muted {
+  font-size: 0.8rem;
+  color: #666;
+  margin-bottom: 6px;
+}
+
+/* Style pour le bouton Contacter */
+.btn-outline-warning {
+  background-color: #c084fc;
+  border-color: #c084fc;
+  color: #ffffff;
+  font-size: 0.75rem;
+  border-radius: 20px;
+  padding: 3px 10px;
+  transition: all 0.3s ease;
+}
+
+.btn-outline-warning:hover {
+  background-color: #a855f7;
+  border-color: #a855f7;
+  color: #ffffff;
+}
+
+/* Style pour la ligne de séparation */
+.dropdown-item hr {
+  border-top: 1px solid #6f42c1;
+  margin: 0.5rem 0;
+}
+
+/* Style pour le texte de chargement ou absence de clients */
+.dropdown-item p {
+  color: #5a32a3;
+  font-style: italic;
+  margin: 0;
+}

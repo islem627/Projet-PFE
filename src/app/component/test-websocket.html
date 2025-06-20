@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test WebSocket</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        #output { margin-top: 20px; border: 1px solid #ccc; padding: 10px; }
+    </style>
+</head>
+<body>
+    <h1>Test WebSocket - Livreur 60</h1>
+    <p>Status: <span id="status">Disconnected</span></p>
+    <div id="output"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.1/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+    <script>
+        const socket = new SockJS('http://localhost:8080/ws');
+        const stompClient = Stomp.over(socket);
+        const statusElement = document.getElementById('status');
+        const outputElement = document.getElementById('output');
+        stompClient.connect({}, function (frame) {
+            console.log('Connected: ' + frame);
+            statusElement.textContent = 'Connected';
+            statusElement.style.color = 'green';
+            stompClient.subscribe('/topic/location/60', function (message) {
+                const location = JSON.parse(message.body);
+                console.log('Received message:', location);
+                outputElement.innerHTML += `<p>Received: ${JSON.stringify(location)}</p>`;
+            });
+        }, function (error) {
+            console.error('Error: ' + error);
+            statusElement.textContent = 'Error: ' + error;
+            statusElement.style.color = 'red';
+            outputElement.innerHTML += `<p>Error: ${error}</p>`;
+        });
+    </script>
+</body>
+</html>

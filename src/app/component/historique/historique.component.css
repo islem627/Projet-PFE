@@ -1,0 +1,136 @@
+.table-responsive {
+    width: 100%;
+  }
+  .card {
+    margin-bottom: 20px;
+  }
+  .form-label {
+    font-weight: bold;
+  }
+  .form-control, .form-select {
+    max-width: 300px;
+  }
+  .mt-4 {
+    margin-top: 20px;
+  }
+
+
+
+  .custom-table {
+    border-collapse: collapse;
+    width: 100%;
+    background-color: #ffffff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .custom-table th, .custom-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  
+
+  
+  /* Pastel green shades for entire rows based on rating */
+  .custom-table tbody tr.rating-1 {
+    background-color: #e6f4ea; /* Lightest pastel green */
+  }
+  
+  .custom-table tbody tr.rating-2 {
+    background-color: #c8e6c9; /* Slightly darker */
+  }
+  
+  .custom-table tbody tr.rating-3 {
+    background-color: #a3d6a6; /* Medium */
+  }
+  
+  .custom-table tbody tr.rating-4 {
+    background-color: #80c783; /* Darker */
+  }
+  
+  .custom-table tbody tr.rating-5 {
+    background-color: #5cb85c; /* Darkest pastel green */
+  }
+  
+  /* Hover effect for rows */
+  .custom-table tbody tr:hover {
+    filter: brightness(95%); /* Slightly darken the row on hover */
+  }
+  
+  .sortable {
+    cursor: pointer;
+    position: relative;
+  }
+  
+  .sortable:hover {
+    background-color: #e9ecef;
+  }
+  
+  .sortable .asc::after {
+    content: '↑';
+    margin-left: 5px;
+  }
+  
+  .sortable .desc::after {
+    content: '↓';
+    margin-left: 5px;
+  }
+  
+  /* Star rating styles */
+  .star {
+    font-size: 20px;
+    color: #ccc;
+    cursor: pointer;
+  }
+  
+  .star.filled {
+    color: #ffd700; /* Gold for filled stars */
+  }
+  
+  .star-filter {
+    display: flex;
+    gap: 5px;
+  }
+  
+  .star-filter .star {
+    font-size: 24px;
+    transition: color 0.2s;
+  }
+  
+  .star-filter .star:hover,
+  .star-filter .star.selected {
+    color: #ffd700;
+  }
+  
+  /* Filter section styling */
+  .mb-4 .form-label {
+    font-weight: 500;
+    color: #444;
+  }
+  
+  .form-select, .form-control {
+    border-radius: 5px;
+    border: 1px solid #ced4da;
+  }
+  
+  .form-select:focus, .form-control:focus {
+    border-color: #80c783;
+    box-shadow: 0 0 5px rgba(92, 184, 92, 0.3);
+  }
+  
+  /* Card styling */
+  .card {
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  }
+  
+ 
+
+
+  .card-header {
+
+    background: linear-gradient(135deg,  #e1bee7,#b28eef);
+    color: white;
+  }
+  

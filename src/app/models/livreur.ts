@@ -1,0 +1,3 @@
+interface Livreur {
+    disponible: false
+}

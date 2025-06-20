@@ -1,19 +1,6 @@
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
     <ul class="nav">
-      <li class="nav-item nav-profile">
-        <a href="#" class="nav-link">
-          <div class="nav-profile-image">
-            <img [src]="'http://localhost:8762/User/files/' + user.photo" alt="profile" />
-            <span class="login-status online"></span>
-            <!--change to offline or busy as needed-->
-          </div>
-          <div class="nav-profile-text d-flex flex-column">
-            <span class="font-weight-bold mb-2">{{usernameUserConnected}}</span>
-            <span class="text-secondary text-small">{{roleUserConnected}}</span>
-          </div>
-          <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
-        </a>
-      </li>
+    
       <li class="nav-item">
         <a class="nav-link" routerLink="/home">
           <span class="menu-title">Dashboard</span>
@@ -21,13 +8,18 @@
           
         </a>
       </li>
+
+
+
+
+
       <li class="nav-item">
         <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
           <span class="menu-title">Users</span>
           <i class="menu-arrow"></i>
           <i class="mdi mdi-account-group menu-icon"></i>
         </a>
-        <div class="collapse" id="users-collapse">
+        <div class="collapse" id="ui-basic">
           <ul class="nav flex-column sub-menu">
             <li class="nav-item">
               <a class="nav-link" routerLink="/users">All users</a>
@@ -41,25 +33,14 @@
             <li class="nav-item"  >
               <a class="nav-link" routerLink="/livreurs">Delivery Person</a>
             </li>
-          </ul>
-        </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" data-bs-toggle="collapse" routerLink="/products" aria-expanded="false" aria-controls="icons">
-          <span class="menu-title">Products</span>
-          <i class="  mdi mdi-cart menu-icon"></i>
-          
-        </a>
-        <div class="collapse" id="icons">
-          <ul class="nav flex-column sub-menu">
-            <li class="nav-item">
-              <a class="nav-link" href="pages/icons/font-awesome.html">Font Awesome</a>
+            <li class="nav-item"  >
+              <a class="nav-link" routerLink="/all_partner">Partner</a>
             </li>
           </ul>
         </div>
       </li>
+      
     
-  
       <li class="nav-item">
         <a class="nav-link" data-bs-toggle="collapse"  routerLink="/orders" aria-expanded="false" aria-controls="tables">
           <span class="menu-title">Orders</span>
@@ -74,41 +55,29 @@
         </div>
       </li>
 
-      <li class="nav-item">
-        <a class="nav-link" data-bs-toggle="collapse" href="#planning" routerLink="/planning" aria-expanded="false" aria-controls="planning">
-          <span class="menu-title">Plan Orders</span>
+   
+
+        <li class="nav-item">
+        <a class="nav-link" data-bs-toggle="collapse"    routerLink="/planning" aria-expanded="false" aria-controls="auth">
+          <span class="menu-title">Assign by Governorate</span>
           <i class="mdi mdi-calendar-clock menu-icon"></i>
         </a>
-        <div class="collapse" id="planning">
-          <ul class="nav flex-column sub-menu">
-            <li class="nav-item">
-              <a class="nav-link" routerLink="/planning/assign-by-governorate">Assign by Governorate</a>
-            </li>
-          </ul>
-        </div>
       </li>
 
-
-
+  
       <li class="nav-item">
-        <a class="nav-link" data-bs-toggle="collapse"   routerLink="/destination" aria-expanded="false" aria-controls="auth">
-          <span class="menu-title">Destination</span>
-          <i class="menu-arrow"></i>
-          <i class="mdi mdi-map-marker menu-icon"></i>
+        <a class="nav-link" data-bs-toggle="collapse"    routerLink="/historique" aria-expanded="false" aria-controls="auth">
+          <span class="menu-title">History</span>
+          <i class="mdi mdi-file-document menu-icon"></i>
         </a>
       </li>
+
         <li class="nav-item" >
           <a class="nav-link animated-link"  *ngIf="roleUserConnected =='ROLE_livreyr' "routerLink="/itinerary"  >
               <span class="menu-title" >Itinerary</span>
               <i class="mdi mdi-directions menu-icon"></i>
           </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/updateprofile">
-            <span class="menu-title">Profile</span>
-            <i class="mdi mdi-account menu-icon"></i>
-        </a>
-    </li>
+    
 
       
     </ul>

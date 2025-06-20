@@ -1,14 +1,10 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'environments/environment';
-import { catchError, map, Observable, tap, throwError } from 'rxjs';
+import { catchError, map, Observable, of, tap, throwError } from 'rxjs';
 
-/*interface Commande {
-  id: number;
-  date: string;  // Utilise 'string' ou 'Date' selon ton format
-  status: string;
-  // Ajoute d'autres propriétés de la commande si nécessaire
-}*/
+
+
 export interface Commande {
   id_commande: string;
   dateCommande: string;
@@ -20,28 +16,45 @@ export interface Commande {
   userDTO?: UserDTO;
   livreurId?: number;
   gouvernoratCmd?: string;
-  articel_commande?: string;
-  fraisLivraison?: number;
+articel_commande?: string; // Matches backend  fraisLivraison?: number;
   date_livraison_estimee?: string;
   commentaires?: string;
-  ispaied?: boolean;
-  latitude?: number;
+isPaid?: boolean; // Corrected from ispaied 
   longitude?: number;
   idproduit?: number;
   productDTO?: ProductDTO;
+  longueur_cm?: number;
+  largeur_cm?: number;
+  hauteur_cm?: number;
+  poids_grammes?: number;
+  enseigne?: string;
+  destination_enseigne?: string;
+  archived?: boolean;
+  noteClient?: number;
+  commentaireClient?: string;
+  date_livree?: string;
+  date_ajoutsystem?: string;
+  date_affection?: string;
+  date_expidetion?: string; // Added missing type
+  idpartenaire?: string;
+  deliveryOption?: string;
+  fixe_temps?: string;
+  fraisLivraison: number;
+  latitude: String;
 }
 
 export interface UserDTO {
-  id: number;
-  firstname: string;
-  lastname: string;
+id?: number;
+  username: string;
   phone: string;
-  email: string;
-  address: string;
-  role: string;
-  gouvernorat: string;
-  photo: string;  // Ajout de la propriété photo
-
+  email?: string;
+  firstname?: string;
+  lastname?: string;
+  address?: string;
+  gouvernorat?: string;
+  role?: string;
+  disponible?: boolean;
+  photo?: string;
 }
 
 export interface ProductDTO {
@@ -52,9 +65,11 @@ export interface ProductDTO {
   dateAdded: string;
   photo: string | null;
   type: string;
-  disponiblity: boolean;
+  Disponible: boolean; // Corrected from disponiblity to match template
   quantity: number;
 }
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -62,7 +77,12 @@ export interface ProductDTO {
 export class AllmyservicesService {
   private apiUrl = `${environment.baseUrlorder}/Commande`;
   private apiUrl2 = 'http://localhost:8080/api/orders';
-  constructor(private http:HttpClient) {}
+  constructor(private http:HttpClient,
+  
+  ) {}
+  private toLocalDateTimeFormat(date: Date): string {
+    return date.toISOString().slice(0, 19);
+  }
   private getHeaders(): HttpHeaders {
     const token = localStorage.getItem('token');
     return new HttpHeaders({
@@ -70,13 +90,30 @@ export class AllmyservicesService {
       'Content-Type': 'application/json'
     });
   }
-    /*AllcmdByIdLivreur2(idlivreur: String): Observable<Commande[]> {
-    return this.http.get<Commande[]>(`${this.apiUrl2}/livreur/${idlivreur}`, { headers: this.getHeaders() });
+   getCommande(id: string): Observable<Commande> {
+    return this.http.get<Commande>(`${this.apiUrl}/getcmd/${id}`);
   }
 
-  AllcmdByIdClient2(iduser: String): Observable<Commande[]> {
-    return this.http.get<Commande[]>(`${this.apiUrl2}/user/${iduser}`, { headers: this.getHeaders() });
-  }*/
+    
+   updateUserProfile_(formData: FormData, token: string, userId: number): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.put(`${environment.baseUrlUser}/User/update/${userId}`, formData, { headers }).pipe(
+      tap((response) => console.log('Réponse updateUserProfile:', response)),
+      catchError((error) => {
+        console.error('Erreur updateUserProfile:', error);
+        return throwError(() => new Error(error.error?.message || 'Échec de la mise à jour du profil'));
+      })
+    );
+  }
+  DetailsUserP(userId: string): Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+    return this.http.get(`${environment.baseUrlUser}/users/${userId}`, { headers });
+  }
 
 
     AllcmdByIdLivreur2(idlivreur: string): Observable<Commande[]> {
@@ -123,60 +160,42 @@ export class AllmyservicesService {
  AllOrders()           
  {return this.http.get(`${environment.baseUrlorder}/Commande/getAll`)}//
  
- 
+  getOrdersByPartenaire(idpartenaire: string): Observable<Commande[]> {
+    return this.http.get<Commande[]>(`${environment.baseUrlorder}/Commande/partner/${idpartenaire}`);
+  }
+
  deleteOneorder(id:String)
  {return this.http.delete(`${environment.baseUrlorder}/Commande/delete/${id}`)}
-/*
- Detailsdeorder(id:String)
- {
-   return this.http.get(`${environment.baseUrlorder}/Commande/getcmd/${id}`)
- }*/
 
-/* updateorder(id:String, data:any){
-   return this.http.put(`${environment.baseUrlorder}/Commande/updatecmd/${id}`,data)
- }*/
+updateorder(id: string, data: Partial<Commande>): Observable<Commande> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      'Authorization': token ? `Bearer ${token}` : '',
+      'Content-Type': 'application/json'
+    });
+    console.log('Sending PUT request with token:', token, 'and data:', data);
+    return this.http.put<Commande>(`${environment.baseUrlorder}/Commande/updateCMD/${id}`, data, { headers });
+  }
+  
 
-
-   ///
-   /*
-   updateorder(id: string, data: any) {
-    return this.http.put(`${environment.baseUrlorder}/Commande/updatecmd/${id}`, data);
-  }*/
- 
-   
-
-    updateorder(id: string, data: any): Observable<any> {
-      const token = localStorage.getItem('token');
-      const headers = new HttpHeaders({
-        'Authorization': token ? `Bearer ${token}` : '',
-        'Content-Type': 'application/json'
-      });
-      console.log('Sending PUT request with token:', token); // Debug
-      return this.http.put(`${environment.baseUrlorder}/api/orders/update/${id}`, data, { headers });
-    }
-
-    AjouterCMD(data: Commande): Observable<any> {
-      return this.http.post(`${environment.baseUrlorder}/commande/createE`, data);
-    }
-
-
+      AjouterCMD(data: FormData): Observable<any> {
+        // No headers needed, as FormData sets 'multipart/form-data' with boundary automatically
+        return this.http.post(`${environment.baseUrlorder}/commande/createE`, data).pipe(
+          map(response => response),
+          catchError(error => {
+            console.error('Error creating commande:', error);
+            return throwError(() => new Error(`Server error: ${error.status} - ${error.message}`));
+          })
+        );
+      }
 
     
-
-
-   
-
     getGovernorates(): Observable<string[]> {
       return this.http.get<string[]>(`${environment.baseUrlorder}/api/governorates`);
   }
   getGovernorateslivreur(): Observable<string[]> {
     return this.http.get<string[]>(`${environment.baseUrlUser}/api/governorates`);
-}/*
-
-
-getAllCommandesByLivreurId(idLivreur: number): Observable<any[]> {
-  return this.http.get<Commande[]>(`${environment.baseUrlorder}/allByLivreurID/${idLivreur}`);
-}*/
+}
 AllcmdByIdLivreur(idlivreur: string): Observable<any[]> {
   const token = localStorage.getItem('token');
   const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
@@ -209,61 +228,26 @@ AllcmdByIdLivreur(idlivreur: string): Observable<any[]> {
    return this.http.get(`${environment.baseUrlorder}/Commande/allByproductID/${id}`)
  }
 
-/*
- assignOrder(orderId: number, deliveryPersonId: number): Observable<any> {
-  const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('token')}`);
-  return this.http.put(`${environment.baseUrlorder}/Commande/assignLivreur/${orderId}/${deliveryPersonId}`, {}, { headers });
-}*/
-assignOrder(orderId: number, deliveryPersonId: number): Observable<any> {
-  const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('token')}`);
-  return this.http.put<any>(`${environment.baseUrlorder}/Commande/assignLivreur/${orderId}/${deliveryPersonId}`, {}, { headers })
-    .pipe(
-      catchError((error) => {
-        console.error('An error occurred:', error);
-        return throwError(() => new Error('Failed to assign delivery person'));
-      })
-    );
+
+assignOrder(orderId: number, livreurId: number, dateAffection?: string): Observable<any> {
+  const token = localStorage.getItem('token') || '';
+  const headers = new HttpHeaders({
+    'Authorization': `Bearer ${token}`,
+    'Content-Type': 'application/json'
+  });
+  const body = {
+    livreurId: livreurId,
+    date_affection: dateAffection // Inclure date_affection si fourni
+  };
+  // Modifier l'URL pour supprimer livreurId de l'URL et l'inclure dans le corps
+  return this.http.put(`/api/assign/${orderId}`, body, { headers });
 }
 
-
-
-/*
- assignOrder(orderId: number, deliveryPersonId: number): Observable<any> {
-  return this.http.put(`${environment.baseUrlorder}/Commande/assignLivreur/${orderId}/${deliveryPersonId}`, {});
-}*/
 
 getDeliveryPersons(id:String){
   return this.http.get(`${environment.baseUrlorder}/Commande/allByLivreurID/${id}`)
 }
 
-
- /*AllcmdByIdUser(id:String){
-  return this.http.get(`${environment.baseUrlorder}/Commande/allByUserID/${id}`)
-}
-*/
- /*
-AllcmdByIdUser(id: string): Observable<any[]> {
-  const token = localStorage.getItem('token');
-  const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-  return this.http.get<any[]>(`${environment.baseUrlorder}/Commande/allByUserID/${id}`, { headers });
-}*/
-
-
-/*Detailsdeorderr(id: string): Observable<any> {
-  const token = localStorage.getItem('token');
-  console.log('Token utilisé pour Detailsdeorder :', token);
-  const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-  return this.http.get<any>(`${environment.baseUrlorder}/Commande/getcmd/${id}`, { headers });
-}*/
-
-
-
-
-Detailsdeorder(id: string): Observable<any> {
-  const token = localStorage.getItem('token');
-  const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-  return this.http.get<any>(`${environment.baseUrlorder}/Commande/getcmd/${id}`, { headers });
-}
 
 AllcmdByIdUser(iduser: string): Observable<any[]> {
   const token = localStorage.getItem('token');
@@ -275,6 +259,30 @@ AllcmdByIdUser(iduser: string): Observable<any[]> {
   AllUsers()
   {return this.http.get(`${environment.baseUrlUser}/User/getall`)}
 
+  
+  
+ AllLivreur(): Observable<any[]> {
+    const url = `${environment.baseUrlUser}/User/getall-delivery-persons`;
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${localStorage.getItem('token') || ''}`,
+      'Content-Type': 'application/json'
+    });
+    console.log('📤 Sending AllLivreur request to:', url);
+    return this.http.get<any[]>(url, { headers }).pipe(
+      tap(response => console.log('📥 AllLivreur response:', response)),
+      catchError(error => {
+        console.error('❌ AllLivreur error:', {
+          status: error.status,
+          statusText: error.statusText,
+          url: error.url,
+          message: error.message,
+          error: error.error
+        });
+        return of([]);
+      })
+    );
+  }
+
   deleteOneUser(id:string)
   {return this.http.delete(`${environment.baseUrlUser}/User/delete/${id}`)}
 
@@ -282,6 +290,10 @@ AllcmdByIdUser(iduser: string): Observable<any[]> {
 
   DetailsUser(id:String)
   {return this.http.get(`${environment.baseUrlUser}/User/getuser/${id}`)}
+  
+DetailsOrder(id: String): Observable<Commande> {
+    return this.http.get<Commande>(`${environment.baseUrlorder}/Commande/getcmd/${id}`);
+  }
 
   UpdateUser(id:string , data:any)
   {return this.http.put(`${environment.baseUrlUser}/User/update/${id}`,data)}
@@ -289,11 +301,15 @@ AllcmdByIdUser(iduser: string): Observable<any[]> {
   AjouterUser(id:string , data:any)
   {return this.http.post(`${environment.baseUrlUser}/User/createPhoto/${id}`,data)}
 
-  
+   Detailsdeorder(id: string): Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get<any>(`${environment.baseUrlorder}/Commande/getcmd/${id}`, { headers });
+  }
   
   getAdmins() {
     return this.http.get<any[]>(`${environment.baseUrlUser}/User/getall`).pipe(
-      map(users => users.filter(user => user.role === "admin"))
+      map(users => users.filter(user => user.role === "Admin"))
     );
   }
 
@@ -307,11 +323,26 @@ AllcmdByIdUser(iduser: string): Observable<any[]> {
   getLivreurs() {
     return this.http.get<any[]>(`${environment.baseUrlUser}/User/getall`).pipe(
       map(users => {
-        return users.filter(user => user.role.toLowerCase() === "livreur");
+        return users.filter(user => user.role.toLowerCase() === "Livreur");
+      })
+    );
+  }
+   getDellliveryPerson() {
+    return this.http.get<any[]>(`${environment.baseUrlUser}/User/getall`).pipe(
+      map(users => {
+        return users.filter(user => user.role.toLowerCase() === "Delivery Person");
       })
     );
   }
 
+
+   getPartners() {
+    return this.http.get<any[]>(`${environment.baseUrlUser}/User/getall`).pipe(
+      map(users => {
+        return users.filter(user => user.role.toLowerCase() === "partner");
+      })
+    );
+  }
   
 
     signin(data: FormData) {
@@ -373,8 +404,96 @@ AllcmdByIdUser(iduser: string): Observable<any[]> {
         newPassword
       });
     }
-
+   
 
   
+
+
+  // Archive a command
+archiveCommande(id: string): Observable<void> {
+  return this.http.put<void>(`${this.apiUrl}/archive/${id}`, {});
+}
+
+// Unarchive a command
+unarchiveCommande(id: string): Observable<void> {
+  return this.http.put<void>(`${this.apiUrl}/unarchive/${id}`, {});
+}
+
+// Fetch active commands for a user
+getActiveCommandes(iduser: string): Observable<any[]> {
+  return this.http.get<any[]>(`${this.apiUrl}/client/${iduser}/active`);
+}
+
+// Fetch archived commands for a user
+getArchivedCommandes(iduser: string): Observable<any[]> {
+  return this.http.get<any[]>(`${this.apiUrl}/client/${iduser}/archived`);
+}
+
+evaluateCommande(id: string, noteClient: number, commentaireClient: string, userId: number): Observable<any> {
+  const payload = {
+    noteClient: noteClient * 1.0, // Convert to float
+    commentaireClient,
+    userId
+  };
+  return this.http.put(`${this.apiUrl}/evaluate/${id}`, payload);
+}
+    
+assignLivreurToCommande(idcommande: number, idlivreur: number, dateAffection: Date): Observable<any> {
+  const url = `${this.apiUrl}/assignLivreur/${idcommande}/${idlivreur}`;
+
+  const body = new HttpParams()
+    .set('date_affection', dateAffection.toISOString()); // format ISO pour LocalDateTime
+
+  const headers = new HttpHeaders({
+    'Content-Type': 'application/x-www-form-urlencoded'
+  });
+
+  return this.http.put<any>(url, body.toString(), { headers });
+}
+
+
+
+
+
+getActiveCommandesByLivreur(idlivreur: string): Observable<Commande[]> {
+  const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('token')}`);
+  return this.http.get<Commande[]>(`${environment.baseUrlorder}/livreur/${idlivreur}/active`, { headers });
+}
+getArchivedCommandesByLivreur(idlivreur: string): Observable<Commande[]> {
+  const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('token')}`);
+  return this.http.get<Commande[]>(`${environment.baseUrlorder}/livreur/${idlivreur}/archived`, { headers });
+}
+
+assignLivreurToCommandeP(orderId: number, livreurId: number, date: Date): Observable<any> {
+  const dateAffection = this.toLocalDateTimeFormat(date);
+  const url = `${environment.baseUrlorder}/Commande/assignLivreur/${orderId}/${livreurId}`;
+  console.log(`Requête PUT: ${url}?date_affection=${dateAffection}`);
+
+  const params = new HttpParams().set('date_affection', dateAffection);
+
+  return this.http.put(url, null, { params });
+}
+
+ AllUsersP(): Observable<any[]> {
+    const url = `${environment.baseUrlUser}/User/getall`;
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${localStorage.getItem('token') || ''}`,
+      'Content-Type': 'application/json'
+    });
+    console.log('📤 Sending AllLUSERSS request to:', url);
+    return this.http.get<any[]>(url, { headers }).pipe(
+      tap(response => console.log('📥 AllLusers response:', response)),
+      catchError(error => {
+        console.error('❌ AllUsers error:', {
+          status: error.status,
+          statusText: error.statusText,
+          url: error.url,
+          message: error.message,
+          error: error.error
+        });
+        return of([]);
+      })
+    );
+  }
 
 }

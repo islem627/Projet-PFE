@@ -1,0 +1,86 @@
+<div class="container-scroller">
+  <br><br><br>
+  <div class="container-fluid page-body-wrapper">
+    <app-headerclient></app-headerclient>
+    <app-sidebar-client></app-sidebar-client>
+
+    <div class="main-panel">
+      <div class="content-wrapper">
+        <div class="page-header">
+          <h3 class="page-title">
+            <span class="page-title-icon bg-gradient-primary text-white me-2">
+              <i class="mdi mdi-clock-outline"></i>
+            </span>  Select Delivery Time
+          </h3>
+        </div>
+
+        <div class="delivery-container">
+          <form [formGroup]="deliveryForm" (ngSubmit)="onSubmit()">
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="id_commande">
+                  <i class="mdi mdi-pound-box"></i> Order ID
+                </label>
+                <input
+                  type="number"
+                  id="id_commande"
+                  formControlName="id_commande"
+                  class="form-control"
+                  required
+                  placeholder="Enter Order ID"
+                >
+                <div *ngIf="deliveryForm.get('id_commande')?.invalid && deliveryForm.get('id_commande')?.touched" class="error-message">
+                  Please enter a valid order ID
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="date_livraison_estimee">
+                  <i class="mdi mdi-calendar"></i> Delivery Date
+                </label>
+                <input
+                  type="date"
+                  id="date_livraison_estimee"
+                  formControlName="date_livraison_estimee"
+                  class="form-control"
+                  required
+                >
+                <div *ngIf="deliveryForm.get('date_livraison_estimee')?.invalid && deliveryForm.get('date_livraison_estimee')?.touched" class="error-message">
+                  Please select a delivery date
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="fixe_temps">
+                  <i class="mdi mdi-clock-outline"></i> Fixed Time
+                </label>
+                <select
+                  id="fixe_temps"
+                  formControlName="fixe_temps"
+                  class="form-control"
+                  required
+                >
+                  <option value="" disabled>Select a time slot</option>
+                  <option *ngFor="let option of fixe_tempss" [value]="option">
+                    {{ option }}
+                  </option>
+                </select>
+                <div *ngIf="deliveryForm.get('fixe_temps')?.invalid && deliveryForm.get('fixe_temps')?.touched" class="error-message">
+                  Please select a delivery time
+                </div>
+              </div>
+            </div>
+
+            <div *ngIf="errorMessage" class="error-message">
+              {{ errorMessage }}
+            </div>
+
+            <button type="submit" [disabled]="deliveryForm.invalid" class="submit-btn">
+              <i class="mdi mdi-check-circle-outline"></i> Update Command
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

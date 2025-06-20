@@ -10,9 +10,7 @@
             <h3 class="page-title">
               <span class="page-title-icon bg-gradient-primary text-white me-2">
                 <i class="mdi mdi-receipt"></i>
-              </span>
-              Order Details
-              
+              </span> Détails de la commande
             </h3>
           </div>
 
@@ -27,19 +25,19 @@
                           <table class="table table-striped">
                             <tbody>
                               <tr>
-                                <td><strong>ID </strong></td>
+                                <td><strong>ID Commande</strong></td>
                                 <td>{{ order.id_commande }}</td>
                               </tr>
                               <tr>
-                                <td><strong>Order Date	</strong></td>
+                                <td><strong>Date Commande</strong></td>
                                 <td>{{ order.dateCommande }}</td>
                               </tr>
                               <tr>
-                                <td><strong>Order Status	</strong></td>
+                                <td><strong>Statut de la commande</strong></td>
                                 <td>{{ order.statut_commande }}</td>
                               </tr>
                               <tr>
-                                <td><strong>	Delivery Address</strong></td>
+                                <td><strong>Adresse de livraison</strong></td>
                                 <td>{{ order.adresse_livraison }}</td>
                               </tr>
                               <tr>
@@ -47,108 +45,143 @@
                                 <td>{{ order.total }} TND</td>
                               </tr>
                               <tr>
-                                <td><strong>Ordered Item</strong></td>
+                                <td><strong>Article commandé</strong></td>
                                 <td>{{ order.articel_commande }}</td>
                               </tr>
                               <tr>
-                                <td><strong>Discount</strong></td>
-                                <td>{{ order.remise }} D</td>
+                                <td><strong>Remise</strong></td>
+                                <td>{{ order.remise }} TND</td>
                               </tr>
                               <tr>
-                                <td><strong>Delivery Fee</strong></td>
+                                <td><strong>Frais de livraison</strong></td>
                                 <td>{{ order.fraisLivraison }} TND</td>
                               </tr>
                               <tr>
-                                <td><strong>Estimated Delivery Date</strong></td>
+                                <td><strong>Date de livraison estimée</strong></td>
                                 <td>{{ order.date_livraison_estimee }}</td>
                               </tr>
                               <tr>
-                                <td><strong>Comments</strong></td>
+                                <td><strong>Commentaires</strong></td>
                                 <td>{{ order.commentaires }}</td>
                               </tr>
                               <tr>
-                                <td><strong>Paid</strong></td>
-                                <td>{{ order.ispaied ? 'Yes' : 'No' }}</td>
+                                <td><strong>Payée</strong></td>
+                                <td>{{ order.ispaied ? 'Oui' : 'Non' }}</td>
                               </tr>
                               <tr>
                                 <td><strong>Latitude</strong></td>
                                 <td>{{ order.latitude }}</td>
                               </tr>
                               <tr>
-                                <td><strong>Longitude </strong></td>
+                                <td><strong>Longitude</strong></td>
                                 <td>{{ order.longitude }}</td>
                               </tr>
+                              <tr>
+                                <td><strong>Date ajout système</strong></td>
+                                <td>{{ order.date_ajoutsystem }}</td>
+                              </tr>
+                              <tr>
+                                <td><strong>Date affectation</strong></td>
+                                <td>{{ order.date_affection || 'N/A' }}</td>
+                              </tr>
+                              <tr>
+                                <td><strong>Date expédition</strong></td>
+                                <td>{{ order.date_expedition || 'N/A' }}</td>
+                              </tr>
+                              <tr>
+                                <td><strong>Date livrée</strong></td>
+                                <td>{{ order.date_livree || 'N/A' }}</td>
+                              </tr>
+                              <tr>
+                                <td><strong>Enseigne</strong></td>
+                                <td>{{ order.enseigne || 'N/A' }}</td>
+                              </tr>
+                              <tr>
+                                <td><strong>Destination enseigne</strong></td>
+                                <td>{{ order.destination_enseigne || 'N/A' }}</td>
+                              </tr>
+                              <tr>
+                                <td><strong>Poids (g)</strong></td>
+                                <td>{{ order.poids_grammes }} g</td>
+                              </tr>
+                              <tr>
+                                <td><strong>Hauteur (cm)</strong></td>
+                                <td>{{ order.hauteur_cm }} cm</td>
+                              </tr>
+                              <tr>
+                                <td><strong>Largeur (cm)</strong></td>
+                                <td>{{ order.largeur_cm }} cm</td>
+                              </tr>
+                              <tr>
+                                <td><strong>Longueur (cm)</strong></td>
+                                <td>{{ order.longueur_cm }} cm</td>
+                              </tr>
+                              <tr>
+                                <td><strong>Archivée</strong></td>
+                                <td>{{ order.archived ? 'Oui' : 'Non' }}</td>
+                              </tr>
+                              <tr>
+                                <td><strong>Commentaire client</strong></td>
+                                <td>{{ order.commentaireClient || 'N/A' }}</td>
+                              </tr>
+                              <tr>
+                                <td><strong>Note client</strong></td>
+                                <td>{{ order.noteClient || 'N/A' }}</td>
+                              </tr>
+                              <tr>
+                                <td><strong>Gouvernorat</strong></td>
+                                <td>{{ order.gouvernoratCmd || 'N/A' }}</td>
+                              </tr>
 
-                              <!-- Détails Produit -->
-                              <tr><td colspan="2"><strong>--- Ordered Product  ---</strong></td></tr>
+                              <!-- Informations client -->
                               <tr>
-                                <td><strong>Name Product</strong></td>
-                                <td>{{ order.productDTO.name }}</td>
+                                <td colspan="2"><strong>Informations client</strong></td>
                               </tr>
                               <tr>
-                                <td><strong>Description Product</strong></td>
-                                <td>{{ order.productDTO.description }}</td>
-                              </tr>
-                              <tr>
-                                <td><strong>Price Product</strong></td>
-                                <td>{{ order.productDTO.price }} TND</td>
-                              </tr>
-                              <tr>
-                                <td><strong>Availability Product</strong></td>
-                                <td>{{ order.productDTO.type }}</td>
-                              </tr>
-                              <tr>
-                                <td><strong>Disponible</strong></td>
-                                <td>{{ order.productDTO.Disponible ? 'Oui' : 'Non' }}</td>
-                              </tr>
-                              <tr>
-                                <td><strong>Quantity</strong></td>
-                                <td>{{ order.productDTO.quantity }}</td>
-                              </tr>
-
-                              <!-- Détails Utilisateur -->
-                              <tr><td colspan="2"><strong>--- Client Information---</strong></td></tr>
-                              <tr>
-                                <td><strong>Username</strong></td>
-                                <td>{{ order.userDTO.username }}</td>
+                                <td><strong>Nom d'utilisateur</strong></td>
+                                <td>{{ order.userDTO?.username }}</td>
                               </tr>
                               <tr>
                                 <td><strong>Email</strong></td>
-                                <td>{{ order.userDTO.email }}</td>
+                                <td>{{ order.userDTO?.email }}</td>
                               </tr>
                               <tr>
-                                <td><strong>Lastname</strong></td>
-                                <td>{{ order.userDTO.lastname }}</td>
+                                <td><strong>Nom</strong></td>
+                                <td>{{ order.userDTO?.lastname }}</td>
                               </tr>
                               <tr>
-                                <td><strong>Firstname</strong></td>
-                                <td>{{ order.userDTO.firstname }}</td>
+                                <td><strong>Prénom</strong></td>
+                                <td>{{ order.userDTO?.firstname }}</td>
                               </tr>
                               <tr>
-                                <td><strong>Adress</strong></td>
-                                <td>{{ order.userDTO.address }}</td>
+                                <td><strong>Adresse</strong></td>
+                                <td>{{ order.userDTO?.address }}</td>
                               </tr>
                               <tr>
-                                <td><strong>Phone</strong></td>
-                                <td>{{ order.userDTO.phone }}</td>
+                                <td><strong>Téléphone</strong></td>
+                                <td>{{ order.userDTO?.phone }}</td>
                               </tr>
                               <tr>
-                                <td><strong>Role</strong></td>
-                                <td>{{ order.userDTO.role }}</td>
+                                <td><strong>Rôle</strong></td>
+                                <td>{{ order.userDTO?.role }}</td>
                               </tr>
-                              <tr>
+                              <!--<tr>
                                 <td><strong>Photo</strong></td>
                                 <td>
-                                  <img [src]="'http://localhost:8762/User/files/' + order.userDTO.photo" 
-                                       alt="photo utilisateur" 
-                                       style="width: 100px; height: 100px;">
+                                  <img [src]="'http://localhost:8762/User/files/' + order.userDTO.photo" alt="Photo de l'utilisateur" style="width: 100px; height: 100px;">
                                 </td>
-                              </tr>
+                              </tr>-->
                             </tbody>
                           </table>
+
+                          <div class="mt-3 d-flex gap-2">
+                            <button class="btn-cancel" (click)="goBack()">
+                              <i class="mdi mdi-arrow-left"></i> Retour
+                            </button>
+                          </div>
                         </div>
                       </div>
-                    </div> <!-- fin card -->
+                    </div>
                   </div>
                 </div>
               </div>

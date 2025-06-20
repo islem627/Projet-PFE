@@ -67,19 +67,36 @@ isUserConnected: String = '';
     );
   }
 
-  connect(): void {
-    const socket = new SockJS('http://localhost:8080/ws');
-    this.stompClient = Stomp.over(socket);
+ connect(): void {
+  const userId = localStorage.getItem('iduserconnected');
 
-    this.stompClient.connect({}, (frame: any) => {
-      console.log('Connected:', frame);
-      this.stompClient.subscribe('/topic/notifications', (message: any) => {
-        this.showNotification(message.body);
-      });
-    }, (error: any) => {
-      console.error('Erreur de connexion WebSocket:', error);
-    });
+  if (!userId) {
+    console.error('❌ No user ID found in localStorage.');
+    return;
   }
+
+  // 👇 Add userId as query param to the WebSocket URL
+  const socket = new SockJS(`http://localhost:8080/ws?userId=${userId}`);
+  this.stompClient = Stomp.over(socket);
+
+  // Optional: disable debug logs
+  this.stompClient.debug = () => {};
+
+  this.stompClient.connect({}, (frame: any) => {
+    console.log('🟢 Connected as user:', userId);
+    console.log('STOMP Frame:', frame);
+
+    // ✅ Subscribe to the private notification channel
+    this.stompClient.subscribe('/user/queue/notifications', (message: any) => {
+      console.log('🔔 Notification received:', message.body);
+      this.showNotification(message.body);
+    });
+
+  }, (error: any) => {
+    console.error('🔴 WebSocket connection error:', error);
+  });
+}
+
 
   showNotification(message: string): void {
     const currentTime = new Date();
@@ -192,4 +209,10 @@ isUserConnected: String = '';
         });
       }
         
+      profile() : void
+{
+  this.router.navigate(['/updateprofile']);
+
+}
+
 }

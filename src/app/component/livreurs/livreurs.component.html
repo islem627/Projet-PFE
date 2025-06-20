@@ -9,8 +9,12 @@
             <div class="page-header">
               <h3 class="page-title">
                 <span class="page-title-icon bg-gradient-primary text-white me-2">
-                  <i class="mdi-format-list-bulleted"></i>
-                </span> Delivery Personnel List
+  <i class="mdi mdi-truck-delivery"></i>
+</span>
+Delivery Persons List
+
+
+
               </h3>
               <nav aria-label="breadcrumb">
                 <ul class="breadcrumb">
@@ -18,7 +22,6 @@
                     <div style="
                       display: flex;
                       align-items: center;
-                      background-color: #caafd26e; /* Violet pastel foncé */
                       border-radius: 12px;
                       padding: 6px 10px;
                       box-shadow: 0 2px 6px rgba(218, 161, 230, 0.742);
@@ -27,7 +30,7 @@
                     ">
                       <input type="text"
                              [(ngModel)]="searchText"
-                             placeholder="Search Delivery Person by Username..."
+                             placeholder="Search livreur by Username..."
                              style="
                                border: none;
                                background: linear-gradient(135deg, #b388ff, #e1bee7);
@@ -70,62 +73,53 @@
                         <thead>
                           <tr>
                             <th>ID</th>
-                              <th> Username </th>
-                              <th>Photo</th>
-                              <th> Email </th>
-                              <th> Phone </th>
-                              <th> Adress </th>
-                              <th>Governorate</th>
-                              <th> Role </th>
-                              <th>Action</th>
+                            <th> Username </th>
+                            <th>Photo</th>
+                            <th> Email </th>
+                            <th> Phone </th>
+                            <th> Adress </th>
+                            <th> Role </th>
+                            <th>Action</th>
                           </tr>
                         </thead>
                         <tbody>
-                          <tr *ngFor="let Livreur of listLivreur |paginate:{itemsPerPage:3,currentPage:c};">
-                            <td>{{ Livreur.id }}</td>
+                          <tr *ngFor="let livreur of listLivreur |paginate:{itemsPerPage:5,currentPage:c};">
+                            <td>{{ livreur.id }}</td>
                             <td>
-                              <img [src]="'http://localhost:8762/User/files/' + Livreur.photo" class="me-2" alt="image">
-  
+                              <img [src]="'http://localhost:8762/User/files/' + livreur.photo" class="me-2" alt="image">
+
                             </td>
-                            <td>{{ Livreur.username }}</td>
-                            <td>{{ Livreur.email }}</td>
-                            <td>{{ Livreur.phone }}</td>
-                            <td>{{ Livreur.address }}</td>
-                            <td>{{Livreur.gouvernorat}}</td>
-                            <td>{{ Livreur.role }}</td>
+                            <td>{{ livreur.username }}</td>
+                            <td>{{ livreur.email }}</td>
+                            <td>{{ livreur.phone }}</td>
+                            <td>{{ livreur.address }}</td>
+                            <td>{{ livreur.role }}</td>
                             <td>
-                              
-                              <!-- Détails Livreur -->
-<button type="button" 
+                              <button type="button" 
 class="btn-circle btn-gradient-primary btn-rounded  action-btn" 
-(click)="detailsLivreur(Livreur.id)">
+(click)="  detailsLivreur
+(livreur.id)">
 <i class="mdi mdi-account-search-outline text-white" style="cursor: pointer;"></i>
 </button>
 
 <!-- Modifier Livreur -->
 <button type="button" 
 class="btn-circle btn-gradient-success btn-rounded  action-btn" 
-(click)="updateLivreur(Livreur.id)">
+(click)="updateLivreur(livreur.id)">
 <i class="mdi mdi-account-edit-outline" style="cursor: pointer;"></i>
 </button>
 
 <!-- Supprimer Livreur -->
 <button type="button"
 class="btn-circle btn-gradient-danger btn-rounded action-btn" 
-(click)="deleteLivreur(Livreur.id)">
+(click)="deleteLivreur(livreur.id)">
 <i class="mdi mdi-account-remove-outline text-white" style="cursor: pointer;"></i>
 </button>
-
-                              
-                              
-                              
-                            
-                          </td>
+                            </td>
                           </tr>
                         </tbody>
                       </table>
                       <pagination-controls (pageChange)="c=$event"></pagination-controls>
-  
                     </div>
                   </div>
                 </div>

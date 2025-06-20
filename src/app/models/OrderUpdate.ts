@@ -8,7 +8,8 @@
 export interface OrderUpdate {
   orderId: string;
   status: string;
-  articelCommande: string | null;
-  adresseLivraison: string | null;
-  dateCommande: string | null;
+  iduser: number;
+  articelCommande?: string;
+  adresseLivraison?: string;
+  dateCommande?: string;
 }

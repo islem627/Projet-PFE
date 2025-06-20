@@ -1,87 +1,119 @@
-<div class="profile-container">
-  <!-- Partie gauche : Carte profil -->
-  <div class="profile-card">
-    <img [src]="user.file ? (user.file ) : 'assets/default-profile.png'" alt="Photo de profil" class="profile-img" />
-    <h2>{{ user.username || 'Utilisateur' }}</h2>
-    <p><i class="fas fa-envelope"></i> {{ user.email || 'Non défini' }}</p>
-    <p><i class="fas fa-phone"></i> {{ user.phone || 'Non défini' }}</p>
-  </div>
+<body>
+  <div class="container-scroller">
+    <br>
+    <!-- partial:partials/_navbar.html -->
+    <app-header></app-header>
+    <br><br><br>
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+      <!-- partial:partials/_sidebar.html -->
+      <br><br><br>
+      <app-sidebar></app-sidebar>
+      <!-- partial -->
+      <div class="main-panel">
+        <div class="content-wrapper">
+         
+          <div class="profile-container">
+            <!-- Partie gauche : Carte profil -->
+            <div class="profile-card">
+          <img [src]="'http://localhost:8762/User/files/' + user.photo" alt="Photo de profil" class="profile-img"/>
+              <h2>{{ user.username || 'Utilisateur' }}</h2>
+              <p><i class="fas fa-envelope"></i> {{ user.email || 'Non défini' }}</p>
+              <p><i class="fas fa-phone"></i> {{ user.phone || 'Non défini' }}</p>
+              <p><i class="fas fa-map-marker-alt"></i> {{ user.address || 'Non défini' }}</p>
+              <p><i class="fas fa-city"></i> {{ user.gouvernorat || 'Non défini' }}</p>
+            </div>
 
-  <!-- Partie droite : Formulaire -->
-  <div class="profile-form">
-    <form (ngSubmit)="updateProfile()" #profileForm="ngForm">
-      <h3><i class="fas fa-user-edit"></i> Modifier mon profil</h3>
+            <!-- Partie droite : Formulaire -->
+            <div class="profile-form">
+              <form (ngSubmit)="updateProfile()" #profileForm="ngForm">
+                <h3><i class="fas fa-user-edit"></i> Modifier mon profil</h3>
 
-      <div>
-        <label for="username"><i class="fas fa-user"></i> Nom d'utilisateur</label>
-        <input
-          type="text"
-          id="username"
-          [(ngModel)]="user.username"
-          name="username"
-          required
-          #username="ngModel"
-          [class.invalid]="username.invalid && username.touched"
-        />
-        <span *ngIf="username.invalid && username.touched" class="error">Le nom d'utilisateur est requis.</span>
+                <div>
+                  <label for="username"><i class="fas fa-user"></i> Nom d'utilisateur</label>
+                  <input type="text" id="username" [(ngModel)]="user.username" name="username" #username="ngModel" [class.invalid]="username.invalid && username.touched" />
+                  <span *ngIf="username.invalid && username.touched" class="error">Le nom d'utilisateur est requis.</span>
+                </div>
+
+                <div>
+                  <label for="email"><i class="fas fa-envelope"></i> Email</label>
+                  <input type="email" id="email" [(ngModel)]="user.email" name="email" email #email="ngModel" [class.invalid]="email.invalid && email.touched" />
+                  <span *ngIf="email.invalid && email.touched" class="error">Veuillez entrer un email valide.</span>
+                </div>
+
+                <div>
+                  <label for="phone"><i class="fas fa-phone"></i> Téléphone</label>
+                  <input type="text" id="phone" [(ngModel)]="user.phone" name="phone" pattern="[0-9]{10}" #phone="ngModel" [class.invalid]="phone.invalid && phone.touched" />
+                  <span *ngIf="phone.invalid && phone.touched" class="error">Le numéro doit contenir 10 chiffres.</span>
+                </div>
+
+                <div>
+                  <label for="address"><i class="fas fa-map-marker-alt"></i> Adresse</label>
+                  <input type="text" id="address" [(ngModel)]="user.address" name="address" #address="ngModel" />
+                </div>
+
+            <div>
+                  <label for="gouvernorat"><i class="fas fa-city"></i> Gouvernorat</label>
+                  <select
+                    id="gouvernorat"
+                    [(ngModel)]="user.gouvernorat"
+                    name="gouvernorat"
+                    #gouvernorat="ngModel"
+                    [class.invalid]="gouvernorat.invalid && gouvernorat.touched"
+                    class="form-control"
+                    required
+                  >
+                    <option value="" disabled selected>Sélectionnez un gouvernorat</option>
+                    <option value="Ariana">Ariana</option>
+                    <option value="Béja">Béja</option>
+                    <option value="Ben Arous">Ben Arous</option>
+                    <option value="Bizerte">Bizerte</option>
+                    <option value="Gabès">Gabès</option>
+                    <option value="Gafsa">Gafsa</option>
+                    <option value="Jendouba">Jendouba</option>
+                    <option value="Kairouan">Kairouan</option>
+                    <option value="Kasserine">Kasserine</option>
+                    <option value="Kébili">Kébili</option>
+                    <option value="Le Kef">Le Kef</option>
+                    <option value="Mahdia">Mahdia</option>
+                    <option value="La Manouba">La Manouba</option>
+                    <option value="Médenine">Médenine</option>
+                    <option value="Monastir">Monastir</option>
+                    <option value="Nabeul">Nabeul</option>
+                    <option value="Sfax">Sfax</option>
+                    <option value="Sidi Bouzid">Sidi Bouzid</option>
+                    <option value="Siliana">Siliana</option>
+                    <option value="Sousse">Sousse</option>
+                    <option value="Tataouine">Tataouine</option>
+                    <option value="Tozeur">Tozeur</option>
+                    <option value="Tunis">Tunis</option>
+                    <option value="Zaghouan">Zaghouan</option>
+                  </select>
+                  <span *ngIf="gouvernorat.invalid && gouvernorat.touched" class="error">Veuillez sélectionner un gouvernorat.</span>
+                </div>
+
+                <div>
+                  <label for="file"><i class="fas fa-image"></i> Photo</label>
+                  <input type="file" id="file" (change)="onFileChange($event)" accept="image/*" />
+                </div>
+
+                <div *ngIf="showPasswordSection">
+                  <label for="password"><i class="fas fa-key"></i> Nouveau mot de passe</label>
+                  <input type="password" id="password" [(ngModel)]="user.password" name="password" #password="ngModel" [class.invalid]="password.invalid && password.touched" />
+                  <span *ngIf="password.invalid && password.touched" class="error">Le mot de passe est requis.</span>
+                </div>
+
+                <button type="submit"><i class="fas fa-save"></i> Mettre à jour</button>
+              </form>
+
+              <!-- Bouton toggle changer mot de passe -->
+              <button class="password-btn" (click)="togglePasswordSection()">
+                <i class="fas fa-lock"></i> {{ showPasswordSection ? 'Annuler' : 'Changer mon mot de passe' }}
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
-
-      <div>
-        <label for="email"><i class="fas fa-envelope"></i> Email</label>
-        <input
-          type="email"
-          id="email"
-          [(ngModel)]="user.email"
-          name="email"
-          required
-          email
-          #email="ngModel"
-          [class.invalid]="email.invalid && email.touched"
-        />
-        <span *ngIf="email.invalid && email.touched" class="error">Veuillez entrer un email valide.</span>
-      </div>
-
-      <div>
-        <label for="phone"><i class="fas fa-phone"></i> Téléphone</label>
-        <input
-          type="text"
-          id="phone"
-          [(ngModel)]="user.phone"
-          name="phone"
-          pattern="[0-9]{10}"
-          #phone="ngModel"
-          [class.invalid]="phone.invalid && phone.touched"
-        />
-        <span *ngIf="phone.invalid && phone.touched" class="error">Le numéro doit contenir 10 chiffres.</span>
-      </div>
-
-      <div>
-        <label for="file"><i class="fas fa-image"></i> Photo</label>
-        <input type="file" id="file" (change)="onFileChange($event)" accept="image/*" />
-      </div>
-
-      <button type="submit" [disabled]="profileForm.invalid"><i class="fas fa-save"></i> Mettre à jour</button>
-    </form>
-
-    <!-- Changer mot de passe -->
-    <div *ngIf="showPasswordSection" class="change-password-section">
-      <h4><i class="fas fa-key"></i> Changer le mot de passe</h4>
-      <input
-        type="password"
-        [(ngModel)]="user.password"
-        name="password"
-        placeholder="Nouveau mot de passe"
-        required
-        #password="ngModel"
-        [class.invalid]="password.invalid && password.touched"
-      />
-      <span *ngIf="password.invalid && password.touched" class="error">Le mot de passe est requis.</span>
-      <button (click)="changePassword()" [disabled]="!user.password"><i class="fas fa-check"></i> Valider</button>
     </div>
-
-    <!-- Bouton toggle changer mot de passe -->
-    <button class="password-btn" (click)="showPasswordSection = !showPasswordSection">
-      <i class="fas fa-lock"></i> {{ showPasswordSection ? 'Annuler' : 'Changer mon mot de passe' }}
-    </button>
   </div>
-</div>
+</body>

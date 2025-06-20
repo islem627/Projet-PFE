@@ -1,0 +1,48 @@
+<nav class="sidebar sidebar-offcanvas" id="sidebar">
+  <ul class="nav">
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/home">
+        <span class="menu-title">Dashboard</span>
+        <i class="mdi mdi-view-dashboard menu-icon"></i>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/destination" aria-expanded="false" aria-controls="auth">
+        <span class="menu-title">Destination</span>
+        <i class="mdi mdi-map-marker menu-icon"></i>
+      </a>
+    </li>
+    <li class="nav-item ">
+      <a class="nav-link animated-link dropdown-toggle" id="notifDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <span class="menu-title">Contacter</span>
+        <i class="mdi mdi-message-processing menu-icon"></i>
+        <span class="count-symbol" *ngIf="unreadMessageCount > 0">{{ unreadMessageCount }}</span>
+      </a>
+      <div class="dropdown-menu dropdown-menu-end" aria-labelledby="notifDropdown">
+        <div id="livreurList" class="dropdown-item">
+          <!-- Chargement en cours -->
+          <ng-container *ngIf="loading">
+            <p class="dropdown-item">Chargement...</p>
+          </ng-container>
+          <!-- Aucun livreur -->
+          <ng-container *ngIf="!loading && livreurs.length === 0">
+            <p class="dropdown-item">Aucun livreur assigné</p>
+          </ng-container>
+          <!-- Liste des livreurs -->
+          <div *ngFor="let livreur of livreurs" class="dropdown-item">
+            <div class="d-flex align-items-center">
+              <img [src]="'http://localhost:8762/User/files/' + (livreur.photo || 'default-image.jpg')"
+                   class="me-2 rounded-circle" alt="livreur" width="40" height="40">
+              <div class="ms-2">
+                <p class="mb-0 fw-bold">{{ livreur.firstname }} {{ livreur.lastname }}</p>
+                <p class="mb-0 small text-muted">Téléphone: {{ livreur.phone }}</p>
+                <a [routerLink]="['/chat', livreur.id]" class="btn btn-sm btn-outline-warning mt-1">Contacter</a>
+              </div>
+            </div>
+            <hr class="my-2">
+          </div>
+        </div>
+      </div>
+    </li>
+  </ul>
+</nav>

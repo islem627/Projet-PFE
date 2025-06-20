@@ -39,12 +39,11 @@ import { AddproductComponent } from './component/addproduct/addproduct.component
 import { AddorderComponent } from './component/addorder/addorder.component';
 import { UpdateproductComponent } from './component/updateproduct/updateproduct.component';
 import { UpdateuserComponent } from './component/updateuser/updateuser.component';
-import { PageClientComponent } from './component/pageclient/page-client.component';
 import { HeaderclientComponent } from './component/headerclient/headerclient.component';
 import { HeaderlivreurComponent } from './component/headerlivreur/headerlivreur.component';
 import { UpdateadminComponent } from './component/updateadmin/updateadmin.component';
 import { ProfileComponent } from './component/profile/profile.component';
-import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { CommonModule, HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { LivreursComponent } from './component/livreurs/livreurs.component';
 import { DetailslivreurComponent } from './component/detailslivreur/detailslivreur.component';
 import { UpdatelivreurComponent } from './component/updatelivreur/updatelivreur.component';
@@ -56,12 +55,43 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { ForgotPasswordComponent } from './component/forgot-password/forgot-password.component';
 import { PageDeleviryComponent } from './component/page-deleviry/page-deleviry.component';
 import { NotifclientComponent } from './component/notifclient/notifclient.component';
-import { ChattComponent } from './component/chatt/chatt.component';
 import { DeliveryComponent } from './component/delivery/delivery.component';
 import { ClientNotificationsComponent } from './component/client-notifications/client-notifications.component';
 import { PartnerComponent } from './component/partner/partner.component';
+import { PlanningComponent } from './component/planning/planning.component';
+import { HistoriqueComponent } from './component/historique/historique.component';
+import { PageClientComponent } from './component/pageclient/pageclient/page-client.component';
+
+
+import { AuthService } from './services/auth.service';
+import { AllmyservicesService } from './services/allmyservices.service';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import { DeliveryTrackerComponent } from './component/delivery-tracker/delivery-tracker.component';
+import { GoogleMapsModule } from '@angular/google-maps';
+import { StompTestComponent } from './component/stomp-test/stomp-test.component';
+import { MapsComponent } from './component/maps/maps.component';
+import { HistoPartnerComponent } from './component/histo-partner/histo-partner.component';
+import { DateComponent } from './component/date/date.component';
+import { SidebarClientComponent } from './component/sidebar-client/sidebar-client.component';
+import { SidebarPartnerComponent } from './component/sidebar-partner/sidebar-partner.component';
+import { SidebarLivreurComponent } from './component/sidebar-livreur/sidebar-livreur.component';
+import { DetailsOrdesComponent } from './details-ordes/details-ordes.component';
+import { DetailsComponent } from './component/details/details.component';
+import { CommandeDetailsComponent } from './commande-details/commande-details.component';
+import { AllPartnerComponent } from './component/all-partner/all-partner.component';
+import { DetailsPartnerComponent } from './component/details-partner/details-partner.component';
+import { UpdatePartnerComponent } from './component/update-partner/update-partner.component';
+
 
 firebase.initializeApp(environement.firebase);
+
+
+const socketConfig: SocketIoConfig = {
+  url: 'http://localhost:8080',
+  options: { transports: ['websocket', 'polling'] }
+};
+
+
 
 @NgModule({
   declarations: [
@@ -108,11 +138,27 @@ firebase.initializeApp(environement.firebase);
     ForgotPasswordComponent,
     PageDeleviryComponent,
     NotifclientComponent,
-    ChattComponent,
     DeliveryComponent,
     ClientNotificationsComponent,
     PartnerComponent,
-    
+    PlanningComponent,
+    HistoriqueComponent,
+  
+
+    DeliveryTrackerComponent,
+     StompTestComponent,
+     MapsComponent,
+     HistoPartnerComponent,
+     DateComponent,
+     SidebarClientComponent,
+     SidebarPartnerComponent,
+     SidebarLivreurComponent,
+     DetailsOrdesComponent,
+     DetailsComponent,
+     CommandeDetailsComponent,
+     AllPartnerComponent,
+     DetailsPartnerComponent,
+     UpdatePartnerComponent,
     
     
   ],
@@ -122,27 +168,35 @@ firebase.initializeApp(environement.firebase);
     AppRoutingModule,
     FormsModule, // Ajouter FormsModule ici
     ToastrModule.forRoot(),  // ToastrModule ajouté
-   /* 
-      {
-       progressBar: true,
-        closeButton: true,
-        newestOnTop: true,
-        tapToDismiss: true,
-        positionClass: 'toast-top-right',
-        timeOut: 8000
-      }
-    ,*/
-
-    ReactiveFormsModule ,
-    HttpClientModule ,
+ 
+    HttpClientModule,
     BrowserAnimationsModule,
     NgxPaginationModule,
     MatSelectModule,
     ReactiveFormsModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatFormFieldModule,
+    CommonModule,
+    GoogleMapsModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+        NgxPaginationModule,
+        MatSelectModule,
+        MatFormFieldModule,
+        CommonModule,
+        ToastrModule.forRoot(),
+        GoogleMapsModule
+    
+  
+
+    
   ],
  // providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
- providers: [],
- bootstrap: [AppComponent]
+ providers: [
+
+   AuthService, 
+  AllmyservicesService,
+ ],
+   bootstrap: [AppComponent]
 })
 export class AppModule { }

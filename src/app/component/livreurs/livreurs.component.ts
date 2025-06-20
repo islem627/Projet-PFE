@@ -8,29 +8,30 @@ import Swal from 'sweetalert2';
   templateUrl: './livreurs.component.html',
   styleUrls: ['./livreurs.component.css']
 })
-export class LivreursComponent implements OnInit {
-  listLivreur: any[] = []; // Correction : aligné avec le HTML
+export class LivreursComponent  implements OnInit {
+  constructor(private service: AllmyservicesService , private router: Router) {}
 
-  constructor(private service: AllmyservicesService, private router : Router) {}
+  listLivreur: any[] = [];
   c: number = 1
 
 
   ngOnInit(): void {
-    this.getLivreursList();
+    this.getDeliveryPerson();
   }
 
-  getLivreursList() {
-    this.service.getLivreurs().subscribe(
-      (result) => {
-        console.log("Livreurs récupérés :", result);
-        this.listLivreur = result; // Correction : utilisation de listLivreur
+  getDeliveryPerson() {
+    this.service.AllLivreur().subscribe(
+      (admins: any[]) => {
+        console.log("Liste des admins :", admins);
+        this.listLivreur = admins;
       },
       (error) => {
-        console.error("Erreur lors de la récupération des Livreurs", error);
+        console.error("Erreur lors de la récupération des admins", error);
       }
     );
   }
-
+  
+  
   detailsLivreur(id: string) {
     this.router.navigate(['/detailslivreur', id]);  // Navigation vers la page des détails du Livreur
   }
@@ -54,7 +55,7 @@ export class LivreursComponent implements OnInit {
     if (result.isConfirmed) {
       this.service. deleteOneUser(id).subscribe(
         (res)=>{console.log("suceess to delete: ", res) ;
-          this.getLivreursList() //apel au fonction de get all
+          this.getDeliveryPerson() //apel au fonction de get all
         } ,
         (error)=>{console.log("error",error)}
       )
@@ -72,6 +73,7 @@ export class LivreursComponent implements OnInit {
 
 searchText: string = '';
 
-  
+
 }
+
 

@@ -7,14 +7,14 @@ import { AllmyservicesService } from 'src/app/services/allmyservices.service';
   templateUrl: './updatelivreur.component.html',
   styleUrls: ['./updatelivreur.component.css']
 })
-export class UpdatelivreurComponent implements OnInit {
-  userId: string | null = '';
-  user: any = {};
-  originalUser: any = {}; // Ajouter cette ligne pour gérer l'original de l'utilisateur
+export class UpdatelivreurComponent  implements OnInit {
+  livreurId: string | null = '';
+  livreur: any = {};
+  originallivreur: any = {};
   editingField: string | null = null;
-
   editValues: any = {};
   isEditing: { [key: string]: boolean } = {};
+  showSuccessAlert: boolean = false; // Variable pour contrôler l'alerte
 
   @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
 
@@ -25,46 +25,51 @@ export class UpdatelivreurComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.userId = this.route.snapshot.paramMap.get('id');
-    if (this.userId) {
-      this.getUserDetails(this.userId);
+    this.livreurId = this.route.snapshot.paramMap.get('id');
+    if (this.livreurId) {
+      this.getlivreurDetails(this.livreurId);
     }
   }
 
-  getUserDetails(id: string) {
+  getlivreurDetails(id: string) {
     this.service.DetailsUser(id).subscribe({
       next: res => {
-        this.user = res;
-        this.originalUser = { ...res }; // Initialiser `originalUser` ici
-        this.editValues = { ...res }; // Initialiser les valeurs éditables
-        console.log('Détails de l\'utilisateur:', this.user);
-              },
+        this.livreur = res;
+        this.originallivreur = { ...res };
+        this.editValues = { ...res };
+        console.log('Détails de l\'utilisateur:', this.livreur);
+      },
       error: err => console.error('Erreur lors du chargement de l\'utilisateur', err)
     });
   }
 
   cancelChanges() {
-    // Réinitialiser tous les champs aux valeurs d'origine (avant modification)
-    this.user = { ...this.originalUser }; // Utiliser `originalUser` pour restaurer l'état initial
-    this.isEditing = {}; // Réinitialiser l'état des champs en mode lecture
+    this.livreur = { ...this.originallivreur };
+    this.isEditing = {};
+    this.showSuccessAlert = false; // Cacher l'alerte lors de l'annulation
   }
 
-  onPhotoSelected(event: Event) {
-    const input = event.target as HTMLInputElement;
-    if (!input.files?.length || !this.userId) return;
+ onPhotoSelected(event: Event) {
+  const input = event.target as HTMLInputElement;
+  if (!input.files?.length || !this.livreurId) return;
 
-    const file = input.files[0];
-    const formData = new FormData();
-    formData.append('photo', file);
+  const file = input.files[0];
+  const formData = new FormData();
+  formData.append('file', file); // Nom 'file' pour correspondre à @RequestPart("file")
 
-    this.service.AjouterUser(this.userId, formData).subscribe({
-      next: () => {
-        console.log('Photo de l\'utilisateur mise à jour');
-        this.getUserDetails(this.userId!);
-      },
-      error: err => console.error('Erreur lors de la mise à jour de la photo', err)
-    });
-  }
+  this.service.UpdateUser(this.livreurId, formData).subscribe({
+    next: () => {
+      console.log('Photo de l\'utilisateur mise à jour');
+      this.getlivreurDetails(this.livreurId!); // Recharger les détails de l'utilisateur
+      this.showSuccessAlert = true; // Afficher l'alerte
+      this.hideAlertAfterDelay(); // Cacher après 3 secondes
+    },
+    error: err => {
+      console.error('Erreur lors de la mise à jour de la photo', err);
+      // Optionnel : Afficher une alerte d'erreur
+    }
+  });
+}
 
   toggleEdit(field: string, currentValue: any) {
     this.isEditing[field] = !this.isEditing[field];
@@ -76,28 +81,34 @@ export class UpdatelivreurComponent implements OnInit {
   }
 
   submitField(field: string) {
-    if (!this.userId) return;
+    if (!this.livreurId) return;
 
-    this.user[field] = this.editValues[field];
+    this.livreur[field] = this.editValues[field];
 
     const payload: any = {};
-    payload[field] = this.user[field];
+    payload[field] = this.livreur[field];
 
-    this.service.UpdateUser(this.userId, payload).subscribe({
+    this.service.UpdateUser(this.livreurId, payload).subscribe({
       next: () => {
         console.log(`${field} mis à jour avec succès`);
-        this.getUserDetails(this.userId!);
+        this.getlivreurDetails(this.livreurId!);
         this.isEditing[field] = false;
+        this.showSuccessAlert = true; // Afficher l'alerte
+        this.hideAlertAfterDelay(); // Cacher après 3 secondes
       },
       error: err => console.error(`Erreur lors de la mise à jour du champ ${field}`, err)
     });
   }
 
   submitAll() {
-    if (!this.userId) return;
+    if (!this.livreurId) return;
 
-    this.service.UpdateUser(this.userId, this.user).subscribe({
-      next: () => console.log('Utilisateur mis à jour avec succès'),
+    this.service.UpdateUser(this.livreurId, this.livreur).subscribe({
+      next: () => {
+        console.log('Utilisateur mis à jour avec succès');
+        this.showSuccessAlert = true; // Afficher l'alerte
+        this.hideAlertAfterDelay(); // Cacher après 3 secondes
+      },
       error: err => console.error('Erreur lors de la mise à jour', err)
     });
   }
@@ -113,21 +124,36 @@ export class UpdatelivreurComponent implements OnInit {
     this.editingField = null;
 
     const newValue = td.innerText.trim();
-    if (this.user[field] == newValue) return;
+    if (this.livreur[field] == newValue) return;
 
-    this.user[field] = (field === 'age' || field === 'phone') // Exemples de champs numériques, ajustez selon votre besoin
+    this.livreur[field] = (field === 'phone') // Ajusté pour ne vérifier que 'phone' comme champ numérique
       ? parseFloat(newValue)
       : newValue;
 
     const payload: any = {};
-    payload[field] = this.user[field];
+    payload[field] = this.livreur[field];
 
-    if (!this.userId) return;
+    if (!this.livreurId) return;
 
-    this.service.UpdateUser(this.userId, payload).subscribe({
-      next: () => console.log(`${field} mis à jour avec succès`),
+    this.service.UpdateUser(this.livreurId, payload).subscribe({
+      next: () => {
+        console.log(`${field} mis à jour avec succès`);
+        this.showSuccessAlert = true; // Afficher l'alerte
+        this.hideAlertAfterDelay(); // Cacher après 3 secondes
+      },
       error: err => console.error(`Erreur lors de la mise à jour de ${field}`, err)
     });
   }
-}
 
+  // Méthode pour cacher l'alerte après un délai
+  hideAlertAfterDelay() {
+    setTimeout(() => {
+      this.showSuccessAlert = false;
+    }, 3000); // Cacher après 3 secondes
+  }
+
+  // Méthode pour cacher l'alerte manuellement
+  hideAlert() {
+    this.showSuccessAlert = false;
+  }
+}

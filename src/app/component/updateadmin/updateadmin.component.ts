@@ -3,18 +3,18 @@ import { ActivatedRoute } from '@angular/router';
 import { AllmyservicesService } from 'src/app/services/allmyservices.service';
 
 @Component({
-  selector: 'app-updateadmin',
+  selector: 'app-UpdateUser',
   templateUrl: './updateadmin.component.html',
   styleUrls: ['./updateadmin.component.css']
 })
-export class UpdateadminComponent implements OnInit {
+export class UpdateadminComponent  implements OnInit {
   adminId: string | null = '';
   admin: any = {};
-  originalUser: any = {}; // Ajouter cette ligne pour gérer l'original de l'utilisateur
+  originaladmin: any = {};
   editingField: string | null = null;
-
   editValues: any = {};
   isEditing: { [key: string]: boolean } = {};
+  showSuccessAlert: boolean = false; // Variable pour contrôler l'alerte
 
   @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
 
@@ -27,44 +27,49 @@ export class UpdateadminComponent implements OnInit {
   ngOnInit(): void {
     this.adminId = this.route.snapshot.paramMap.get('id');
     if (this.adminId) {
-      this.getAdmins(this.adminId);
+      this.getadminDetails(this.adminId);
     }
   }
 
-  getAdmins(id: string) {
+  getadminDetails(id: string) {
     this.service.DetailsUser(id).subscribe({
       next: res => {
         this.admin = res;
-        this.originalUser = { ...res }; // Initialiser `originalUser` ici
-        this.editValues = { ...res }; // Initialiser les valeurs éditables
+        this.originaladmin = { ...res };
+        this.editValues = { ...res };
         console.log('Détails de l\'utilisateur:', this.admin);
-              },
+      },
       error: err => console.error('Erreur lors du chargement de l\'utilisateur', err)
     });
   }
 
   cancelChanges() {
-    // Réinitialiser tous les champs aux valeurs d'origine (avant modification)
-    this.admin = { ...this.originalUser }; // Utiliser `originalUser` pour restaurer l'état initial
-    this.isEditing = {}; // Réinitialiser l'état des champs en mode lecture
+    this.admin = { ...this.originaladmin };
+    this.isEditing = {};
+    this.showSuccessAlert = false; // Cacher l'alerte lors de l'annulation
   }
 
-  onPhotoSelected(event: Event) {
-    const input = event.target as HTMLInputElement;
-    if (!input.files?.length || !this.adminId) return;
+ onPhotoSelected(event: Event) {
+  const input = event.target as HTMLInputElement;
+  if (!input.files?.length || !this.adminId) return;
 
-    const file = input.files[0];
-    const formData = new FormData();
-    formData.append('photo', file);
+  const file = input.files[0];
+  const formData = new FormData();
+  formData.append('file', file); // Nom 'file' pour correspondre à @RequestPart("file")
 
-    this.service.AjouterUser(this.adminId, formData).subscribe({
-      next: () => {
-        console.log('Photo de l\'utilisateur mise à jour');
-        this.getAdmins(this.adminId!);
-      },
-      error: err => console.error('Erreur lors de la mise à jour de la photo', err)
-    });
-  }
+  this.service.UpdateUser(this.adminId, formData).subscribe({
+    next: () => {
+      console.log('Photo de l\'utilisateur mise à jour');
+      this.getadminDetails(this.adminId!); // Recharger les détails de l'utilisateur
+      this.showSuccessAlert = true; // Afficher l'alerte
+      this.hideAlertAfterDelay(); // Cacher après 3 secondes
+    },
+    error: err => {
+      console.error('Erreur lors de la mise à jour de la photo', err);
+      // Optionnel : Afficher une alerte d'erreur
+    }
+  });
+}
 
   toggleEdit(field: string, currentValue: any) {
     this.isEditing[field] = !this.isEditing[field];
@@ -86,8 +91,10 @@ export class UpdateadminComponent implements OnInit {
     this.service.UpdateUser(this.adminId, payload).subscribe({
       next: () => {
         console.log(`${field} mis à jour avec succès`);
-        this.getAdmins(this.adminId!);
+        this.getadminDetails(this.adminId!);
         this.isEditing[field] = false;
+        this.showSuccessAlert = true; // Afficher l'alerte
+        this.hideAlertAfterDelay(); // Cacher après 3 secondes
       },
       error: err => console.error(`Erreur lors de la mise à jour du champ ${field}`, err)
     });
@@ -97,7 +104,11 @@ export class UpdateadminComponent implements OnInit {
     if (!this.adminId) return;
 
     this.service.UpdateUser(this.adminId, this.admin).subscribe({
-      next: () => console.log('Utilisateur mis à jour avec succès'),
+      next: () => {
+        console.log('Utilisateur mis à jour avec succès');
+        this.showSuccessAlert = true; // Afficher l'alerte
+        this.hideAlertAfterDelay(); // Cacher après 3 secondes
+      },
       error: err => console.error('Erreur lors de la mise à jour', err)
     });
   }
@@ -115,7 +126,7 @@ export class UpdateadminComponent implements OnInit {
     const newValue = td.innerText.trim();
     if (this.admin[field] == newValue) return;
 
-    this.admin[field] = (field === 'age' || field === 'phone') // Exemples de champs numériques, ajustez selon votre besoin
+    this.admin[field] = (field === 'phone') // Ajusté pour ne vérifier que 'phone' comme champ numérique
       ? parseFloat(newValue)
       : newValue;
 
@@ -125,8 +136,24 @@ export class UpdateadminComponent implements OnInit {
     if (!this.adminId) return;
 
     this.service.UpdateUser(this.adminId, payload).subscribe({
-      next: () => console.log(`${field} mis à jour avec succès`),
+      next: () => {
+        console.log(`${field} mis à jour avec succès`);
+        this.showSuccessAlert = true; // Afficher l'alerte
+        this.hideAlertAfterDelay(); // Cacher après 3 secondes
+      },
       error: err => console.error(`Erreur lors de la mise à jour de ${field}`, err)
     });
+  }
+
+  // Méthode pour cacher l'alerte après un délai
+  hideAlertAfterDelay() {
+    setTimeout(() => {
+      this.showSuccessAlert = false;
+    }, 3000); // Cacher après 3 secondes
+  }
+
+  // Méthode pour cacher l'alerte manuellement
+  hideAlert() {
+    this.showSuccessAlert = false;
   }
 }

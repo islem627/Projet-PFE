@@ -9,8 +9,7 @@ export const environment = {
   baseUrlproduct:"http://localhost:8763",
   baseUrlorder:"http://localhost:8764",
   baseUrlorderr: 'http://localhost:8080', // Updated from 8764 to 8080
-
-
+googleMapsApiKey: 'AIzaSyB4sJjeHjm-JqjRc6ScYiaGM__GZ3qDp2U'
 };
 
 /*

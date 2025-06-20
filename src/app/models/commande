@@ -15,4 +15,6 @@ export interface Commande {
   latitude?: number;
   longitude?: number;
   idproduit?: number;
+  idpartenaire: string; // Changed to string to match service
+
 }

@@ -8,7 +8,8 @@ import Swal from 'sweetalert2';
   templateUrl: './orders.component.html',
   styleUrls: ['./orders.component.css']
 })
-export class OrdersComponent implements OnInit{
+export class OrdersComponent 
+implements OnInit{
 
   constructor(private service:AllmyservicesService , private router: Router){}
   listorders:any //n'importe quel type ojbet, string array
@@ -38,9 +39,8 @@ addorder()
   this.router.navigate(['/addorder']);
 }
 
-detailsorder(id:String)
-{
-  this.router.navigateByUrl("/detailsorder/"+id)
+detailsorder(id: string) {
+    this.router.navigateByUrl("/detailsorder/" + id);
 }
 updateorder(id:String)
 {

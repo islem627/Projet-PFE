@@ -8,7 +8,6 @@
           
       </section>
       <div class="container" [class.right-panel-active]="rightPanelActive" id="container">
-        <!-- Register Form -->
 
         <div class="form-container register-container">
       
@@ -76,6 +75,137 @@
           </form>
           
         </div>
+       
+        
+        <div class="form-container register-container">
+          <form [formGroup]="registerForm" (ngSubmit)="register()">
+            <!-- First Name -->
+            <input formControlName="firstname" placeholder="First Name" />
+            <div
+              *ngIf="registerForm.get('firstname')?.touched && registerForm.get('firstname')?.invalid"
+              class="error"
+            >
+              <span *ngIf="registerForm.get('firstname')?.errors?.['required']">First name is required.</span>
+              <span *ngIf="registerForm.get('firstname')?.errors?.['minlength']">
+                First name must be at least 4 characters.
+              </span>
+              <span *ngIf="registerForm.get('firstname')?.errors?.['pattern']">
+                First name must contain only letters.
+              </span>
+            </div>
+        
+            <!-- Last Name -->
+            <input formControlName="lastname" placeholder="Last Name" />
+            <div
+              *ngIf="registerForm.get('lastname')?.touched && registerForm.get('lastname')?.invalid"
+              class="error"
+            >
+              <span *ngIf="registerForm.get('lastname')?.errors?.['required']">Last name is required.</span>
+              <span *ngIf="registerForm.get('lastname')?.errors?.['minlength']">
+                Last name must be at least 4 characters.
+              </span>
+              <span *ngIf="registerForm.get('lastname')?.errors?.['pattern']">
+                Last name must contain only letters.
+              </span>
+            </div>
+        
+            <!-- Email -->
+            <input formControlName="email" placeholder="Email" />
+            <div
+              *ngIf="registerForm.get('email')?.touched && registerForm.get('email')?.invalid"
+              class="error"
+            >
+              <span *ngIf="registerForm.get('email')?.errors?.['required']">Email is required.</span>
+              <span *ngIf="registerForm.get('email')?.errors?.['email']">Please enter a valid email.</span>
+            </div>
+        
+            <!-- Password -->
+            <input formControlName="password" placeholder="Password" type="password" />
+            <div
+              *ngIf="registerForm.get('password')?.touched && registerForm.get('password')?.invalid"
+              class="error"
+            >
+              <span *ngIf="registerForm.get('password')?.errors?.['required']">Password is required.</span>
+            </div>
+        
+            <!-- Address -->
+            <input formControlName="address" placeholder="Address" />
+            <div
+              *ngIf="registerForm.get('address')?.touched && registerForm.get('address')?.invalid"
+              class="error"
+            >
+              <span *ngIf="registerForm.get('address')?.errors?.['required']">Address is required.</span>
+            </div>
+        
+            <!-- Phone -->
+            <input formControlName="phone" placeholder="Phone" />
+            <div
+              *ngIf="registerForm.get('phone')?.touched && registerForm.get('phone')?.invalid"
+              class="error"
+            >
+              <span *ngIf="registerForm.get('phone')?.errors?.['required']">Phone number is required.</span>
+              <span *ngIf="registerForm.get('phone')?.errors?.['pattern']">
+                Phone number must contain only digits.
+              </span>
+            </div>
+        
+            <!-- Username -->
+            <input formControlName="username" placeholder="Username" />
+            <div
+              *ngIf="registerForm.get('username')?.touched && registerForm.get('username')?.invalid"
+              class="error"
+            >
+              <span *ngIf="registerForm.get('username')?.errors?.['required']">Username is required.</span>
+              <span *ngIf="registerForm.get('username')?.errors?.['minlength']">
+                Username must be at least 4 characters.
+              </span>
+              <span *ngIf="registerForm.get('username')?.errors?.['pattern']">
+                Username must contain only letters.
+              </span>
+            </div>
+        
+            <!-- Governorate -->
+            <select formControlName="gouvernorat" id="gouvernorat" class="custom-select">
+              <option value="" disabled>Sélectionner votre gouvernorat</option>
+              <option *ngFor="let gov of gouvernorat" [value]="gov">{{ gov }}</option>
+            </select>
+            <div
+              *ngIf="registerForm.get('gouvernorat')?.touched && registerForm.get('gouvernorat')?.invalid"
+              class="error"
+            >
+              <span *ngIf="registerForm.get('gouvernorat')?.errors?.['required']">
+                Governorate is required.
+              </span>
+            </div>
+        
+            <!-- Role -->
+            <select formControlName="role" id="role" class="custom-select">
+              <option value="" disabled>Sélectionner un rôle</option>
+              <option value="Admin">Admin</option>
+              <option value="Client">Client</option>
+              <option value="Delivery Person">Delivery Person</option>
+              <option value="partner">Partner</option>
+            </select>
+            <div
+              *ngIf="registerForm.get('role')?.touched && registerForm.get('role')?.invalid"
+              class="error"
+            >
+              <span *ngIf="registerForm.get('role')?.errors?.['required']">Role is required.</span>
+            </div>
+        
+            <!-- File Input -->
+            <input type="file" (change)="onFileSelected($event)" accept="image/*" />
+            <div
+              *ngIf="registerForm.get('photo')?.touched && registerForm.get('photo')?.invalid"
+              class="error"
+            >
+              <span *ngIf="registerForm.get('photo')?.errors?.['required']">Photo is required.</span>
+            </div>
+        
+            <!-- Submit Button -->
+            <button class="bs" type="submit" [disabled]="registerForm.invalid">Submit</button>
+          </form>
+        </div>
 
      
         <div class="form-container login-container">
@@ -109,14 +239,14 @@
        <div class="overlay-container">
   <div class="overlay">
     <div class="overlay-panel overlay-left">
-      <h1>Hello, Friend!</h1>
-      <p>Already have an account? Login here!</p>
+      <h1>Hello, Friends!</h1>
+      <h4>Already have an account?<br> Login here!</h4>
       <button class="login" (click)="activateLogin()">Login</button>
     
   </div>
     <div class="overlay-panel overlay-right">
-      <h1>Smart & Easy Delivery Tracking!</h1>
-      <p>Don't have an account yet ? Register here!</p>
+      <h1> Easy Delivery !</h1>
+      <h4>Don't have an account yet ? <br>Register here!</h4>
       <button class="ghost" (click)="activateRegister()">Register</button>
     </div>
   </div>
